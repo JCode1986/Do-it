@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
+import { Button, FormControl, TextField } from '@material-ui/core';
 import Todo from './Todo';
 import db from './firebase';
 import firebase from 'firebase';
+import Form from './features/form/Form'
+import Home from './features/home/Home'
+import Date from './features/date/Date'
+import PriorityLevel from './features/priority/PriorityLevel'
 
 function App() {
   //todos start off with empty array in use state
@@ -37,22 +41,35 @@ function App() {
 
   return (
     <div className="App">
-    <h1>hello world!</h1>
-    <form>
-      <FormControl>
-        <InputLabel>Write a Todo</InputLabel>
-        <Input value={input} onChange={event => setInput(event.target.value)}/>
-      </FormControl>
-
-      <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary">
-            Add Todo
-      </Button>
-    </form>
-    <ul>
-      {todos.map(todo => (
-        <Todo todo={todo}/>
-        ))}
-    </ul>
+      <Home />
+      <form>
+        <FormControl>
+            <TextField 
+              id="outlined-basic" 
+              label="Title" 
+              variant="outlined" 
+              value={input}
+              onChange={event => setInput(event.target.value)}
+            />
+            <TextField 
+              id="outlined-basic" 
+              label="Description" 
+              variant="outlined" 
+              value={input}
+              onChange={event => setInput(event.target.value)}
+            />    
+          <Date />
+          <PriorityLevel />
+          <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary">
+                Submit
+          </Button>
+        </FormControl>
+      </form>
+      <ul>
+        {todos.map(todo => (
+          <Todo todo={todo}/>
+          ))}
+      </ul>
     </div>
   );
 }
