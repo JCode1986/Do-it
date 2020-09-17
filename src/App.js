@@ -16,8 +16,8 @@ function App() {
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc') .onSnapshot(snapshot => {
-      //returns array of strings from database
-      setTodos(snapshot.docs.map(doc => doc.data().todo))
+      //returns object with id, and todo
+      setTodos(snapshot.docs.map(doc => ({id: doc.id, todo: doc.data().todo})))
     })
     //dependencies
   }, []);
@@ -32,8 +32,6 @@ function App() {
       todo: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
-
-    setTodos([...todos, input]);
     setInput(''); //clear input
   }
 
@@ -52,7 +50,7 @@ function App() {
     </form>
     <ul>
       {todos.map(todo => (
-        <Todo text={todo}/>
+        <Todo todo={todo}/>
         ))}
     </ul>
     </div>
