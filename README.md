@@ -5,10 +5,10 @@ React Web app todo list.
 * [Deployed Site](https://react-todo-eb067.web.app)
 
 ## Tools
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [React.js](https://reactjs.org/docs/hello-world.html)
+* [Visual Studio Code](https://code.visualstudio.com/) - IDE
+* [React.js](https://reactjs.org/docs/hello-world.html) - Front end
     * [Material-UI](https://material-ui.com/)
-* [Firebase](https://firebase.google.com/)
+* [Firebase](https://firebase.google.com/) - Back end & Host
 
 ---
 
@@ -49,7 +49,7 @@ export default db;
 * Pick yes
 * `yarn build` or `npm run build` - should create a build folder
 * `firebase deploy`
- 
+* To update deployed website simply re-run ``yarn build` or `npm run build` and re-deploy with `firebase deploy`
 ---
 
 ## Pages
