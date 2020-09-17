@@ -1,11 +1,13 @@
 # ReacToDo
 
 ## Web Application
+React Web app todo list.
+* [Deployed Site](https://react-todo-eb067.web.app)
 
 ## Tools
 * [Visual Studio Code](https://code.visualstudio.com/)
 * [React.js](https://reactjs.org/docs/hello-world.html)
-    * [Material-UI](npm install @material-ui/core)
+    * [Material-UI](https://material-ui.com/)
 * [Firebase](https://firebase.google.com/)
 
 ---
@@ -21,6 +23,7 @@
 * `firebase login` - login to firebase
 * Create a `firebase.js` file
 * Copy config in project on firebase, and paste in `firebase.js`
+    * To find config in google firebase go to your project -> settings icon -> project settings -> scroll down to `firebase sdk snippet` -> click config
 ```
 import firebase from "firebase";
 
@@ -32,11 +35,20 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 
 //can be accessed through any file in project by importing
-export { db };
+export default db;
 ```
 * `npm i firebase` - add all firebase dependencies to project
 
 * Create database in google firebase; develop -> cloud firestore -> create database
+
+### Firebase deployment
+* `firebase init` in terminal - initialize firebase project
+* Select Hosting by pressing space bar
+* Select existing project then press enter
+* Type `build` when prompted `What do you want to use as your public directory?`
+* Pick yes
+* `yarn build` or `npm run build` - should create a build folder
+* `firebase deploy`
  
 ---
 
