@@ -17,8 +17,26 @@
 ## Useful react commands
 * `npm start` - starts react app
 
-## Useful firebase commands
+## Useful firebase commands / setting up
 * `firebase login` - login to firebase
+* Create a `firebase.js` file
+* Copy config in project on firebase, and paste in `firebase.js`
+```
+import firebase from "firebase";
+
+const firebaseApp = firebase.initializeApp({
+    //paste config (key for firebase/backend) here
+});
+
+//connecting to firestore; store in variable name db
+const db = firebaseApp.firestore();
+
+//can be accessed through any file in project by importing
+export { db };
+```
+* `npm i firebase` - add all firebase dependencies to project
+
+* Create database in google firebase; develop -> cloud firestore -> create database
  
 ---
 
