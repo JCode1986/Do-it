@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Button, FormControl, TextField } from '@material-ui/core';
-import Todo from './Todo';
+import Todo from './features/todo/Todo';
 import db from './firebase';
-import firebase from 'firebase';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
-import Date from './features/date/Date'
-import PriorityLevel from './features/priority/PriorityLevel'
 
 function App() {
   //todos start off with empty array in use state
   const [todos, setTodos] = useState([]);
-  //memory for text input
-  const [input, setInput] = useState(['']);
+  const [description, setDescription] = useState(['']);
+  const [title, setTitle] = useState(['']);
+  const [date, setDate] = useState(['']);
+  const [dateDeadline, setDateDeadline] = useState(['']);
+  const [timeDeadline, setTimeDeadline] = useState(['']);
+  const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
@@ -26,50 +26,26 @@ function App() {
     //dependencies
   }, []);
 
-  //add to do
-  const addTodo = (event) => {
-    //stop refresh
-    event.preventDefault();
-
-    //add to db; no need for spread since a new snapshot will trigger the map in use effect
-    db.collection('todos').add({
-      todo: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    setInput(''); //clear input
-  }
-
   return (
     <div className="App">
-      <Home />
-      <form>
-        <FormControl>
-            <TextField 
-              id="outlined-basic" 
-              label="Title" 
-              variant="outlined" 
-              value={input}
-              onChange={event => setInput(event.target.value)}
-            />
-            <TextField 
-              id="outlined-basic" 
-              label="Description" 
-              variant="outlined" 
-              value={input}
-              onChange={event => setInput(event.target.value)}
-            />    
-          <Date />
-          <PriorityLevel />
-          <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="primary">
-                Submit
-          </Button>
-        </FormControl>
-      </form>
-      <ul>
-        {todos.map(todo => (
+      <Home todos={todos}/>
+      <Form 
+        title={title} 
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        date={date}
+        setDate={setDate}
+        dateDeadline={dateDeadline}
+        setDateDeadline={setDateDeadline}
+        timeDeadline={timeDeadline}
+        setTimeDeadline={setTimeDeadline}
+        priorityLevel={priorityLevel}
+        setPriorityLevel={setPriorityLevel}
+      />
+      {todos.map(todo => (
           <Todo todo={todo}/>
           ))}
-      </ul>
     </div>
   );
 }
