@@ -70,7 +70,8 @@ function App() {
         <div className="App">
           <NavBar />
           <Route path="/" exact component={Home}/>
-          <Form 
+          <Route
+            path="/form" exact component={Form}
             title={title} 
             setTitle={setTitle}
             description={description}

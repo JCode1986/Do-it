@@ -18,7 +18,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Form from '../form/Form'
 
 const drawerWidth = 240;
 
@@ -140,7 +141,7 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Home"/>
           </ListItem>
           </Link>
-          <Link to='/create' exact>
+          <Link to='/form' exact >
           <ListItem button key="Create a task">
             <ListItemIcon>
               <HomeIcon/>
