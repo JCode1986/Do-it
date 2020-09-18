@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link, NavLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -131,12 +132,30 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          {['Home', "Tasks", 'Send email', 'Logout'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <Link to='/' exact>
+          <ListItem button key="Home">
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Home"/>
+          </ListItem>
+          </Link>
+          <Link to='/create' exact>
+          <ListItem button key="Create a task">
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Create a task"/>
+          </ListItem>
+          </Link>
+          <Link to='/tasks' exact>
+          <ListItem button key="Tasks">
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Tasks"/>
+          </ListItem>
+          </Link>
         </List>
         <Divider />
         <List>

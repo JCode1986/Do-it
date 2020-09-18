@@ -17,8 +17,9 @@ const form = props => {
       setTitle,
       setDescription,
       input,
-      setDate,
-      setPriorityLevel
+      setPriorityLevel,
+      setDateDeadline,
+      setTimeDeadline
     } = props;
     //add to do
     const addTodo = (event) => {
@@ -31,7 +32,7 @@ const form = props => {
         description: description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         date: date,
-        dateDeadline: dateDeadline,
+        //dateDeadline: dateDeadline,
         timeDeadline: timeDeadline,
         priorityLevel: priorityLevel
       })
@@ -49,29 +50,36 @@ const form = props => {
         <form>
           <FormControl>
               <TextField 
-              id="outlined-basic" 
-              label="Title" 
-              variant="outlined" 
-              value={input}
-              onChange={event => setTitle(event.target.value)}
+                id="outlined-basic" 
+                label="Title" 
+                variant="outlined" 
+                value={input}
+                onChange={event => setTitle(event.target.value)}
               />
               <TextField 
-              id="outlined-basic" 
-              label="Description" 
-              variant="outlined" 
-              value={input}
-              onChange={event => setDescription(event.target.value)}
+                id="outlined-basic" 
+                label="Description" 
+                variant="outlined" 
+                value={input}
+                onChange={event => setDescription(event.target.value)}
               />    
           <Date 
-            date={date}
-            setDate={setDate}  
+            timeDeadline={timeDeadline}
+            dateDeadline={dateDeadline}
+            setDateDeadline={setDateDeadline}
+            setTimeDeadline={setTimeDeadline}
           />
           <PriorityLevel 
             priorityLevel={priorityLevel}
             setPriorityLevel={setPriorityLevel}
           />
-          <Button disabled={!title} type="submit" onClick={addTodo} variant="contained" color="primary">
-                  Submit
+          <Button 
+            disabled={!title} 
+            type="submit" 
+            onClick={addTodo} 
+            variant="contained" 
+            color="primary">
+            Submit
           </Button>
         </FormControl>
       </form>
