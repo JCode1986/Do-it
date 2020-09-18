@@ -4,6 +4,7 @@ import Todo from './features/todo/Todo';
 import db from './firebase';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
+import NavBar from './features/navbar/NavBar'
 
 function App() {
   //todos start off with empty array in use state
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
       <Home todos={todos}/>
       <Form 
         title={title} 
