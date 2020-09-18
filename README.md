@@ -49,7 +49,7 @@ export default db;
 * Pick yes
 * `yarn build` or `npm run build` - should create a build folder
 * `firebase deploy`
-* To update deployed website simply re-run ``yarn build` or `npm run build` and re-deploy with `firebase deploy`
+* To update deployed website simply re-run `yarn build` or `npm run build` and re-deploy with `firebase deploy`
 ---
 
 ## Pages

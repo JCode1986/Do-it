@@ -47,6 +47,7 @@ const form = props => {
         justify="space-evenly"
         alignItems="center"
       >
+        <h1>Add Task</h1>
         <form>
           <FormControl>
               <TextField 
