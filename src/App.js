@@ -90,12 +90,17 @@ function App() {
             }
           />
           {todos.map(todo => (
-              <Todo 
-                todo={todo}
-                description={description}
-                date={date}
-                />
-              ))}
+            <Route
+              exact path="/tasks"
+              render={(props) =>
+                <Todo 
+                  todo={todo}
+                  description={description}
+                  date={date}
+                  />             
+              }
+            />
+          ))}
         </div>
       </Router>
     </>
