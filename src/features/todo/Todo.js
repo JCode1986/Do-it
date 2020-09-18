@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Todo(props) {
+
+    const {todo, date, description, id} = props.todo;
+
     //access to use styles
     const classes = useStyles();
     const [isModalOpen, setModalIsOpen] = useState(false);
@@ -49,7 +52,7 @@ function Todo(props) {
         }, { merge: true})
         setModalIsOpen(false);
     }
-    console.log(props.todo.date);
+    
     return (
         <>
             <Modal 
@@ -63,7 +66,7 @@ function Todo(props) {
                     <FormControl>
                         <h1>I am a model</h1>
                         <input 
-                            placeholder={props.todo.todo} 
+                            placeholder={todo} 
                             value={input} 
                             onChange={event => setInput(event.target.value)} 
                         />
@@ -90,8 +93,8 @@ function Todo(props) {
                 <ListItem>
                     <ListItemAvatar>
                     </ListItemAvatar>
-                    <ListItemText primary={props.todo.todo} secondary={props.todo.date}/>
-                    <ListItemText primary={props.todo.description} />
+                    <ListItemText primary={todo} secondary={date}/>
+                    <ListItemText primary={description} />
                 </ListItem>
                 <EditIcon 
                     style={{color:'darkblue', cursor:'pointer'}}
@@ -101,7 +104,7 @@ function Todo(props) {
                 />
                 <DeleteForeverIcon 
                     style={{color:'red', cursor:'pointer'}}
-                    onClick={event => db.collection('todos').doc(props.todo.id).delete()} 
+                    onClick={event => db.collection('todos').doc(id).delete()} 
                 />
             </List>
         </>

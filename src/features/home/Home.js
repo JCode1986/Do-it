@@ -1,11 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-function Home(props) {
-    console.log("hello", props);
+function Home() {
     return (
         <div>
-            <h1>My amazing app!{props.todos.todos}</h1>
-    <p>{props.todos.todos}</p>
+            <h1>My amazing app!</h1>
+            <h3>Go to <Link to='/tasks'>Tasks</Link></h3>
         </div>
     )
 }
