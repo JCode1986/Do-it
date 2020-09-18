@@ -35,9 +35,9 @@ export default function SimpleSelect() {
           onChange={handleChange}
           label="Priority"
         >
-          <MenuItem value={1}>Low</MenuItem>
-          <MenuItem value={2}>Medium</MenuItem>
-          <MenuItem value={3}>High</MenuItem>
+          <MenuItem style={{color:"green"}} value={1}>Low</MenuItem>
+          <MenuItem style={{color:"orange"}} value={2}>Medium</MenuItem>
+          <MenuItem style={{color:"red"}} value={3}>High</MenuItem>
         </Select>
         <FormHelperText>Priority Level Required</FormHelperText>
       </FormControl>
