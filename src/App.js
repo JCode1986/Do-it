@@ -49,7 +49,7 @@ function App() {
     setTitle('');
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
-    db.collection('todos').orderBy('timestamp', 'desc') .onSnapshot(snapshot => {
+    db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       //returns object with id, and todo
       setTodos(snapshot.docs.map(doc => ({
         id: doc.id, 
@@ -70,27 +70,37 @@ function App() {
         <div className="App">
           <NavBar />
           <Route path="/" exact component={Home}/>
-          <Form 
-            title={title} 
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-            date={date}
-            setDate={setDate}
-            dateDeadline={dateDeadline}
-            setDateDeadline={setDateDeadline}
-            timeDeadline={timeDeadline}
-            setTimeDeadline={setTimeDeadline}
-            priorityLevel={priorityLevel}
-            setPriorityLevel={setPriorityLevel}
+          <Route
+            exact path="/form"
+            render={(props) => 
+              <Form {...props}
+                title={title} 
+                setTitle={setTitle}
+                description={description}
+                setDescription={setDescription}
+                date={date}
+                setDate={setDate}
+                dateDeadline={dateDeadline}
+                setDateDeadline={setDateDeadline}
+                timeDeadline={timeDeadline}
+                setTimeDeadline={setTimeDeadline}
+                priorityLevel={priorityLevel}
+                setPriorityLevel={setPriorityLevel}
+              />           
+            }
           />
           {todos.map(todo => (
-              <Todo 
-                todo={todo}
-                description={description}
-                date={date}
-                />
-              ))}
+            <Route
+              exact path="/tasks"
+              render={(props) =>
+                <Todo 
+                  todo={todo}
+                  description={description}
+                  date={date}
+                  />             
+              }
+            />
+          ))}
         </div>
       </Router>
     </>
