@@ -49,7 +49,7 @@ function Todo(props) {
         }, { merge: true})
         setModalIsOpen(false);
     }
-
+    console.log(props.todo.date);
     return (
         <>
             <Modal 
@@ -62,7 +62,11 @@ function Todo(props) {
                 <form className={classes.paper}>
                     <FormControl>
                         <h1>I am a model</h1>
-                        <input placeholder={props.todo.todo} value={input} onChange={event => setInput(event.target.value)} />
+                        <input 
+                            placeholder={props.todo.todo} 
+                            value={input} 
+                            onChange={event => setInput(event.target.value)} 
+                        />
                         <ul>
                             <li>
                                 <Button 
@@ -86,9 +90,8 @@ function Todo(props) {
                 <ListItem>
                     <ListItemAvatar>
                     </ListItemAvatar>
-                    <ListItemText primary={props.todo.todo} secondary="Deadline Date"/>
+                    <ListItemText primary={props.todo.todo} secondary={props.todo.date}/>
                     <ListItemText primary={props.todo.description} />
-                    {console.log(props.todo, 'what is this')}
                 </ListItem>
                 <EditIcon 
                     style={{color:'darkblue', cursor:'pointer'}}

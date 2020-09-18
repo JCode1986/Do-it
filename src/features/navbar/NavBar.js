@@ -111,7 +111,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Just Do It
+            No Excuses
           </Typography>
         </Toolbar>
       </AppBar>
