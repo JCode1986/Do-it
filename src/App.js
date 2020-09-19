@@ -40,8 +40,7 @@ function App() {
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
   const [date, setDate] = useState([dateAndTimeNow]);
-  const [dateDeadline, setDateDeadline] = useState(Date.now());
-  const [timeDeadline, setTimeDeadline] = useState(Date.now());
+  const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
@@ -82,8 +81,6 @@ function App() {
                 setDate={setDate}
                 dateDeadline={dateDeadline}
                 setDateDeadline={setDateDeadline}
-                timeDeadline={timeDeadline}
-                setTimeDeadline={setTimeDeadline}
                 priorityLevel={priorityLevel}
                 setPriorityLevel={setPriorityLevel}
               />           
@@ -93,7 +90,7 @@ function App() {
             <Route
               exact path="/tasks"
               render={(props) =>
-                <Todo 
+                <Todo {...props}
                   todo={todo}
                   description={description}
                   date={date}

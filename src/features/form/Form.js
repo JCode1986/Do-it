@@ -4,6 +4,7 @@ import PriorityLevel from '../priority/PriorityLevel'
 import Date from '../date/Date'
 import db from '../../firebase';
 import firebase from 'firebase';
+import './Form.css'
 
 const form = props => {  
 
@@ -11,15 +12,13 @@ const form = props => {
       title, 
       description, 
       date, 
-      dateDeadline, 
-      timeDeadline, 
+      dateDeadline,  
       priorityLevel,
       setTitle,
       setDescription,
       input,
       setPriorityLevel,
       setDateDeadline,
-      setTimeDeadline
     } = props;
     //add to do
     const addTodo = (event) => {
@@ -32,8 +31,7 @@ const form = props => {
         description: description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         date: date,
-        //dateDeadline: dateDeadline,
-        timeDeadline: timeDeadline,
+        dateDeadline: dateDeadline,
         priorityLevel: priorityLevel
       })
       setTitle(''); //clear input
@@ -47,6 +45,7 @@ const form = props => {
         justify="space-evenly"
         alignItems="center"
       >
+        <h1>Add Task</h1>
         <form>
           <FormControl>
               <TextField 
@@ -64,10 +63,8 @@ const form = props => {
                 onChange={event => setDescription(event.target.value)}
               />    
           <Date 
-            timeDeadline={timeDeadline}
             dateDeadline={dateDeadline}
             setDateDeadline={setDateDeadline}
-            setTimeDeadline={setTimeDeadline}
           />
           <PriorityLevel 
             priorityLevel={priorityLevel}
