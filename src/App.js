@@ -6,41 +6,15 @@ import Form from './features/form/Form'
 import Home from './features/home/Home'
 import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
+import TimeConverter from './features/date/TimeConverter'
 
 function App() {
-  
-  //date conversion from https://stackoverflow.com/questions/14638018/current-time-formatting-with-javascript
-  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  let d = new Date(); 
-  let day = days[d.getDay()];
-  let hr = d.getHours();
-  let min = d.getMinutes();
-
-  if (min < 10) {
-    min = "0" + min;
-  }
-
-  let ampm = "am";
-  
-  if( hr > 12 ) {
-    hr -= 12;
-  }
-  
-  ampm = "pm";
-
-  let getDate = d.getDate();
-  let getMonth = months[d.getMonth()];
-  let getYear = d.getFullYear();
-
-  let dateAndTimeNow = day + " " + hr + ":" + min + ampm + " " + getDate + " " + getMonth + " " + getYear;
-
   //todos start off with empty array in use state
   const [todos, setTodos] = useState([]);
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
-  const [date, setDate] = useState([dateAndTimeNow]);
-  const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
+  const [date, setDate] = useState([TimeConverter(new Date(Date.now()))]);
+  const [dateDeadline, setDateDeadline] = useState(new Date());
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
@@ -56,13 +30,11 @@ function App() {
         description: doc.data().description,
         date: doc.data().date,
         dateDeadline: doc.data().dateDeadline,
-        timeDeadline: doc.data().timeDeadline,
         priorityLevel: doc.data().priorityLevel
       })))
     })
     //dependencies
   }, []);
-
   return (
     <>
       <Router>
@@ -94,6 +66,7 @@ function App() {
                   todo={todo}
                   description={description}
                   date={date}
+                  dateDeadline={dateDeadline}
                   />             
               }
             />
