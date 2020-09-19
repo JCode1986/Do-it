@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop:'6%',
       marginLeft: '36%',
       marginRight: '33%',
-      border: '1px solid',
-      padding: '10px',
-      boxShadow: '5px 10px 8px 10px darkgrey',
       borderRadius: '8px',
       display:'inline-block'
     },

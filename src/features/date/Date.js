@@ -14,12 +14,15 @@ export default function MaterialUIPickers(props) {
   // const [selectedDate, setSelectedDate] = React.useState(Date.now());
 
   // const handleDateChange = (date) => {
-  //   setSelectedDate(date);
+  //   setSelectedDate(date);   
   // };
 
+
     const handleDateChange = (date) => {
-      props.setDateDeadline(props.dateDeadline);
+      props.setDateDeadline(date._d);
+      props.setTimeDeadline(date._d);
     }
+
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>

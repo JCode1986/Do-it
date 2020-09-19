@@ -4,6 +4,7 @@ import PriorityLevel from '../priority/PriorityLevel'
 import Date from '../date/Date'
 import db from '../../firebase';
 import firebase from 'firebase';
+import './Form.css'
 
 const form = props => {  
 
