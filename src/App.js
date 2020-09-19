@@ -14,12 +14,13 @@ function App() {
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
   const [date, setDate] = useState([TimeConverter(new Date(Date.now()))]);
-  const [dateDeadline, setDateDeadline] = useState(new Date());
+  const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
     setTitle('');
+    setDateDeadline(new Date(Date.now()));
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -40,7 +41,7 @@ function App() {
       <Router>
         <div className="App">
           <NavBar />
-          <Route path="/" exact component={Home}/>
+          <Route exact path="/" component={Home}/>
           <Route
             exact path="/form"
             render={(props) => 
@@ -60,6 +61,7 @@ function App() {
           />
           {todos.map(todo => (
             <Route
+              key={todo.id}
               exact path="/tasks"
               render={(props) =>
                 <Todo {...props}

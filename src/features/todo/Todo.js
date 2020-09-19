@@ -127,14 +127,14 @@ function Todo(props) {
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1">
-                                <h2>{todo}</h2>
+                            <Typography gutterBottom variant="h5">
+                                {todo}
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                                 <em>Date created: {date}</em>
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
-                                <em>Deadline: {timeconverter(dateDeadline)}</em>
+                                <em>Deadline: {}</em>
                             </Typography>
                         </Grid>
                         <Grid item>
