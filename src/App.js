@@ -6,21 +6,20 @@ import Form from './features/form/Form'
 import Home from './features/home/Home'
 import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
-import TimeConverter from './features/date/TimeConverter'
+import timeConverter from './features/date/TimeConverter'
 
 function App() {
   //todos start off with empty array in use state
   const [todos, setTodos] = useState([]);
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
-  const [date, setDate] = useState([TimeConverter(new Date(Date.now()))]);
+  const [date, setDate] = useState([timeConverter(new Date(Date.now()))]);
   const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
-    setTitle('');
-    setDateDeadline(new Date(Date.now()));
+    setTitle(['']);
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -46,6 +45,7 @@ function App() {
             exact path="/form"
             render={(props) => 
               <Form {...props}
+                setTodos={setTodos}
                 title={title} 
                 setTitle={setTitle}
                 description={description}
