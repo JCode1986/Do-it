@@ -48,7 +48,7 @@ const form = props => {
         <h1>Add Task</h1>
         <form>
           <FormControl>
-              <TextField 
+              <TextField
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
@@ -56,6 +56,7 @@ const form = props => {
                 onChange={event => setTitle(event.target.value)}
               />
               <TextField 
+                multiline={true}
                 id="outlined-basic" 
                 label="Description" 
                 variant="outlined" 
