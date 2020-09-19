@@ -133,7 +133,7 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <Link to='/' exact>
+          <Link to='/' >
           <ListItem button key="Home">
             <ListItemIcon>
               <HomeIcon/>
@@ -141,7 +141,7 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Home"/>
           </ListItem>
           </Link>
-          <Link to='/form' exact >
+          <Link to='/form' >
           <ListItem button key="Create a task">
             <ListItemIcon>
               <HomeIcon/>
@@ -149,7 +149,7 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Create a task"/>
           </ListItem>
           </Link>
-          <Link to='/tasks' exact>
+          <Link to='/tasks' >
           <ListItem button key="Tasks">
             <ListItemIcon>
               <HomeIcon/>
