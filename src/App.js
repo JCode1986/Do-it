@@ -41,7 +41,6 @@ function App() {
   const [title, setTitle] = useState(['']);
   const [date, setDate] = useState([dateAndTimeNow]);
   const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
-  const [timeDeadline, setTimeDeadline] = useState(new Date(Date.now()));
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
@@ -82,8 +81,6 @@ function App() {
                 setDate={setDate}
                 dateDeadline={dateDeadline}
                 setDateDeadline={setDateDeadline}
-                timeDeadline={timeDeadline}
-                setTimeDeadline={setTimeDeadline}
                 priorityLevel={priorityLevel}
                 setPriorityLevel={setPriorityLevel}
               />           

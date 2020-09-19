@@ -10,19 +10,9 @@ import {
 
 export default function MaterialUIPickers(props) {
 
-  // The first commit of Material-UI
-  // const [selectedDate, setSelectedDate] = React.useState(Date.now());
-
-  // const handleDateChange = (date) => {
-  //   setSelectedDate(date);   
-  // };
-
-
     const handleDateChange = (date) => {
       props.setDateDeadline(date._d);
-      props.setTimeDeadline(date._d);
     }
-
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -42,7 +32,7 @@ export default function MaterialUIPickers(props) {
                 margin="normal"
                 id="time-picker"
                 label="Deadline Time"
-                value={props.timeDeadline}
+                value={props.dateDeadline}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{'aria-label': 'change time',}}
             />
