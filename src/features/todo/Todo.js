@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import timeconverter from '../date/TimeConverter'
+import timeConverter from '../date/TimeConverter'
 
 //from material ui; this is how to style in material ui
 // const useStyles = makeStyles((theme) => ({
@@ -77,7 +77,7 @@ function Todo(props) {
         }, { merge: true})
         setModalIsOpen(false);
     }
-    
+
     console.log(dateDeadline, "what is this")
 
     return (
@@ -115,7 +115,7 @@ function Todo(props) {
                         </ul>
                     </FormControl>
                 </form>
-            </Modal>
+            </Modal> 
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={1}>
@@ -128,13 +128,13 @@ function Todo(props) {
                         <Grid item xs container direction="column" spacing={2}>
                         <Grid item xs>
                             <Typography gutterBottom variant="h5">
-                                {todo}
+                                <strong>{todo}</strong>
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                                 <em>Date created: {date}</em>
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
-                                <em>Deadline: {}</em>
+                                Deadline: {dateDeadline.nanoseconds}
                             </Typography>
                         </Grid>
                         <Grid item>

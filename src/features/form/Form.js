@@ -5,36 +5,37 @@ import Date from '../date/Date'
 import db from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
+import timeConverter from '../date/TimeConverter'
 
-const form = props => {  
-
-    const {
-      title, 
-      description, 
-      date, 
-      dateDeadline,  
-      priorityLevel,
-      setTitle,
-      setDescription,
-      input,
-      setPriorityLevel,
-      setDateDeadline,
-    } = props;
+function form(props) {  
+  
+  const {
+    title, 
+    description, 
+    date, 
+    setDate,
+    dateDeadline,  
+    priorityLevel,
+    setTitle,
+    setDescription,
+    setPriorityLevel,
+    setDateDeadline,
+  } = props;
+  
     //add to do
     const addTodo = (event) => {
       //stop refresh
       event.preventDefault();
-  
-      //add to db; no need for spread since a new snapshot will trigger the map in use effect
+        //add to db; no need for spread since a new snapshot will trigger the map in use effect
       db.collection('todos').add({
         todo: title,
         description: description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        date: date,
+        date: timeConverter(),
         dateDeadline: dateDeadline,
         priorityLevel: priorityLevel
       })
-      setTitle(''); //clear input
+      setTitle('');
       setDescription('');
     }
 
@@ -52,7 +53,7 @@ const form = props => {
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
-                value={input}
+                value={title}
                 onChange={event => setTitle(event.target.value)}
               />
               <TextField 
@@ -60,7 +61,7 @@ const form = props => {
                 id="outlined-basic" 
                 label="Description" 
                 variant="outlined" 
-                value={input}
+                value={description}
                 onChange={event => setDescription(event.target.value)}
               />    
           <Date 
