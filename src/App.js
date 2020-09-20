@@ -7,6 +7,7 @@ import Home from './features/home/Home'
 import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import timeConverter from './features/date/TimeConverter'
+import TodoHeader from './features/todo/TodoHeader'
 
 function App() {
   //todos start off with empty array in use state
@@ -59,6 +60,9 @@ function App() {
                 setPriorityLevel={setPriorityLevel}
               />           
             }
+          />
+          <TodoHeader 
+            todos={todos}
           />
           {todos.map(todo => (
             <Route
