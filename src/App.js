@@ -14,12 +14,13 @@ function App() {
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
   const [date, setDate] = useState([timeConverter(new Date(Date.now()))]);
-  const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
+  const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState(1);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
     setTitle(['']);
+    setDateDeadline(new Date(Date.now()));
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {

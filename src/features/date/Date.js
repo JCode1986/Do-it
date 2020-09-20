@@ -12,7 +12,6 @@ export default function MaterialUIPickers(props) {
 
     const handleDateChange = (date) => {
       props.setDateDeadline(date._d);
-      console.log(date._d, "what is this?")
     }
 
   return (

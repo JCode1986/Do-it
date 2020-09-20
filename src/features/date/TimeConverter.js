@@ -1,5 +1,5 @@
 
-function TimeConverter() {
+const timeConverter =() => {
     //date conversion from https://stackoverflow.com/questions/14638018/current-time-formatting-with-javascript
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -24,10 +24,9 @@ function TimeConverter() {
     let getMonth = months[d.getMonth()];
     let getYear = d.getFullYear();
 
-    let dateAndTime = day + " " + hr + ":" + min + ampm + " " + getDate + " " + getMonth + " " + getYear;
-    return dateAndTime;
+    return `${day} ${hr}:${min}${ampm} ${getDate} ${getMonth} ${getYear}`
 }
 
-export default TimeConverter
+export default timeConverter;
 
 
