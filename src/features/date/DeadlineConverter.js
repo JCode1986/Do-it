@@ -81,13 +81,13 @@ function dateFormat(dateString) {
       min = "0" + min;
     }
         
-    let ampm = "am";
+    let ampm = "AM";
     
     if( hr > 12 ) {
       hr -= 12;
     }
     
-    ampm = "pm";
+    ampm = "PM";
     
     return `${a[0]} ${hr}:${min}${ampm} ${a[2]} ${a[1]} ${a[3]}`
 }

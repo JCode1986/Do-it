@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Todo from './features/todo/Todo';
-import db from './firebase';
+import firebaseApp from './firebase';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
 import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import timeConverter from './features/date/TimeConverter'
 import TodoHeader from './features/todo/TodoHeader'
+import Login from './features/authentication/Login'
+import Signup from './features/authentication/SignUp'
+import { AuthProvider } from './features/authentication/Auth';
+import PrivateRoute from './features/authentication/PrivateRoute';
+
+const db = firebaseApp.firestore();
 
 function App() {
   //todos start off with empty array in use state
@@ -39,47 +45,55 @@ function App() {
   }, []);
   return (
     <>
+    <AuthProvider>
       <Router>
-        <div className="App">
-          <NavBar />
-          <Route exact path="/" component={Home}/>
-          <Route
-            exact path="/form"
-            render={(props) => 
-              <Form {...props}
-                setTodos={setTodos}
-                title={title} 
-                setTitle={setTitle}
-                description={description}
-                setDescription={setDescription}
-                date={date}
-                setDate={setDate}
-                dateDeadline={dateDeadline}
-                setDateDeadline={setDateDeadline}
-                priorityLevel={priorityLevel}
-                setPriorityLevel={setPriorityLevel}
-              />           
-            }
-          />
-          <TodoHeader 
-            todos={todos}
-          />
-          {todos.map(todo => (
+          <div className="App">
+            <NavBar />
+            <PrivateRoute exact path="/" component={Home}/>
             <Route
-              key={todo.id}
+              exact path="/form"
+              render={(props) => 
+                <Form {...props}
+                  setTodos={setTodos}
+                  title={title} 
+                  setTitle={setTitle}
+                  description={description}
+                  setDescription={setDescription}
+                  date={date}
+                  setDate={setDate}
+                  dateDeadline={dateDeadline}
+                  setDateDeadline={setDateDeadline}
+                  priorityLevel={priorityLevel}
+                  setPriorityLevel={setPriorityLevel}
+                />           
+              }
+            />
+            <Route exact path="/login" component={Login} />
+            <Route 
               exact path="/tasks"
               render={(props) =>
+              <TodoHeader {...props}
+                todos={todos}
+              />
+              }
+            />
+            {todos.map(todo => (
+              <Route
+                key={todo.id}
+                exact path="/tasks"
+                render={(props) =>
                 <Todo {...props}
                   todo={todo}
                   description={description}
                   date={date}
                   dateDeadline={dateDeadline}
                   />             
-              }
-            />
-          ))}
-        </div>
-      </Router>
+                }
+              />
+            ))}
+          </div>
+        </Router>
+      </AuthProvider>
     </>
   );
 }

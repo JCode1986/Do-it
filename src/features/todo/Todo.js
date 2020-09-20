@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import './Todo.css'
 import { Button, Modal, FormControl } from '@material-ui/core';
-import db from '../../firebase';
+import firebaseApp  from '../../firebase';
+import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
@@ -28,6 +29,8 @@ import dateFormat from '../date/DeadlineConverter'
 //       display:'inline-block'
 //     },
 //   }));
+
+const db = firebaseApp.firestore();
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -81,7 +84,7 @@ function Todo(props) {
         }, { merge: true})
         setModalIsOpen(false);
     }
-
+console.log(dateDeadline.toDate(), "what is this?")
     return (
         <>
             <Modal 

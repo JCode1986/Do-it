@@ -161,11 +161,11 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
         <Link to='/login' >
-          <ListItem button key="Login">
+          <ListItem button key="Log in">
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
-            <ListItemText primary="Login"/>
+            <ListItemText primary="Log in"/>
           </ListItem>
           </Link>
           <Link >

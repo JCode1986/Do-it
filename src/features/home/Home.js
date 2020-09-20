@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import firebaseApp from "../../firebase"
 
 function Home() {
     return (
         <div>
-            <h1>My amazing app!</h1>
-            <h3>Go to <Link to='/tasks'>Tasks</Link></h3>
+            <h1>Home</h1>
+            <button onClick={() => firebaseApp.auth().signOut()}>Sign out</button>
         </div>
     )
 }

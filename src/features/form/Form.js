@@ -2,11 +2,13 @@ import React from 'react'
 import { Button, FormControl, TextField, Grid } from '@material-ui/core';
 import PriorityLevel from '../priority/PriorityLevel'
 import Date from '../date/Date'
-import db from '../../firebase';
+import firebaseApp from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
 import timeConverter from '../date/TimeConverter'
 import { withRouter } from 'react-router-dom';
+
+const db = firebaseApp.firestore();
 
 const form = (props) => {  
   
