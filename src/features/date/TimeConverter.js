@@ -14,7 +14,7 @@ const timeConverter =() => {
 
     let ampm = "am";
 
-    if( hr > 12 ) {
+    if( hr >= 12 ) {
     hr -= 12;
     }
 

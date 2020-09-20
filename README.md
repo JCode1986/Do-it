@@ -50,6 +50,9 @@ export default db;
 * `yarn build` or `npm run build` - should create a build folder
 * `firebase deploy`
 * To update deployed website simply re-run `yarn build` or `npm run build` and re-deploy with `firebase deploy`
+
+## Firebase authentication setup
+* [Youtube - Maksim Ivanov](https://www.youtube.com/watch?v=unr4s3jd9qA)
 ---
 
 ## Pages
