@@ -160,12 +160,22 @@ export default function PersistentDrawerLeft() {
         </List>
         <Divider />
         <List>
-          {['About'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <Link to='/login' >
+          <ListItem button key="Login">
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Login"/>
+          </ListItem>
+          </Link>
+          <Link >
+          <ListItem button key="About">
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="About"/>
+          </ListItem>
+          </Link>
         </List>
       </Drawer>
       <main

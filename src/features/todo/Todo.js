@@ -11,11 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DeadlineConverter'
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { withRouter } from 'react-router-dom';
-import timeConverter from '../date/TimeConverter'
-import Date from '../date/Date'
-import PriorityLevel from '../priority/PriorityLevel'
 
 //from material ui; this is how to style in material ui
 // const useStyles = makeStyles((theme) => ({
@@ -123,13 +118,6 @@ function Todo(props) {
                     </FormControl>
                 </form>
             </Modal>
-            <div>
-                <h1><strong>Do it!</strong></h1>
-                <AddCircleOutlineIcon 
-                    onClick={() => props.history.push('/form') }
-                    className="addIcon" 
-                />
-            </div>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={1}>
@@ -177,4 +165,4 @@ function Todo(props) {
     )
 }
 
-export default withRouter(Todo)
+export default Todo
