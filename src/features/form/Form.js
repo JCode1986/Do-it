@@ -6,6 +6,7 @@ import db from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
 import timeConverter from '../date/TimeConverter'
+import { withRouter } from 'react-router-dom';
 
 const form = (props) => {  
   
@@ -35,6 +36,7 @@ const form = (props) => {
       })
       setTitle('');
       setDescription('');
+      props.history.push('/tasks');
     }
 
     return (
@@ -84,4 +86,4 @@ const form = (props) => {
     )
 }
 
-export default form
+export default withRouter(form)

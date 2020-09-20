@@ -11,7 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DeadlineConverter'
-//import timeConverter from '../date/TimeConverter'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import { withRouter } from 'react-router-dom';
+import timeConverter from '../date/TimeConverter'
+import Date from '../date/Date'
+import PriorityLevel from '../priority/PriorityLevel'
 
 //from material ui; this is how to style in material ui
 // const useStyles = makeStyles((theme) => ({
@@ -59,7 +63,11 @@ function Todo(props) {
     const classes = useStyles();
 
     const [isModalOpen, setModalIsOpen] = useState(false);
-    const [input, setInput] = useState();
+    const [updateDescription, setUpdateDescription] = useState(['']);
+    const [updateTitle, setUpdateTitle] = useState(['']);
+    // const [updateDate, setUpdateDate] = useState([timeConverter(new Date(Date.now()))]);
+    // const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
+    // const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -72,14 +80,12 @@ function Todo(props) {
     const updateTodo = () => {
         //update todo with new input text
         db.collection('todos').doc(props.todo.id).set({
-        todo: input,
-        description: input
+        todo: updateTitle,
+        description: updateDescription
         //prevents from overiding in firebase
         }, { merge: true})
         setModalIsOpen(false);
     }
-
-    console.log(dateDeadline.toDate().toString(), "what is this")
 
     return (
         <>
@@ -95,13 +101,13 @@ function Todo(props) {
                         <h1>I am a model</h1>
                         <input 
                             placeholder={todo} 
-                            value={input} 
-                            onChange={event => setInput(event.target.value)} 
+                            value={updateTitle} 
+                            onChange={event => setUpdateTitle(event.target.value)} 
                         />
                         <ul>
                             <li>
                                 <Button 
-                                    disabled={!input}
+                                    disabled={!updateTitle}
                                     variant="contained" 
                                     style={{color:'red'}} 
                                     onClick={updateTodo}
@@ -116,7 +122,14 @@ function Todo(props) {
                         </ul>
                     </FormControl>
                 </form>
-            </Modal> 
+            </Modal>
+            <div>
+                <h1><strong>Do it!</strong></h1>
+                <AddCircleOutlineIcon 
+                    onClick={() => props.history.push('/form') }
+                    className="addIcon" 
+                />
+            </div>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={1}>
@@ -164,4 +177,4 @@ function Todo(props) {
     )
 }
 
-export default Todo
+export default withRouter(Todo)
