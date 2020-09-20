@@ -7,13 +7,11 @@ import firebase from 'firebase';
 import './Form.css'
 import timeConverter from '../date/TimeConverter'
 
-function form(props) {  
+const form = (props) => {  
   
   const {
     title, 
     description, 
-    date, 
-    setDate,
     dateDeadline,  
     priorityLevel,
     setTitle,
