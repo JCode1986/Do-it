@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, FormControl, TextField, Grid } from '@material-ui/core';
 import PriorityLevel from '../priority/PriorityLevel'
-import Date from '../date/Date'
+import DateAndTime from '../date/DateAndTime'
 import firebaseApp from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
@@ -38,6 +38,7 @@ const form = (props) => {
       })
       setTitle('');
       setDescription('');
+      setDateDeadline(new Date(Date.now()));
       props.history.push('/tasks');
     }
 
@@ -66,7 +67,7 @@ const form = (props) => {
                 value={description}
                 onChange={event => setDescription(event.target.value)}
               />    
-          <Date 
+          <DateAndTime 
             dateDeadline={dateDeadline}
             setDateDeadline={setDateDeadline}
           />
