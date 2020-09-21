@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Todo.css'
-import { Button, Modal, FormControl } from '@material-ui/core';
+import { Button, Modal, FormControl, TextField, Dialog } from '@material-ui/core';
 import firebaseApp  from '../../firebase';
 import 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,17 +14,26 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DateFormat'
 import WarningIcon from '@material-ui/icons/Warning';
 import DeleteApproval from "../modals/DeleteApproval"
+import DateAndTime from '../date/DateAndTime';
+import PriorityLevel from '../priority/PriorityLevel'
+import Slide from '@material-ui/core/Slide';
 
 const db = firebaseApp.firestore();
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      display: 'inline-block',
+      borderRadius: '20px !important',
+      transform: 'scale(1.03)',
+      transitionDuration: 0.5,
     },
     paper: {
       padding: theme.spacing(2),
-      margin: 'auto',
+      margin: '20px',
       maxWidth: 500,
+      display: 'inline-block',
+      borderRadius: '20px !important',
     },
     image: {
       width: 128,
@@ -35,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
       maxWidth: '100%',
       maxHeight: '100%',
+      fontSize: '90px',
     },
   }));
 
@@ -48,10 +58,10 @@ function Todo(props) {
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [updateDescription, setUpdateDescription] = useState(['']);
     const [updateTitle, setUpdateTitle] = useState(['']);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    // const [updateDate, setUpdateDate] = useState([timeConverter(new Date(Date.now()))]);
-    // const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
-    // const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
+    const [showDeleteApproval, setShowDeleteApproval] = useState(false);
+    const [updateDate, setUpdateDate] = useState([new Date(Date.now())]);
+    const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
+    const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -59,10 +69,6 @@ function Todo(props) {
 
     const handleCloseModal = () => {
         setModalIsOpen(false);
-    }
-
-    const GoToDelete = () => {
-        return <DeleteApproval />
     }
 
     const updateTodo = () => {
@@ -75,6 +81,19 @@ function Todo(props) {
         setModalIsOpen(false);
     }
 
+    // const showDeleteDialogue = () => {
+    //     setShowDeleteApproval(true);
+    //     if(showDeleteApproval) {
+    //         return <DeleteApproval
+    //         showDeleteApproval={showDeleteApproval}
+    //         setshowDeleteApproval={setShowDeleteApproval}
+    //         todo={todo}
+    //         />
+    //     }
+    // }
+
+    console.log(showDeleteApproval, "dialogue")
+
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
             case 1:
@@ -86,15 +105,6 @@ function Todo(props) {
             default:
                 break;
         }
-    }
-
-    const changeBorderColor = (priorityLevel) => {
-        if(priorityLevel === 1) {
-            return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
-        } else if (priorityLevel === 2) {
-            return ( <WarningIcon className={classes.img} style={{color:'yellow'}} alt="complex"/> )
-        }
-        return (<WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/>)
     }
 
     return (
@@ -116,14 +126,15 @@ function Todo(props) {
                         />
                         <input 
                             placeholder={todo} 
-                            value={updateTitle} 
+                            value={updateDescription} 
                             onChange={event => setUpdateDescription(event.target.value)} 
                         />
                         <ul>
                             <li>
                                 <Button 
-                                    disabled={!updateTitle}
+                                    disabled={!updateTitle} 
                                     variant="contained" 
+                                    type="submit" 
                                     style={{color:'red'}} 
                                     onClick={updateTodo}
                                 >Update</Button>
@@ -136,8 +147,7 @@ function Todo(props) {
                             </li>
                         </ul>
                     </FormControl>
-                </form>
-                
+                </form>      
             </Modal>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
@@ -170,8 +180,16 @@ function Todo(props) {
                             <DeleteForeverIcon 
                                 style={{color:'red', cursor:'pointer'}}
                                 onClick={event => db.collection('todos').doc(id).delete()} 
-                                //onClick={GoToDelete()}
-                                
+                                // onClick={() => {
+                                //     setShowDeleteApproval(true);
+                                //     if(showDeleteApproval) {
+                                //         return <DeleteApproval
+                                //         showDeleteApproval={showDeleteApproval}
+                                //         setshowDeleteApproval={setShowDeleteApproval}
+                                //         todo={todo}
+                                //         />
+                                //     }
+                                // }}               
                             />
                         </Grid>
                         </Grid>

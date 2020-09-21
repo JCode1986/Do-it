@@ -14,7 +14,8 @@ function TodoHeader(props) {
           <div>              
           <AddCircleOutlineIcon 
               style={{cursor:'pointer'}}
-              onClick={() => props.history.push('/form') }
+              onClick={() => 
+                props.history.push('/form')}
               className="addIcon" 
           />
           </div>
