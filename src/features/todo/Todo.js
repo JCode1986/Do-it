@@ -13,23 +13,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DateFormat'
 import WarningIcon from '@material-ui/icons/Warning';
-
-//from material ui; this is how to style in material ui
-// const useStyles = makeStyles((theme) => ({
-//     paper: {
-//       position: 'absolute',
-//       width: 400,
-//       backgroundColor: theme.palette.background.paper,
-//       border: '2px solid #000',
-//       boxShadow: theme.shadows[5],
-//       padding: theme.spacing(2, 4, 3),
-//       marginTop:'6%',
-//       marginLeft: '36%',
-//       marginRight: '33%',
-//       borderRadius: '8px',
-//       display:'inline-block'
-//     },
-//   }));
+import DeleteApproval from "../modals/DeleteApproval"
 
 const db = firebaseApp.firestore();
 
@@ -64,6 +48,7 @@ function Todo(props) {
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [updateDescription, setUpdateDescription] = useState(['']);
     const [updateTitle, setUpdateTitle] = useState(['']);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     // const [updateDate, setUpdateDate] = useState([timeConverter(new Date(Date.now()))]);
     // const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     // const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
@@ -74,6 +59,10 @@ function Todo(props) {
 
     const handleCloseModal = () => {
         setModalIsOpen(false);
+    }
+
+    const GoToDelete = () => {
+        return <DeleteApproval />
     }
 
     const updateTodo = () => {
@@ -87,22 +76,15 @@ function Todo(props) {
     }
 
     const changeIconColor = (priorityLevel) => {
-        // switch(priorityLevel) {
-        //     case 1:
-        //         return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
-        //     case 2:
-        //         return ( <WarningIcon className={classes.img} style={{color:'yellow'}} alt="complex"/> )
-        //     case 3:
-        //         return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
-        //     default:
-        //         break;
-        // }
-        if(priorityLevel === 1) {
-            return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
-        } else if (priorityLevel === 2) {
-            return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
-        } else if (priorityLevel === 3) {
-            return (<WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/>)
+        switch(priorityLevel) {
+            case 1:
+                return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+            case 2:
+                return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+            case 3:
+                return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+            default:
+                break;
         }
     }
 
@@ -155,6 +137,7 @@ function Todo(props) {
                         </ul>
                     </FormControl>
                 </form>
+                
             </Modal>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
@@ -187,6 +170,8 @@ function Todo(props) {
                             <DeleteForeverIcon 
                                 style={{color:'red', cursor:'pointer'}}
                                 onClick={event => db.collection('todos').doc(id).delete()} 
+                                //onClick={GoToDelete()}
+                                
                             />
                         </Grid>
                         </Grid>

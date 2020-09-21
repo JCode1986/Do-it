@@ -8,7 +8,7 @@ import {
   KeyboardTimePicker
 } from '@material-ui/pickers';
 
-export default function MaterialUIPickers(props) {
+export default function DateAndTime(props) {
 
     const handleDateChange = (date) => {
       props.setDateDeadline(date._d);
