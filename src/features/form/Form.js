@@ -39,6 +39,7 @@ const form = (props) => {
       setTitle('');
       setDescription('');
       setDateDeadline(new Date(Date.now()));
+      setPriorityLevel(1);
       props.history.push('/tasks');
     }
 
@@ -49,10 +50,11 @@ const form = (props) => {
         justify="space-evenly"
         alignItems="center"
       >
-        <h1>Add Task</h1>
+        <h1>Create</h1>
         <form>
           <FormControl>
               <TextField
+                required
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
@@ -75,14 +77,24 @@ const form = (props) => {
             priorityLevel={priorityLevel}
             setPriorityLevel={setPriorityLevel}
           />
-          <Button 
-            disabled={!title} 
-            type="submit" 
-            onClick={addTodo} 
-            variant="contained" 
-            color="primary">
-            Submit
-          </Button>
+          <Grid>
+            <Button
+                disabled={!title} 
+                type="submit" 
+                onClick={addTodo} 
+                variant="contained" 
+                color="primary">
+                Submit
+            </Button>
+            <Button 
+                onClick={() => {
+                  props.history.push('/tasks')
+                }} 
+                variant="contained" 
+                >
+                Cancel
+            </Button>
+          </Grid>
         </FormControl>
       </form>
     </Grid>

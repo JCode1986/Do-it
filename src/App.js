@@ -11,6 +11,8 @@ import Login from './features/authentication/Login'
 import Signup from './features/authentication/SignUp'
 import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
+import Footer from './features/footer/Footer'
+import EditForm from './features/form/EditForm'
 
 const db = firebaseApp.firestore();
 
@@ -18,16 +20,16 @@ function App() {
   //todos start off with empty array in use state
   const [todos, setTodos] = useState([]);
   const [description, setDescription] = useState(['']);
-  const [title, setTitle] = useState(['']);
+  const [title, setTitle] = useState([]);
   const [dateCreated, setDateCreated] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
-    setTitle(['']);
     setDateDeadline(new Date(Date.now()));
     setDateCreated(new Date(Date.now()));
+    setPriorityLevel(1);
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -92,8 +94,17 @@ function App() {
                 }
               />
             ))}
+            <Route 
+              exact path="/update"
+              render={(props) =>
+              <EditForm {...props}
+                todos={todos}
+              />
+              }
+            />
           </div>
         </Router>
+        <Footer/>
       </AuthProvider>
     </>
   );

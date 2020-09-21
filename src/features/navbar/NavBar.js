@@ -111,7 +111,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            No Excuses
+            Do it!
           </Typography>
         </Toolbar>
       </AppBar>
@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Log in"/>
           </ListItem>
           </Link>
-          <Link >
+          <Link to='/about'>
           <ListItem button key="About">
             <ListItemIcon>
               <HomeIcon/>

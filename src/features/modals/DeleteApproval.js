@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React  from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,16 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const DeleteApproval = (props) => {
-  const [open, setOpen] = useState(false);
   const { id } = props.todo
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const deleteToDo = (event) => {
     event.PreventDefault();
@@ -34,10 +25,10 @@ const DeleteApproval = (props) => {
   return (
     <div>
       <Dialog
-        open={open}
+        open={props.showDeleteApproval}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
+        onClose={() => props.setShowDeleteApproval(false)}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -51,7 +42,7 @@ const DeleteApproval = (props) => {
           <Button onClick={deleteToDo} color="primary">
             Yes
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={() => props.setShowDeleteApproval(false)} color="primary">
             No
           </Button>
         </DialogActions>
