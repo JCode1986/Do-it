@@ -16,13 +16,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelect() {
+export default function SimpleSelect(props) {
   const classes = useStyles();
-  const [priorityLevel, setPriorityLevel] = useState('');
+  
+  let { priorityLevel, setPriorityLevel } = props
 
   const handleChange = (event) => {
     setPriorityLevel(event.target.value);
+    console.log(event.target.value, "what is this?")
   };
+
+  
 
   return (
     <div>

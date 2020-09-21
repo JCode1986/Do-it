@@ -5,7 +5,6 @@ import Date from '../date/Date'
 import firebaseApp from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
-import timeConverter from '../date/TimeConverter'
 import { withRouter } from 'react-router-dom';
 
 const db = firebaseApp.firestore();
@@ -15,7 +14,8 @@ const form = (props) => {
   const {
     title, 
     description, 
-    dateDeadline,  
+    dateDeadline,
+    dateCreated,  
     priorityLevel,
     setTitle,
     setDescription,
@@ -32,7 +32,7 @@ const form = (props) => {
         todo: title,
         description: description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        date: timeConverter(),
+        dateCreated: dateCreated,
         dateDeadline: dateDeadline,
         priorityLevel: priorityLevel
       })
@@ -57,7 +57,7 @@ const form = (props) => {
                 variant="outlined" 
                 value={title}
                 onChange={event => setTitle(event.target.value)}
-              />
+                />
               <TextField 
                 multiline={true}
                 id="outlined-basic" 

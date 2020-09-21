@@ -6,7 +6,6 @@ import Form from './features/form/Form'
 import Home from './features/home/Home'
 import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
-import timeConverter from './features/date/TimeConverter'
 import TodoHeader from './features/todo/TodoHeader'
 import Login from './features/authentication/Login'
 import Signup from './features/authentication/SignUp'
@@ -20,14 +19,15 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
-  const [date, setDate] = useState([timeConverter(new Date(Date.now()))]);
+  const [dateCreated, setDateCreated] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
-  const [priorityLevel, setPriorityLevel] = useState(1);
+  const [priorityLevel, setPriorityLevel] = useState([1]);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
     setTitle(['']);
     setDateDeadline(new Date(Date.now()));
+    setDateCreated(new Date(Date.now()));
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
@@ -36,7 +36,7 @@ function App() {
         id: doc.id, 
         todo: doc.data().todo,
         description: doc.data().description,
-        date: doc.data().date,
+        dateCreated: doc.data().dateCreated,
         dateDeadline: doc.data().dateDeadline,
         priorityLevel: doc.data().priorityLevel
       })))
@@ -59,8 +59,8 @@ function App() {
                   setTitle={setTitle}
                   description={description}
                   setDescription={setDescription}
-                  date={date}
-                  setDate={setDate}
+                  dateCreated={dateCreated}
+                  setDateCreated={setDateCreated}
                   dateDeadline={dateDeadline}
                   setDateDeadline={setDateDeadline}
                   priorityLevel={priorityLevel}
@@ -85,8 +85,9 @@ function App() {
                 <Todo {...props}
                   todo={todo}
                   description={description}
-                  date={date}
+                  dateCreated={dateCreated}
                   dateDeadline={dateDeadline}
+                  priorityLevel={priorityLevel}
                   />             
                 }
               />

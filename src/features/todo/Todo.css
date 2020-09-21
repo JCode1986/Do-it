@@ -10,3 +10,7 @@
 svg.MuiSvgIcon-root.addIcon {
     font-size: 45px;
 }
+
+.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded {
+    border-radius: 20px;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Todo.css'
 import { Button, Modal, FormControl } from '@material-ui/core';
 import firebaseApp  from '../../firebase';
-import firebase from 'firebase';
+import 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
@@ -11,7 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import dateFormat from '../date/DeadlineConverter'
+import dateFormat from '../date/DateFormat'
+import WarningIcon from '@material-ui/icons/Warning';
 
 //from material ui; this is how to style in material ui
 // const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Todo(props) {
 
-    const {todo, date, id, dateDeadline} = props.todo;
+    const {todo, dateCreated, id, dateDeadline, priorityLevel} = props.todo;
 
     //access to use styles
     const classes = useStyles();
@@ -84,7 +85,36 @@ function Todo(props) {
         }, { merge: true})
         setModalIsOpen(false);
     }
-console.log(dateDeadline.toDate(), "what is this?")
+
+    const changeIconColor = (priorityLevel) => {
+        // switch(priorityLevel) {
+        //     case 1:
+        //         return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+        //     case 2:
+        //         return ( <WarningIcon className={classes.img} style={{color:'yellow'}} alt="complex"/> )
+        //     case 3:
+        //         return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+        //     default:
+        //         break;
+        // }
+        if(priorityLevel === 1) {
+            return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+        } else if (priorityLevel === 2) {
+            return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+        } else if (priorityLevel === 3) {
+            return (<WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/>)
+        }
+    }
+
+    const changeBorderColor = (priorityLevel) => {
+        if(priorityLevel === 1) {
+            return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+        } else if (priorityLevel === 2) {
+            return ( <WarningIcon className={classes.img} style={{color:'yellow'}} alt="complex"/> )
+        }
+        return (<WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/>)
+    }
+
     return (
         <>
             <Modal 
@@ -101,6 +131,11 @@ console.log(dateDeadline.toDate(), "what is this?")
                             placeholder={todo} 
                             value={updateTitle} 
                             onChange={event => setUpdateTitle(event.target.value)} 
+                        />
+                        <input 
+                            placeholder={todo} 
+                            value={updateTitle} 
+                            onChange={event => setUpdateDescription(event.target.value)} 
                         />
                         <ul>
                             <li>
@@ -126,7 +161,7 @@ console.log(dateDeadline.toDate(), "what is this?")
                     <Grid container spacing={1}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                        <img className={classes.img} alt="complex" src="/static/images/grid/complex.jpg" />
+                        {changeIconColor(priorityLevel)}
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
@@ -136,7 +171,7 @@ console.log(dateDeadline.toDate(), "what is this?")
                                 <strong>{todo}</strong>
                             </Typography>
                             <Typography variant="body2" gutterBottom>
-                                <em>Date created: {date}</em>
+                                <em>Date created: {dateFormat(dateCreated.toDate().toString())}</em>
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 <em>Deadline: {dateFormat(dateDeadline.toDate().toString())}</em>
