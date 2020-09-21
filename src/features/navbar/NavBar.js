@@ -166,7 +166,7 @@ export default function PersistentDrawerLeft() {
             <ListItemText primary="Log in"/>
           </ListItem>
           </Link>
-          <Link >
+          <Link to='/about'>
           <ListItem button key="About">
             <ListItemIcon>
               <HomeIcon/>

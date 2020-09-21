@@ -50,10 +50,11 @@ const form = (props) => {
         justify="space-evenly"
         alignItems="center"
       >
-        <h1>Add Task</h1>
+        <h1>Create</h1>
         <form>
           <FormControl>
               <TextField
+                required
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
@@ -77,7 +78,7 @@ const form = (props) => {
             setPriorityLevel={setPriorityLevel}
           />
           <Grid>
-            <Button 
+            <Button
                 disabled={!title} 
                 type="submit" 
                 onClick={addTodo} 

@@ -86,6 +86,10 @@ function dateFormat(dateString) {
         hr -= 12;
         ampm = "PM"
     }
+
+    if (hr === 0) {
+      hr = 12;
+    }
     
     return `${a[0]} ${hr}:${min} ${ampm} ${a[2]} ${a[1]} ${a[3]}`
 }

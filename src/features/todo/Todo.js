@@ -176,6 +176,9 @@ function Todo(props) {
                                 variant="contained" 
                                 color="primary" 
                                 onClick={handleOpenModal}
+                                // onClick={() => {
+                                //     props.history.push('/update');
+                                // }}
                             />
                             <DeleteForeverIcon 
                                 style={{color:'red', cursor:'pointer'}}
