@@ -21,25 +21,29 @@ import {
     Dialog, 
     DialogActions, 
     DialogContent, 
-    DialogTitle
+    DialogTitle, 
+    Slide,
+    DialogContentText
 } from '@material-ui/core';
 
 const db = firebaseApp.firestore();
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+  
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
       display: 'inline-block',
       borderRadius: '20px !important',
-      transform: 'scale(1.03)',
-      transitionDuration: 0.5,
     },
     paper: {
       padding: theme.spacing(2),
       margin: '20px',
       maxWidth: 500,
-      display: 'inline-block',
-      borderRadius: '20px !important',
+      borderRadius: '20px',
+    
     },
     image: {
       width: 128,
@@ -52,6 +56,12 @@ const useStyles = makeStyles((theme) => ({
       maxHeight: '100%',
       fontSize: '90px',
     },
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+      }
   }));
 
 function Todo(props) {
@@ -62,9 +72,9 @@ function Todo(props) {
     const classes = useStyles();
 
     const [isModalOpen, setModalIsOpen] = useState(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [updateDescription, setUpdateDescription] = useState(['']);
     const [updateTitle, setUpdateTitle] = useState(['']);
-    const [showDeleteApproval, setShowDeleteApproval] = useState(false);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
 
@@ -75,6 +85,15 @@ function Todo(props) {
     const handleCloseModal = () => {
         setModalIsOpen(false);
     }
+
+    const handleOpenDeleteDialog = () => {
+        setIsDeleteDialogOpen(true);
+    }
+
+    const handleCloseDeleteDialog = () => {
+        setIsDeleteDialogOpen(false);
+    }
+
 
     const updateTodo = () => {
         //update todo with new input text
@@ -87,6 +106,11 @@ function Todo(props) {
         //prevents from overiding in firebase
         }, { merge: true})
         setModalIsOpen(false);
+    }
+
+    const deleteTodo = () => {
+        db.collection('todos').doc(id).delete()
+        setIsDeleteDialogOpen(false);
     }
 
     const changeIconColor = (priorityLevel) => {
@@ -104,6 +128,7 @@ function Todo(props) {
 
     return (
         <>
+{/* Update */}
             <Grid
                 container
                 direction="column"
@@ -112,7 +137,13 @@ function Todo(props) {
             >
                 <form>
                     <FormControl>
-                        <Dialog open={isModalOpen} onClose={handleCloseModal} aria-labelledby="form-dialog-title">
+                        <Dialog 
+                            keepMounted
+                            open={isModalOpen} 
+                            onClose={handleCloseModal} 
+                            aria-labelledby="form-dialog-title"
+                            TransitionComponent={Transition}
+                        >
                             <DialogTitle id="form-dialog-title">Update</DialogTitle>
                                 <DialogContent>
                                     <TextField
@@ -162,6 +193,39 @@ function Todo(props) {
                     </Dialog>
                 </FormControl>
             </form>
+
+{/* Delete */}
+            <Dialog
+                open={isDeleteDialogOpen}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleCloseDeleteDialog}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle id="alert-dialog-slide-title">{"Delete"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-slide-description">
+                            Are you sure you want to permanently delete this task?
+                        </DialogContentText>
+                    </DialogContent>
+                <DialogActions>
+                <Button 
+                    onClick={deleteTodo} 
+                    color="primary"
+                >
+                    Yes
+                </Button>
+                <Button 
+                    onClick={handleCloseDeleteDialog} 
+                    color="primary"
+                >
+                    No
+                </Button>
+                </DialogActions>
+            </Dialog>
+
+{/* Todo List */}
         </Grid>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
@@ -172,7 +236,7 @@ function Todo(props) {
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
+                        <Grid item xs container direction="column" spacing={1}>
                         <Grid item xs>
                             <Typography gutterBottom variant="h5">
                                 <strong>{todo}</strong>
@@ -184,23 +248,23 @@ function Todo(props) {
                                 <em>Deadline: {dateFormat(dateDeadline.toDate().toString())}</em>
                             </Typography>
                         </Grid>
-                        <Grid item>
-                            <EditIcon 
-                                style={{color:'darkblue', cursor:'pointer'}}
-                                variant="contained" 
-                                color="primary" 
-                                onClick={handleOpenModal}
-                            />
-                            <DeleteForeverIcon 
-                                style={{color:'red', cursor:'pointer'}}
-                                onClick={event => db.collection('todos').doc(id).delete()}              
-                            />
+                            <Grid item>
+                                <EditIcon 
+                                    style={{color:'darkblue', cursor:'pointer'}}
+                                    variant="contained" 
+                                    color="primary" 
+                                    onClick={handleOpenModal}
+                                />
+                                <DeleteForeverIcon 
+                                    style={{color:'red', cursor:'pointer'}} 
+                                    onClick={handleOpenDeleteDialog}            
+                                />
+                            </Grid>
                         </Grid>
-                        </Grid>
                         <Grid item>
-                        <Typography variant="subtitle1">
-                            <MoreHorizIcon/>
-                        </Typography>
+                            <Typography variant="subtitle1">
+                                <MoreHorizIcon/>
+                            </Typography>
                         </Grid>
                     </Grid>
                     </Grid>
