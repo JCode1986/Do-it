@@ -20,13 +20,14 @@ function App() {
   //todos start off with empty array in use state
   const [todos, setTodos] = useState([]);
   const [description, setDescription] = useState(['']);
-  const [title, setTitle] = useState([]);
+  const [title, setTitle] = useState(['']);
   const [dateCreated, setDateCreated] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
+    setTitle('');
     setDateDeadline(new Date(Date.now()));
     setDateCreated(new Date(Date.now()));
     setPriorityLevel(1);
@@ -49,8 +50,8 @@ function App() {
     <>
     <AuthProvider>
       <Router>
+        <NavBar />
           <div className="App">
-            <NavBar />
             <PrivateRoute exact path="/" component={Home}/>
             <Route
               exact path="/form"
