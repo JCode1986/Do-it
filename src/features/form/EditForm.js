@@ -1,87 +1,53 @@
-import React, { useState } from 'react'
-import firebase from '../../firebase';
-import './EditForm.css'
-import { Button, FormControl, TextField } from '@material-ui/core';
-import 'firebase';
-import Grid from '@material-ui/core/Grid';
-import { withRouter } from 'react-router-dom';
-import DateAndTime from '../date/DateAndTime';
-import PriorityLevel from '../priority/PriorityLevel';
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-function EditForm(props) {
+export default function EditForm() {
+  const [open, setOpen] = React.useState(false);
 
-    const db = firebase.firestore();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const [updateTitle, setUpdateTitle] = useState(['']);
-    const [updateDescription, setUpdateDescription] = useState(['']);
-    const [updateDate, setUpdateDate] = useState([new Date(Date.now())]);
-    const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
-    const [updatePriorityLevel, setUpdatePriorityLevel] = useState([1]);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const updateTodo = () => {
-        //update todo with new input text
-        db.collection('todos').doc(props.todo.id).set({
-        todo: updateTitle,
-        description: updateDescription
-        //prevents from overiding in firebase
-        }, { merge: true})
-        props.history.push('/tasks')
-    }
-    
-    return (
-        <Grid
-        container
-        direction="column"
-        justify="space-evenly"
-        alignItems="center"
-      >
-        <h1>Update</h1>
-        <form>
-          <FormControl>
-              <TextField
-                id="outlined-basic" 
-                label="Title" 
-                variant="outlined" 
-                value={updateTitle}
-                onChange={event => setUpdateTitle(event.target.value)}
-                />
-              <TextField 
-                multiline={true}
-                id="outlined-basic" 
-                label="Description" 
-                variant="outlined" 
-                value={updateDescription}
-                onChange={event => setUpdateDescription(event.target.value)}
-              />    
-          <DateAndTime 
-            updateDateDeadline={updateDateDeadline}
-            updateSetDateDeadline={setUpdateDateDeadline}
+  return (
+    <div>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Open form dialog
+      </Button>
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
           />
-          <PriorityLevel 
-            updatePriorityLevel={updatePriorityLevel}
-            setUpdatePriorityLevel={setUpdatePriorityLevel}
-          />
-          <Grid>
-            <Button 
-                disabled={!updateTitle} 
-                type="submit" 
-                onClick={updateTodo} 
-                variant="contained" 
-                color="primary">
-                Update
-            </Button>
-            <Button 
-                onClick={() => props.history.push('/tasks')} 
-                variant="contained" 
-                color="primary">
-                Cancel
-            </Button>
-          </Grid>
-        </FormControl>
-      </form>
-    </Grid>
-    )
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 }
-
-export default withRouter(EditForm)
-       

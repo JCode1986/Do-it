@@ -1,5 +1,5 @@
 import 'date-fns';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
 import {
@@ -8,12 +8,11 @@ import {
   KeyboardTimePicker
 } from '@material-ui/pickers';
 
-export default function DateAndTime(props) {
-    const {dateDeadline, setDateDeadline } = props;
+function UpdateDateAndTime(props) {
+    const {updateDateDeadline, setUpdateDateDeadline } = props;
 
-    const handleDateChange = (date) => {
-      setDateDeadline(date._d);
-      console.log(dateDeadline, "dateDeadline for create");
+    const handleUpdateDateChange = (date) => {
+        setUpdateDateDeadline(date._d)
     }
 
   return (
@@ -21,24 +20,26 @@ export default function DateAndTime(props) {
         <Grid container justify="center">
             <KeyboardDatePicker
                 disableToolbar
+                helperText={'Deadline Date'}
                 variant="inline"
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Deadline Date"
-                value={dateDeadline}
-                onChange={handleDateChange}
+                value={updateDateDeadline}
+                onChange={handleUpdateDateChange}
                 KeyboardButtonProps={{'aria-label': 'change date',}}
             />
             <KeyboardTimePicker
                 margin="normal"
+                helperText={'Deadline Time'}
                 id="time-picker"
-                label="Deadline Time"
-                value={dateDeadline}
-                onChange={handleDateChange}
+                value={updateDateDeadline}
+                onChange={handleUpdateDateChange}
                 KeyboardButtonProps={{'aria-label': 'change time',}}
             />
         </Grid>
     </MuiPickersUtilsProvider>
   );
 }
+
+export default UpdateDateAndTime

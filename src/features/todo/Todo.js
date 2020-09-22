@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import './Todo.css'
-import { Button, Modal, FormControl, TextField, Dialog } from '@material-ui/core';
 import firebaseApp  from '../../firebase';
-import 'firebase';
+import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DateFormat'
 import WarningIcon from '@material-ui/icons/Warning';
-import DeleteApproval from "../modals/DeleteApproval"
-import DateAndTime from '../date/DateAndTime';
-import PriorityLevel from '../priority/PriorityLevel'
-import Slide from '@material-ui/core/Slide';
+import UpdateDateAndTime from '../date/UpdateDateAndTime';
+import UpdatePriorityLevel from '../priority/UpdatePriorityLevel';
+import { 
+    Button, 
+    FormControl, 
+    TextField, 
+    Paper, 
+    Grid, 
+    Typography, 
+    ButtonBase, 
+    Dialog, 
+    DialogActions, 
+    DialogContent, 
+    DialogTitle
+} from '@material-ui/core';
 
 const db = firebaseApp.firestore();
 
@@ -59,7 +65,6 @@ function Todo(props) {
     const [updateDescription, setUpdateDescription] = useState(['']);
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [showDeleteApproval, setShowDeleteApproval] = useState(false);
-    const [updateDate, setUpdateDate] = useState([new Date(Date.now())]);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
 
@@ -75,24 +80,14 @@ function Todo(props) {
         //update todo with new input text
         db.collection('todos').doc(props.todo.id).set({
         todo: updateTitle,
-        description: updateDescription
+        description: updateDescription,
+        dateDeadline: updateDateDeadline,
+        priorityLevel: updatePriorityLevel,
+        modifiedDate: firebase.firestore.FieldValue.serverTimestamp(),
         //prevents from overiding in firebase
         }, { merge: true})
         setModalIsOpen(false);
     }
-
-    // const showDeleteDialogue = () => {
-    //     setShowDeleteApproval(true);
-    //     if(showDeleteApproval) {
-    //         return <DeleteApproval
-    //         showDeleteApproval={showDeleteApproval}
-    //         setshowDeleteApproval={setShowDeleteApproval}
-    //         todo={todo}
-    //         />
-    //     }
-    // }
-
-    console.log(showDeleteApproval, "dialogue")
 
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
@@ -109,46 +104,65 @@ function Todo(props) {
 
     return (
         <>
-            <Modal 
-                className="Modal"
-                open={isModalOpen}
-                onClose={handleCloseModal}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+            <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="center"
             >
-                <form className={classes.paper}>
+                <form>
                     <FormControl>
-                        <h1>I am a model</h1>
-                        <input 
-                            placeholder={todo} 
-                            value={updateTitle} 
-                            onChange={event => setUpdateTitle(event.target.value)} 
-                        />
-                        <input 
-                            placeholder={todo} 
-                            value={updateDescription} 
-                            onChange={event => setUpdateDescription(event.target.value)} 
-                        />
-                        <ul>
-                            <li>
-                                <Button 
-                                    disabled={!updateTitle} 
-                                    variant="contained" 
-                                    type="submit" 
-                                    style={{color:'red'}} 
-                                    onClick={updateTodo}
-                                >Update</Button>
-                            </li>
-                            <li>
-                                <Button 
-                                    variant="contained" 
-                                    onClick={handleCloseModal}
-                                >Cancel</Button>
-                            </li>
-                        </ul>
-                    </FormControl>
-                </form>      
-            </Modal>
+                        <Dialog open={isModalOpen} onClose={handleCloseModal} aria-labelledby="form-dialog-title">
+                            <DialogTitle id="form-dialog-title">Update</DialogTitle>
+                                <DialogContent>
+                                    <TextField
+                                        required
+                                        autoFocus
+                                        input
+                                        label="Title" 
+                                        defaultValue={props.todo.todo}
+                                        margin="dense"
+                                        id="name"
+                                        type="email"
+                                        fullWidth
+                                        value={updateTitle} 
+                                        onChange={event => setUpdateTitle(event.target.value)} 
+                                    />
+                                    <TextField 
+                                        multiline={true}
+                                        id="outlined-basic" 
+                                        label="Description" 
+                                        variant="outlined" 
+                                        value={updateDescription}
+                                        onChange={event => setUpdateDescription(event.target.value)}
+                                    />
+                                           <UpdateDateAndTime 
+                                                updateDateDeadline={updateDateDeadline}
+                                                setUpdateDateDeadline={setUpdateDateDeadline}
+                                            />
+                                            <UpdatePriorityLevel 
+                                                updatePriorityLevel={updatePriorityLevel}
+                                                setUpdatePriorityLevel={setUpdatePriorityLevel}
+                                            />    
+                                </DialogContent>
+                            <DialogActions>
+                        <Button 
+                            disabled={!updateTitle} 
+                            type="submit" 
+                            onClick={updateTodo} 
+                            color="primary"
+                            variant="contained" 
+                            >
+                            Update
+                        </Button>
+                        <Button onClick={handleCloseModal} color="primary">
+                            Cancel
+                        </Button>
+                        </DialogActions>
+                    </Dialog>
+                </FormControl>
+            </form>
+        </Grid>
             <div className={classes.root}>
                 <Paper className={classes.paper}>
                     <Grid container spacing={1}>
@@ -176,23 +190,10 @@ function Todo(props) {
                                 variant="contained" 
                                 color="primary" 
                                 onClick={handleOpenModal}
-                                // onClick={() => {
-                                //     props.history.push('/update');
-                                // }}
                             />
                             <DeleteForeverIcon 
                                 style={{color:'red', cursor:'pointer'}}
-                                onClick={event => db.collection('todos').doc(id).delete()} 
-                                // onClick={() => {
-                                //     setShowDeleteApproval(true);
-                                //     if(showDeleteApproval) {
-                                //         return <DeleteApproval
-                                //         showDeleteApproval={showDeleteApproval}
-                                //         setshowDeleteApproval={setShowDeleteApproval}
-                                //         todo={todo}
-                                //         />
-                                //     }
-                                // }}               
+                                onClick={event => db.collection('todos').doc(id).delete()}              
                             />
                         </Grid>
                         </Grid>

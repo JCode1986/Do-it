@@ -14,3 +14,19 @@ svg.MuiSvgIcon-root.addIcon {
     transform: scale(1.03) !important;
     transition-duration: 0.5 !important;
 }
+
+.MuiFormControl-root {
+    margin: 15px !important;
+}
+
+button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {
+    width: 110px;
+    margin-left: 40%;
+    margin-right: 25%;
+    margin-top: 20px;
+}
+
+.FormButtons {
+    display: inline-block !important;
+    margin: 15px !important;
+}
