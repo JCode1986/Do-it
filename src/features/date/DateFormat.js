@@ -34,47 +34,6 @@ function dateFormat(dateString) {
     let hr = parseInt(time[0])
     let min = parseInt(time[1])
     
-    // switch(hr) {
-    //   case 0:
-    //     hr = 12
-    //     break;
-    //   case 13:
-    //     hr = 1
-    //     break;
-    //   case 14:
-    //     hr = 2
-    //     break;
-    //   case 15:
-    //     hr = 3
-    //     break;
-    //   case 16:
-    //     hr = 4
-    //     break;
-    //   case 17:
-    //     hr = 5
-    //     break;
-    //   case 18:
-    //     hr = 6
-    //     break;
-    //   case 19:
-    //     hr = 7
-    //     break;
-    //   case 20:
-    //     hr = 8
-    //     break;
-    //   case 21:
-    //     hr = 9
-    //     break;
-    //   case 22:
-    //     hr = 10
-    //     break;
-    //   case 23:
-    //     hr = 11
-    //     break
-    //     default:
-    //         break;
-    // }
-
     if (min < 10) {
       min = "0" + min;
     }

@@ -8,7 +8,6 @@ import NavBar from './features/navbar/NavBar'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import TodoHeader from './features/todo/TodoHeader'
 import Login from './features/authentication/Login'
-import Signup from './features/authentication/SignUp'
 import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
 import Footer from './features/footer/Footer'
@@ -41,6 +40,7 @@ function App() {
         description: doc.data().description,
         dateCreated: doc.data().dateCreated,
         dateDeadline: doc.data().dateDeadline,
+        dateModified: doc.data().dateModified,
         priorityLevel: doc.data().priorityLevel
       })))
     })
@@ -90,6 +90,7 @@ function App() {
                   description={description}
                   dateCreated={dateCreated}
                   dateDeadline={dateDeadline}
+                  setDateDeadline={setDateDeadline}
                   priorityLevel={priorityLevel}
                   />             
                 }
