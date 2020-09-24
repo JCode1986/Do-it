@@ -1,54 +1,66 @@
-import React  from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import firebase from "../../firebase"
+import React from 'react'
+import '../../firebase';
+import firebase from 'firebase';
+import { makeStyles } from '@material-ui/core/styles';
+import{ Modal, Button } from '@material-ui/core';
 
-const db = firebase.firestore()
+function DeleteDialog(props) {
+    const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
+    const db = firebase.firestore();
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+    const useStyles = makeStyles((theme) => ({
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+    }));
 
-const DeleteApproval = (props) => {
-  const { id } = props.todo
+    const classes = useStyles();
 
-  const deleteToDo = (event) => {
-    event.PreventDefault();
-    db.collection('todos').doc(id).delete()  
-  }
+    //delete a task
+    const deleteTodo = () => {
+        db.collection('todos').doc(props.id).delete()
+        setIsDeleteDialogOpen(false);
+    }
 
-  return (
-    <div>
-      <Dialog
-        open={props.showDeleteApproval}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={() => props.setShowDeleteApproval(false)}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{"Delete"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Are you sure you want to permanently delete this task?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={deleteToDo} color="primary">
-            Yes
-          </Button>
-          <Button onClick={() => props.setShowDeleteApproval(false)} color="primary">
-            No
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+    return (
+        <div>
+            <Modal
+                open={isDeleteDialogOpen}
+                onClose={handleCloseDeleteDialog}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div 
+                    className={classes.paper}
+                    style={{    
+                        width:'auto',        
+                        position:'absolute',
+                        top:'50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'
+                    }}
+                >
+                    <h2 id="simple-modal-title">Delete Confirmation</h2>
+                    <p id="simple-modal-description">
+                        Are you sure you want to permanently delete this task?
+                    </p>
+                <Button
+                    onClick={deleteTodo}
+                    >Yes
+                </Button>
+                <Button
+                    onClick={handleCloseDeleteDialog}
+                    >No
+                </Button>
+                </div>
+            </Modal>
+        </div>
+    )
 }
 
-export default DeleteApproval;
+export default DeleteDialog;

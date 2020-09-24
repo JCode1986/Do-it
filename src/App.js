@@ -11,7 +11,6 @@ import Login from './features/authentication/Login'
 import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
 import Footer from './features/footer/Footer'
-import EditForm from './features/form/EditForm'
 
 const db = firebaseApp.firestore();
 
@@ -87,23 +86,17 @@ function App() {
                 render={(props) =>
                 <Todo {...props}
                   todo={todo}
+                  title={title} 
                   description={description}
                   dateCreated={dateCreated}
                   dateDeadline={dateDeadline}
                   setDateDeadline={setDateDeadline}
                   priorityLevel={priorityLevel}
+                  setTitle={setTitle}
                   />             
                 }
               />
             ))}
-            <Route 
-              exact path="/update"
-              render={(props) =>
-              <EditForm {...props}
-                todos={todos}
-              />
-              }
-            />
           </div>
         </Router>
         <Footer/>

@@ -1,10 +1,11 @@
 .App {
   text-align: center;
-  /* background-image: linear-gradient(red, yellow); */
+  /* background: linear-gradient(#F1F2B5, #135058); */
 }
 
 h1 {
-  margin-top: 55px;
+  padding-top: 50px;
+  padding-bottom: 10px;
   margin-bottom: -10px;
 }
 

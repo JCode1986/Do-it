@@ -6,17 +6,9 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 45px;
 }
 
-.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded {
-    border-radius: 20px !important;
-}
-
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
     transform: scale(1.03) !important;
     transition-duration: 0.5 !important;
-}
-
-.MuiFormControl-root {
-    margin: 15px !important;
 }
 
 button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {

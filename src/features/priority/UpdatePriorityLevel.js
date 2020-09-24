@@ -15,13 +15,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
   
-  let { updatePriorityLevel, setUpdatePriorityLevel } = props
-
+  let { updatePriorityLevel, setUpdatePriorityLevel, priorityLevel } = props;
+  
   const handleChange = (event) => {
     setUpdatePriorityLevel(event.target.value);
   };
-
-  
 
   return (
     <div>
@@ -30,7 +28,8 @@ export default function SimpleSelect(props) {
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={updatePriorityLevel}
+          //value={updatePriorityLevel}
+          defaultValue={priorityLevel}
           onChange={handleChange}
           label="Priority"
         >
