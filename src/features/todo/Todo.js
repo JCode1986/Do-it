@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import './Todo.css'
 import 'firebase';
+import DeleteApproval from '../modals/DeleteApproval'
+import DetailsModal from '../modals/DetailsModal'
+import UpdateModal from '../modals/UpdateModal';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DateFormat'
 import WarningIcon from '@material-ui/icons/Warning';
-import DeleteApproval from '../modals/DeleteApproval'
-import UpdateModal from '../modals/UpdateModal';
 import { withRouter } from 'react-router-dom';
 import { 
     Paper, 
@@ -97,6 +98,11 @@ function Todo(props) {
 
     return (
         <>
+            <DetailsModal
+                isDetailOpen={isDetailOpen}
+                setIsDetailOpen={setIsDetailOpen}
+                description={description}
+            />
             <DeleteApproval 
                 isDeleteDialogOpen={isDeleteDialogOpen}
                 setIsDeleteDialogOpen={setIsDeleteDialogOpen}
@@ -129,7 +135,10 @@ function Todo(props) {
                 <Paper className={classes.paper}>
                     <Grid container spacing={2}>
                     <Grid item>
-                        <ButtonBase className={classes.image}>
+                        <ButtonBase 
+                            className={classes.image}
+                            onClick={() => setIsDetailOpen(true)}
+                        >
                         {changeIconColor(priorityLevel)}
                         </ButtonBase>
                     </Grid>
