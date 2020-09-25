@@ -162,7 +162,12 @@ function Todo(props) {
                                 <Grid item xs container direction="column" spacing={1}>
                                 <Grid item xs>
                                     <Typography gutterBottom variant="h5" style={{color:'#3589E9'}}>
-                                        <strong>{todo}{due()}</strong>
+                                        {
+                                            !due() ? <strong>{todo}</strong>
+                                            :
+                                            <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
+                                        }
+                                        {/* <strong>{todo}{due()}</strong> */}
                                     </Typography>
                                     <Typography variant="body2">
                                         <em><strong style={{color:'#5495DF'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>

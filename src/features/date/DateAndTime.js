@@ -1,11 +1,11 @@
 import 'date-fns';
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
+import { Grid, TextField } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
-  KeyboardTimePicker
+  KeyboardTimePicker,
 } from '@material-ui/pickers';
 
 export default function DateAndTime(props) {
@@ -17,11 +17,20 @@ export default function DateAndTime(props) {
       console.log(date._d)
     }
 
+    const TextFieldComponent = (props) => {
+      return <TextField {...props} disabled={true} />
+    }
+
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
         <Grid container justify="center">
             <KeyboardDatePicker
                 disableToolbar
+                //disabled
+                invalidDateMessage="Invalid Date Format"
+                disablePast="true"
+                animateYearScrolling="true"
+                autoOk="true"
                 variant="inline"
                 format="MM/dd/yyyy"
                 margin="normal"
@@ -30,14 +39,17 @@ export default function DateAndTime(props) {
                 value={dateDeadline}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{'aria-label': 'change date',}}
+                TextFieldComponent={TextFieldComponent}
             />
             <KeyboardTimePicker
                 margin="normal"
                 id="time-picker"
+                disablePast="true"
                 label="Deadline Time"
                 value={dateDeadline}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{'aria-label': 'change time',}}
+                TextFieldComponent={TextFieldComponent}
             />
         </Grid>
     </MuiPickersUtilsProvider>
