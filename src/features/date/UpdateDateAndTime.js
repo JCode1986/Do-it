@@ -1,5 +1,5 @@
 import 'date-fns';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
 import {
@@ -9,7 +9,11 @@ import {
 } from '@material-ui/pickers';
 
 function UpdateDateAndTime(props) {
-    const {updateDateDeadline, setUpdateDateDeadline } = props;
+    const {updateDateDeadline, setUpdateDateDeadline, dateDeadline } = props;
+
+    useEffect(() => {
+      setUpdateDateDeadline(dateDeadline.toDate());
+    }, [setUpdateDateDeadline, dateDeadline])
 
     const handleUpdateDateChange = (date) => {
         setUpdateDateDeadline(date._d)
@@ -25,7 +29,7 @@ function UpdateDateAndTime(props) {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                //defaultValue={updateDateDeadline}
+                defaultValue={updateDateDeadline}
                 value={updateDateDeadline}
                 onChange={handleUpdateDateChange}
                 KeyboardButtonProps={{'aria-label': 'change date',}}

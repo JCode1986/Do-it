@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './UpdatePriority.css'
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, MenuItem, FormHelperText, FormControl, Select} from '@material-ui/core';
@@ -18,9 +18,14 @@ export default function SimpleSelect(props) {
   
   let { setUpdatePriorityLevel, priorityLevel } = props;
   
+  useEffect(() => {
+    setUpdatePriorityLevel(priorityLevel);
+  }, [setUpdatePriorityLevel, priorityLevel])
+
   const handleChange = (event) => {
     setUpdatePriorityLevel(event.target.value);
   };
+
 
   return (
     <div>

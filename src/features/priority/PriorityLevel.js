@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
   
-  let { priorityLevel, setPriorityLevel } = props
+  let { priorityLevel, setPriorityLevel, } = props
 
   const handleChange = (event) => {
     setPriorityLevel(event.target.value);

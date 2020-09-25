@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UpdateDateAndTime from '../date/UpdateDateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -28,8 +28,21 @@ export default function EditForm(props) {
     setUpdatePriorityLevel,
     setUpdateDateDeadline,
     priorityLevel,
+    todo,
+    description,
     id
   } = props;
+
+  useEffect(() => {
+    setUpdateTitle(todo)
+    setUpdateDescription(description)
+  }, [
+      todo, 
+      description, 
+      dateDeadline,  
+      setUpdateTitle, 
+      setUpdateDescription, 
+    ])
 
   //update a task
   const updateTodo = () => {
@@ -73,6 +86,7 @@ export default function EditForm(props) {
                   id="outlined-basic" 
                   label="Title" 
                   variant="outlined" 
+                  defaultValue={todo}
                   value={updateTitle}
                   onChange={event => setUpdateTitle(event.target.value)}
                   />
@@ -81,6 +95,7 @@ export default function EditForm(props) {
                   id="outlined-basic" 
                   label="Description" 
                   variant="outlined" 
+                  defaultValue={description}
                   value={updateDescription}
                   onChange={event => setUpdateDescription(event.target.value)}
                 />    
