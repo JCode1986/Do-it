@@ -9,11 +9,12 @@ import {
 } from '@material-ui/pickers';
 
 export default function DateAndTime(props) {
-    const {dateDeadline, setDateDeadline } = props;
+    const {dateDeadline, setDateDeadline, dateCreated } = props;
 
     const handleDateChange = (date) => {
+      if(date._d < dateCreated) return null;
       setDateDeadline(date._d);
-      console.log(dateDeadline, "dateDeadline for create");
+      console.log(date._d)
     }
 
   return (
