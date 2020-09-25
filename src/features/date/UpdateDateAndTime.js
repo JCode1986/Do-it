@@ -1,5 +1,5 @@
 import 'date-fns';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@material-ui/pickers';
 
 function UpdateDateAndTime(props) {
-    const {updateDateDeadline, setUpdateDateDeadline, dateDeadline } = props;
+    const {updateDateDeadline, setUpdateDateDeadline } = props;
 
     const handleUpdateDateChange = (date) => {
         setUpdateDateDeadline(date._d)

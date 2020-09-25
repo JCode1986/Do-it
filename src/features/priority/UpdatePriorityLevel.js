@@ -1,4 +1,5 @@
 import React from 'react';
+import './UpdatePriority.css'
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, MenuItem, FormHelperText, FormControl, Select} from '@material-ui/core';
 
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
   
-  let { updatePriorityLevel, setUpdatePriorityLevel, priorityLevel } = props;
+  let { setUpdatePriorityLevel, priorityLevel } = props;
   
   const handleChange = (event) => {
     setUpdatePriorityLevel(event.target.value);
@@ -24,7 +25,7 @@ export default function SimpleSelect(props) {
   return (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Priority</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label" style={{textAlign:'center'}}>Priority</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"

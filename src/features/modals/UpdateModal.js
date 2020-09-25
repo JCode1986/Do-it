@@ -2,7 +2,7 @@ import React from 'react';
 import UpdateDateAndTime from '../date/UpdateDateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
-import firebase from 'firebase'
+
 import { 
   Grid, 
   FormControl, 
@@ -31,16 +31,14 @@ export default function EditForm(props) {
     id
   } = props;
 
-  console.log(updatePriorityLevel, "what is this?")
   //update a task
   const updateTodo = () => {
-    console.log("in update function")
     db.collection('todos').doc(id).set({
       todo: updateTitle,
       description: updateDescription,
       dateDeadline: updateDateDeadline,
       priorityLevel: updatePriorityLevel,
-      modifiedDate: firebase.firestore.FieldValue.serverTimestamp(),
+      modifiedDate: new Date(Date.now()),
     //prevents from overiding in firebase
     }, { merge: true})
     setModalIsOpen(false);

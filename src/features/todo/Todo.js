@@ -21,24 +21,21 @@ import {
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      display: 'inline-block',
-      borderRadius: '20px !important',
-      justifyContent: 'space-evenly',
-
     },
     paper: {
-      padding: theme.spacing(2),
-      width: 510,
-      borderRadius: '20px',
-      textAlign: 'center', 
+        padding: theme.spacing(1),
+        width: 445,
+        borderRadius: '20px',
+        textAlign: 'center', 
+        margin: 'auto',
+        marginTop: '35px',
     },
     image: {
-      width: 128,
-      height: 128,
+      width: 50,
+      height: 50,
     },
     img: {
       margin: 'auto',
-
       maxWidth: '100%',
       maxHeight: '100%',
       fontSize: '90px',
@@ -53,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Todo(props) {
 
-    const {todo, dateCreated, id, dateDeadline, priorityLevel, description } = props.todo;
+    const {todo, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
 
     //access to use styles
     const classes = useStyles();
@@ -95,13 +92,18 @@ function Todo(props) {
                 break;
         }
     }
-
+ 
     return (
         <>
             <DetailsModal
                 isDetailOpen={isDetailOpen}
                 setIsDetailOpen={setIsDetailOpen}
+                todo={todo}
                 description={description}
+                dateDeadline={dateDeadline}
+                priorityLevel={priorityLevel}
+                modifiedDate={modifiedDate}
+                dateCreated={dateCreated}
             />
             <DeleteApproval 
                 isDeleteDialogOpen={isDeleteDialogOpen}
@@ -117,6 +119,8 @@ function Todo(props) {
                 todo={todo}
                 id={id}
                 title={props.title}
+                modifiedDate={props.modifiedDate}
+                setModifiedDate={props.setModifiedDate}
                 dateDeadline={dateDeadline}
                 priorityLevel={priorityLevel}
                 description={description}
@@ -132,48 +136,45 @@ function Todo(props) {
 
 {/* Todo List */}
             <div className={classes.root}>
-                <Paper className={classes.paper}>
-                    <Grid container spacing={2}>
-                    <Grid item>
-                        <ButtonBase 
-                            className={classes.image}
-                            onClick={() => setIsDetailOpen(true)}
-                        >
-                        {changeIconColor(priorityLevel)}
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={1}>
-                        <Grid item xs>
-                            <Typography gutterBottom variant="h5">
-                                <strong>{todo}</strong>
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                                <em>Date created: {dateFormat(dateCreated.toDate().toString())}</em>
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary">
-                                <em>Deadline: {dateFormat(dateDeadline.toDate().toString())}</em>
-                            </Typography>
-                        </Grid>
+                <Paper className={classes.paper} style={{display: 'inline', float: 'left', marginLeft: '4.3%'}}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm container>
                             <Grid item>
-                                <EditIcon 
-                                    style={{color:'darkblue', cursor:'pointer'}}
-                                    variant="contained" 
-                                    color="primary" 
-                                    onClick={handleOpenModal}
-                                />
-                                <DeleteForeverIcon 
-                                    style={{color:'red', cursor:'pointer'}} 
-                                    onClick={handleOpenDeleteDialog}   
-                                />
+                                <ButtonBase 
+                                    className={classes.image}
+                                    onClick={() => setIsDetailOpen(true)}
+                                >
+                                {changeIconColor(priorityLevel)}
+                                </ButtonBase>
+                            </Grid>
+                                <Grid item xs container direction="column" spacing={1}>
+                                <Grid item xs>
+                                    <Typography gutterBottom variant="h5">
+                                        <strong>{todo}</strong>
+                                    </Typography>
+                                    <Typography variant="body2" gutterBottom color="textSecondary">
+                                        <em><strong>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                    <em><strong>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <EditIcon 
+                                        style={{color:'darkblue', cursor:'pointer'}}
+                                        variant="contained" 
+                                        color="primary" 
+                                        onClick={handleOpenModal}
+                                    />
+                                    <DeleteForeverIcon 
+                                        style={{color:'red', cursor:'pointer'}} 
+                                        onClick={handleOpenDeleteDialog}   
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid item>
                             </Grid>
                         </Grid>
-                        <Grid item>
-                            <Typography variant="subtitle1">
-                                <MoreHorizIcon/>
-                            </Typography>
-                        </Grid>
-                    </Grid>
                     </Grid>
                 </Paper>
             </div>

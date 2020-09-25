@@ -16,19 +16,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Do it!
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -90,10 +77,11 @@ const Login = ( {history} ) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
+            //required
             fullWidth
             id="email"
-            label="Email Address"
+            //label="Email Address"
+            label="Auth work in progress..."
             name="email"
             autoComplete="email"
             autoFocus
@@ -129,7 +117,7 @@ const Login = ( {history} ) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link to="/sign-up" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -137,7 +125,7 @@ const Login = ( {history} ) => {
         </form>
       </div>
       <Box mt={8}>
-        <Copyright />
+        
       </Box>
     </Container>
   );

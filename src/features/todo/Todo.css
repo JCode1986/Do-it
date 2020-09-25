@@ -3,7 +3,7 @@
 }
 
 svg.MuiSvgIcon-root.addIcon {
-    font-size: 45px;
+    font-size: 35px;
 }
 
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
@@ -11,14 +11,18 @@ svg.MuiSvgIcon-root.addIcon {
     transition-duration: 0.5 !important;
 }
 
-button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-1.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-true {
+    flex-direction: inherit;
+}
+
+/* button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {
     width: 110px;
     margin-left: 40%;
     margin-right: 25%;
     margin-top: 20px;
-}
+} */
 
-.FormButtons {
+/* .FormButtons {
     display: inline-block !important;
     margin: 15px !important;
-}
+} */

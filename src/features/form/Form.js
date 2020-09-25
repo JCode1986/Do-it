@@ -43,6 +43,12 @@ const form = (props) => {
       props.history.push('/tasks');
     }
 
+    const handleEnterKey = (e) => {
+      if(e.key === 'Enter'){
+        console.log("Hi")
+      }
+    }
+
     return (
       <Grid
         container
@@ -63,11 +69,13 @@ const form = (props) => {
                 />
               <TextField 
                 multiline={true}
+                onKeyDown={handleEnterKey}
                 id="outlined-basic" 
                 label="Description" 
                 variant="outlined" 
                 value={description}
                 onChange={event => setDescription(event.target.value)}
+                //onChange={(event) => setDescription(descSkipLine(event, event.target.value))}
               />    
           <DateAndTime 
             dateDeadline={dateDeadline}
@@ -88,9 +96,7 @@ const form = (props) => {
                 Submit
             </Button>
             <Button 
-                onClick={() => {
-                  props.history.push('/tasks')
-                }} 
+                onClick={() => props.history.push('/tasks')} 
                 variant="contained" 
                 >
                 Cancel

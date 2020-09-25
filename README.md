@@ -53,6 +53,9 @@ export default db;
 
 ## Firebase authentication setup
 * [Youtube - Maksim Ivanov](https://www.youtube.com/watch?v=unr4s3jd9qA)
+
+## Firebase OAuth setup
+* [Youtube - lingonsaft](https://www.youtube.com/watch?v=zq0TuNqV0Ew)
 ---
 
 ## Pages
