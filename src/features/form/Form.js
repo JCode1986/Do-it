@@ -48,6 +48,9 @@ const form = (props) => {
         console.log("Hi")
       }
     }
+    const capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
     return (
       <Grid
@@ -60,11 +63,13 @@ const form = (props) => {
         <form>
           <FormControl>
               <TextField
+                inputProps={{ maxLength: 20 }}
                 required
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
-                value={title}
+                helperText="Required: 20 chars max length"
+                value={capitalizeFirstLetter(title)}
                 onChange={event => setTitle(event.target.value)}
                 />
               <TextField 

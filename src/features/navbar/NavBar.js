@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -105,6 +106,7 @@ export default function PersistentDrawerLeft() {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
+            onClose={handleDrawerClose}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >

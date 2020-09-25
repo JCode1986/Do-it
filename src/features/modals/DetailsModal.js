@@ -72,7 +72,7 @@ function Details(props) {
                         !props.description || props.description == 0?
                         <Typography><strong><em>Description: </em> <br/></strong> No details provided...</Typography>
                         :
-                        <Typography><em>Description: </em> <br/> {props.description}</Typography>
+                        <Typography><strong><em>Description: </em> <br/></strong> {props.description}</Typography>
                     }
                     </Typography>
                     <br/>
