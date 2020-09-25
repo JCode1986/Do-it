@@ -8,7 +8,8 @@ import {
   FormControl, 
   Button, 
   TextField, 
-  Modal
+  Modal,
+  Divider
 } from '@material-ui/core';
 
 export default function EditForm(props) {
@@ -56,7 +57,7 @@ export default function EditForm(props) {
     }, { merge: true})
     setModalIsOpen(false);
   }
-
+  
   return (
     <div>
       <Modal    
@@ -72,14 +73,21 @@ export default function EditForm(props) {
           alignItems="center"
           style={{
             backgroundColor:'white', 
-            width:'60%',   
+            width:'40%',   
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)'}}
         >
-          <h1>Update</h1>
+          <div style={{backgroundColor:"lightblue", width:' -webkit-fill-available', border: '1px solid'}}>
+            <h1
+                className="updateHeader"
+              
+              >Update
+            </h1>
+          </div>
           <form>
+          <Divider/>
             <FormControl>
                 <TextField
                   required

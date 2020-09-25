@@ -2,7 +2,7 @@ import React from 'react'
 import '../../firebase';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import{ Modal, Button } from '@material-ui/core';
+import{ Modal, Button, Typography } from '@material-ui/core';
 
 function DeleteDialog(props) {
     const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
@@ -45,10 +45,18 @@ function DeleteDialog(props) {
                         transform: 'translate(-50%, -50%)'
                     }}
                 >
+                    <div 
+                        className="deleteHeader"
+                        style={{backgroundColor:'red'}}
+                    >
                     <h2 id="simple-modal-title">Delete Confirmation</h2>
-                    <p id="simple-modal-description">
+                    </div>
+                    <Typography 
+                        id="simple-modal-description"
+                        style={{marginBottom:'10px'}}
+                    >
                         Are you sure you want to permanently delete this task?
-                    </p>
+                    </Typography>
                 <Button
                     onClick={deleteTodo}
                     >Yes

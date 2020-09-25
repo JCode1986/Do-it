@@ -6,7 +6,12 @@ import './Footer.css'
 function Footer() {
     return (
         <div className="footer">
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography 
+          variant="body2" 
+          color="#E9A802" 
+          align="center"
+          style={{marginTop:'20px', marginBottom:'20px'}}
+          >
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
             Do it!

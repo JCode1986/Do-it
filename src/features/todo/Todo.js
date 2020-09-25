@@ -7,9 +7,9 @@ import UpdateModal from '../modals/UpdateModal';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import dateFormat from '../date/DateFormat'
 import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
 import { withRouter } from 'react-router-dom';
 import { 
     Paper, 
@@ -83,11 +83,11 @@ function Todo(props) {
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
             case 1:
-                return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+                return ( <ErrorIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
             case 2:
-                return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+                return ( <ErrorIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
             case 3:
-                return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+                return ( <ErrorIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
             default:
                 break;
         }
@@ -136,7 +136,12 @@ function Todo(props) {
 
 {/* Todo List */}
             <div className={classes.root}>
-                <Paper className={classes.paper} style={{display: 'inline', float: 'left', marginLeft: '4.3%'}}>
+                <Paper className={classes.paper} 
+                style={{
+                    display: 'inline', 
+                    float: 'left', 
+                    marginLeft: '4.3%',
+                    }}>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm container>
                             <Grid item>
@@ -149,14 +154,14 @@ function Todo(props) {
                             </Grid>
                                 <Grid item xs container direction="column" spacing={1}>
                                 <Grid item xs>
-                                    <Typography gutterBottom variant="h5">
+                                    <Typography gutterBottom variant="h5" style={{color:'#3589E9'}}>
                                         <strong>{todo}</strong>
                                     </Typography>
-                                    <Typography variant="body2" gutterBottom color="textSecondary">
-                                        <em><strong>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
+                                    <Typography variant="body2">
+                                        <em><strong style={{color:'#5495DF'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
                                     </Typography>
-                                    <Typography variant="body2" color="textSecondary">
-                                    <em><strong>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                                    <Typography variant="body2">
+                                    <em><strong style={{color:'#5495DF'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
                                     </Typography>
                                 </Grid>
                                 <Grid item>
