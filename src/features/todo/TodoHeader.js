@@ -1,7 +1,6 @@
 import React from 'react'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import './TodoHeader.css'
-import { Typography } from '@material-ui/core'
 import { withRouter } from 'react-router-dom';
 
 function TodoHeader(props) {

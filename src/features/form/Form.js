@@ -27,7 +27,7 @@ const form = (props) => {
     const addTodo = (event) => {
       //stop refresh
       event.preventDefault();
-        //add to db; no need for spread since a new snapshot will trigger the map in use effect
+      //add to db; no need for spread since a new snapshot will trigger the map in use effect
       db.collection('todos').add({
         todo: title,
         description: description,
@@ -41,12 +41,6 @@ const form = (props) => {
       setDateDeadline(new Date(Date.now()));
       setPriorityLevel(1);
       props.history.push('/tasks');
-    }
-
-    const handleEnterKey = (e) => {
-      if(e.key === 'Enter'){
-        console.log("Hi")
-      }
     }
     
     const capitalizeFirstLetter = (string) => {
@@ -75,7 +69,6 @@ const form = (props) => {
                 />
               <TextField 
                 multiline={true}
-                onKeyDown={handleEnterKey}
                 id="outlined-basic" 
                 label="Description" 
                 variant="outlined" 
@@ -86,6 +79,7 @@ const form = (props) => {
           <DateAndTime 
             dateDeadline={dateDeadline}
             setDateDeadline={setDateDeadline}
+            dateCreated={dateCreated}
           />
           <PriorityLevel 
             priorityLevel={priorityLevel}

@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import dateFormat from '../date/DateFormat'
-import WarningIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
 import { withRouter } from 'react-router-dom';
 import { 
@@ -77,6 +76,14 @@ function Todo(props) {
 
     const handleCloseDeleteDialog = () => {
         setIsDeleteDialogOpen(false);
+    }
+
+    console.log(dateDeadline.toDate() > Date.now(), "what is this?")
+
+    const due = () => {
+        if(dateDeadline.toDate() <= Date.now()){
+            return '(Due)'
+        }
     }
 
     //changes priority icon color depending on level
@@ -155,7 +162,12 @@ function Todo(props) {
                                 <Grid item xs container direction="column" spacing={1}>
                                 <Grid item xs>
                                     <Typography gutterBottom variant="h5" style={{color:'#3589E9'}}>
-                                        <strong>{todo}</strong>
+                                        {
+                                            !due() ? <strong>{todo}</strong>
+                                            :
+                                            <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
+                                        }
+                                        {/* <strong>{todo}{due()}</strong> */}
                                     </Typography>
                                     <Typography variant="body2">
                                         <em><strong style={{color:'#5495DF'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
