@@ -6,14 +6,31 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 35px;
 }
 
+
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
     transform: scale(1.03) !important;
+    transition-duration: 0.5 !important;
+}
+
+svg.MuiSvgIcon-root.makeStyles-img-14:hover {
+    transform: scale(1.15) !important;
     transition-duration: 0.5 !important;
 }
 
 .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-1.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-true {
     flex-direction: inherit;
 }
+
+.deleteIcon:hover {
+    transform: scale(1.25) !important;
+    transition-duration: 0.5 !important;
+}
+
+svg.MuiSvgIcon-root.MuiSvgIcon-colorPrimary:hover {
+    transform: scale(1.25) !important;
+    transition-duration: 0.5 !important;
+}
+
 
 /* button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {
     width: 110px;

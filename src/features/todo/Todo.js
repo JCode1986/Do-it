@@ -167,6 +167,7 @@ function Todo(props) {
                                         onClick={handleOpenModal}
                                     />
                                     <DeleteForeverIcon 
+                                        className="deleteIcon"
                                         style={{color:'red', cursor:'pointer'}} 
                                         onClick={handleOpenDeleteDialog}   
                                     />
