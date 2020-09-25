@@ -10,6 +10,7 @@ import TodoHeader from './features/todo/TodoHeader'
 import Login from './features/authentication/Login'
 import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
+//import SignUp from './features/authentication/SignUp'
 import Footer from './features/footer/Footer'
 
 const db = firebaseApp.firestore();
@@ -20,6 +21,7 @@ function App() {
   const [description, setDescription] = useState(['']);
   const [title, setTitle] = useState(['']);
   const [dateCreated, setDateCreated] = useState([new Date(Date.now())]);
+  const [modifiedDate, setModifiedDate] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
 
@@ -39,7 +41,7 @@ function App() {
         description: doc.data().description,
         dateCreated: doc.data().dateCreated,
         dateDeadline: doc.data().dateDeadline,
-        dateModified: doc.data().dateModified,
+        modifiedDate: doc.data().modifiedDate,
         priorityLevel: doc.data().priorityLevel
       })))
     })
@@ -52,6 +54,7 @@ function App() {
         <NavBar />
           <div className="App">
             <PrivateRoute exact path="/" component={Home}/>
+            {/* <SignUp exact path="/sign-up" /> */}
             <Route
               exact path="/form"
               render={(props) => 
@@ -93,13 +96,14 @@ function App() {
                   setDateDeadline={setDateDeadline}
                   priorityLevel={priorityLevel}
                   setTitle={setTitle}
+                  modifiedDate={modifiedDate}
                   />             
                 }
               />
             ))}
           </div>
         </Router>
-        <Footer/>
+        {/* <Footer/> */}
       </AuthProvider>
     </>
   );

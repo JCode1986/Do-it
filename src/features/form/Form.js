@@ -43,6 +43,15 @@ const form = (props) => {
       props.history.push('/tasks');
     }
 
+    const handleEnterKey = (e) => {
+      if(e.key === 'Enter'){
+        console.log("Hi")
+      }
+    }
+    const capitalizeFirstLetter = (string) => {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
     return (
       <Grid
         container
@@ -54,20 +63,24 @@ const form = (props) => {
         <form>
           <FormControl>
               <TextField
+                inputProps={{ maxLength: 20 }}
                 required
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
-                value={title}
+                helperText="Required: 20 chars max length"
+                value={capitalizeFirstLetter(title)}
                 onChange={event => setTitle(event.target.value)}
                 />
               <TextField 
                 multiline={true}
+                onKeyDown={handleEnterKey}
                 id="outlined-basic" 
                 label="Description" 
                 variant="outlined" 
                 value={description}
                 onChange={event => setDescription(event.target.value)}
+                //onChange={(event) => setDescription(descSkipLine(event, event.target.value))}
               />    
           <DateAndTime 
             dateDeadline={dateDeadline}
@@ -88,9 +101,7 @@ const form = (props) => {
                 Submit
             </Button>
             <Button 
-                onClick={() => {
-                  props.history.push('/tasks')
-                }} 
+                onClick={() => props.history.push('/tasks')} 
                 variant="contained" 
                 >
                 Cancel
