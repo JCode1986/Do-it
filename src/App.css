@@ -3,10 +3,14 @@
   /* background: linear-gradient(#F1F2B5, #135058); */
 }
 
-h1 {
+html {
+  margin-bottom: 100px;
+}
+
+/* h1 {
   padding-top: 50px;
   padding-bottom: 10px;
   margin-bottom: -10px;
-}
+} */
 
 

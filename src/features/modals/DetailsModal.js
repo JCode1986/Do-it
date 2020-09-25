@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Typography } from '@material-ui/core';
+import { Modal, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from '../date/DateFormat';
 
@@ -48,10 +48,14 @@ function Details(props) {
                 }}
             >   
                 <div>
-                    <Typography style={{textAlign:'center'}}>
+                    <Typography 
+                        className='detailHeader'
+                        style={{textAlign:'center'}}
+                    >
                         <h2>{props.todo}</h2> 
                     </Typography>
-                    <Typography>
+                    <Divider/>
+                    <Typography style={{marginTop:'10px'}}>
                         <em>Date Created: </em>{dateFormat(props.dateCreated.toDate().toString())}
                     </Typography>
                     {!props.modifiedDate ? 
@@ -63,11 +67,11 @@ function Details(props) {
                             <em>Date Modified: </em>{dateFormat(props.modifiedDate.toDate().toString())}
                         </Typography> 
                     }
-                    <Typography>
+                    <Typography style={{marginBottom:'10px'}}>
                         <em>Deadline: </em>{dateFormat(props.dateDeadline.toDate().toString())}
                     </Typography> 
-                    <br/>
-                    <Typography>
+                    <Divider/>
+                    <Typography style={{marginBottom:'10px', marginTop:'10px'}}>
                     {
                         !props.description || props.description == 0?
                         <Typography><strong><em>Description: </em> <br/></strong> No details provided...</Typography>
@@ -75,8 +79,8 @@ function Details(props) {
                         <Typography><strong><em>Description: </em> <br/></strong> {props.description}</Typography>
                     }
                     </Typography>
-                    <br/>
-                    <Typography>
+                    <Divider/>
+                    <Typography style={{marginTop:'10px'}}>
                         <strong><em>Priority Level: </em> <br/></strong> {level(props.priorityLevel)}
                     </Typography> 
                 </div>

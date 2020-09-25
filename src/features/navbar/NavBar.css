@@ -5,3 +5,11 @@
 svg.MuiSvgIcon-root.makeStyles-img-14 {
     font-size: 90px;
 }
+
+.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+    background-color: #FEAD6F;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.makeStyles-menuButton-4.MuiIconButton-colorInherit.MuiIconButton-edgeStart {
+    background-color: #3589E9;
+}

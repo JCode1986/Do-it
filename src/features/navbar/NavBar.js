@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './NavBar.css'
 
 const drawerWidth = 240;
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+function PersistentDrawerLeft(props) {
 
   const classes = useStyles();
   const theme = useTheme();
@@ -112,13 +113,14 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap style={{color:'#0D2949'}}>
             Do it!
           </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}
+        style={{color:'#3589E9'}}
         variant="persistent"
         anchor="left"
         open={open}
@@ -133,49 +135,52 @@ export default function PersistentDrawerLeft() {
         </div>
         <Divider />
         <List>
-          <Link to='/' >
-          <ListItem button key="Home">
+          <ListItem 
+            button 
+            onClick={() => {props.history.push('/home')}}
+            key="Home">
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
             <ListItemText primary="Home"/>
           </ListItem>
-          </Link>
-          <Link to='/form' >
-          <ListItem button key="Create a task">
+          <ListItem 
+            button
+            onClick={() => {props.history.push('/form')}} 
+            key="Create a task">
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
             <ListItemText primary="Create a task"/>
           </ListItem>
-          </Link>
-          <Link to='/tasks' >
-          <ListItem button key="Tasks">
+          <ListItem 
+            button 
+            key="Tasks"
+            onClick={() => {props.history.push('/tasks')}}
+            >
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
             <ListItemText primary="Tasks"/>
           </ListItem>
-          </Link>
         </List>
         <Divider />
         <List>
-        <Link to='/login' >
-          <ListItem button key="Log in">
+          <ListItem 
+            button 
+            onClick={() => {props.history.push('/login')}}
+            key="Log in">
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
             <ListItemText primary="Log in"/>
           </ListItem>
-          </Link>
-          <Link to='/about'>
           <ListItem button key="About">
             <ListItemIcon>
               <HomeIcon/>
             </ListItemIcon>
             <ListItemText primary="About"/>
           </ListItem>
-          </Link>
         </List>
       </Drawer>
       <main
@@ -187,3 +192,5 @@ export default function PersistentDrawerLeft() {
     </div>
   );
 }
+
+export default withRouter(PersistentDrawerLeft);

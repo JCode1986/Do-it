@@ -6,8 +6,29 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 35px;
 }
 
+
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
     transform: scale(1.03) !important;
+    transition-duration: 0.5 !important;
+}
+
+svg.MuiSvgIcon-root.makeStyles-img-14:hover {
+    transition-duration: 0.5 !important;
+    animation: rotation 4s infinite linear;
+}
+
+/* svg.MuiSvgIcon-root.makeStyles-img-14:hover {
+    transform: scale(1.15) !important;
+    transition-duration: 0.5 !important;
+} */
+
+svg.MuiSvgIcon-root.MuiSvgIcon-colorPrimary:hover {
+    transform: scale(1.25) !important;
+    transition-duration: 0.5 !important;
+}
+
+.deleteIcon:hover {
+    transform: scale(1.25) !important;
     transition-duration: 0.5 !important;
 }
 
@@ -15,14 +36,11 @@ svg.MuiSvgIcon-root.addIcon {
     flex-direction: inherit;
 }
 
-/* button.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.Mui-disabled.Mui-disabled {
-    width: 110px;
-    margin-left: 40%;
-    margin-right: 25%;
-    margin-top: 20px;
-} */
-
-/* .FormButtons {
-    display: inline-block !important;
-    margin: 15px !important;
-} */
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
