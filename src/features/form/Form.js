@@ -58,7 +58,7 @@ const form = (props) => {
         <form>
           <FormControl>
               <TextField
-                inputProps={{ maxLength: 20 }}
+                inputProps={{ maxLength: 15 }}
                 required
                 id="outlined-basic" 
                 label="Title" 
@@ -74,7 +74,6 @@ const form = (props) => {
                 variant="outlined" 
                 value={description}
                 onChange={event => setDescription(event.target.value)}
-                //onChange={(event) => setDescription(descSkipLine(event, event.target.value))}
               />    
           <DateAndTime 
             dateDeadline={dateDeadline}

@@ -91,6 +91,7 @@ export default function EditForm(props) {
             <FormControl>
                 <TextField
                   required
+                  inputProps={{ maxLength: 15 }}                  
                   id="outlined-basic" 
                   label="Title" 
                   variant="outlined" 

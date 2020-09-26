@@ -16,7 +16,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import './NavBar.css'
 
@@ -113,7 +112,7 @@ function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap style={{color:'#0D2949'}}>
+          <Typography variant="h6" noWrap style={{color:'#49120D'}}>
             Do it!
           </Typography>
         </Toolbar>
