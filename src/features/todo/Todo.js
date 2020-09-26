@@ -15,6 +15,7 @@ import {
     Grid, 
     Typography, 
     ButtonBase, 
+    Divider,
 } from '@material-ui/core';
   
 const useStyles = makeStyles((theme) => ({
@@ -22,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
         width: 445,
         borderRadius: '20px',
         textAlign: 'center', 
-        margin: 'auto',
+        //margin: 'auto',
         marginTop: '35px',
     },
     image: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       margin: 'auto',
       maxWidth: '100%',
       maxHeight: '100%',
-      fontSize: '90px',
+      marginRight: '15px',
     },
     closeButton: {
         position: 'absolute',
@@ -99,7 +100,7 @@ function Todo(props) {
                 break;
         }
     }
- 
+
     return (
         <>
             <DetailsModal
@@ -145,11 +146,16 @@ function Todo(props) {
             <div className={classes.root}>
                 <Paper className={classes.paper} 
                 style={{
-                    display: 'inline', 
+                    flex: '1',
+                    display: 'flex', 
                     float: 'left', 
                     marginLeft: '4.3%',
-                    }}>
-                        <Grid container spacing={1}>
+                    }}
+                >
+                        <Grid 
+                            container 
+                            spacing={24}                        
+                        >
                             <Grid item xs={12} sm container>
                             <Grid item>
                                 <ButtonBase 
@@ -161,19 +167,27 @@ function Todo(props) {
                             </Grid>
                                 <Grid item xs container direction="column" spacing={1}>
                                 <Grid item xs>
-                                    <Typography gutterBottom variant="h5" style={{color:'#3589E9'}}>
+                                    <Typography 
+                                        gutterBottom variant="h5"
+                                        onClick={() => setIsDetailOpen(true)} 
+                                        style={{
+                                            color:'#E94435', cursor:'pointer'
+                                        }}>
                                         {
                                             !due() ? <strong>{todo}</strong>
                                             :
                                             <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
                                         }
-                                        {/* <strong>{todo}{due()}</strong> */}
+                                    </Typography>
+                                    <Divider/>
+                                    <Typography 
+                                        style={{marginTop:'10px'}}
+                                        variant="body2"
+                                    >
+                                        <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
                                     </Typography>
                                     <Typography variant="body2">
-                                        <em><strong style={{color:'#5495DF'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
-                                    </Typography>
-                                    <Typography variant="body2">
-                                    <em><strong style={{color:'#5495DF'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                                    <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
                                     </Typography>
                                 </Grid>
                                 <Grid item>

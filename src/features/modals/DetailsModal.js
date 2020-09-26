@@ -2,6 +2,7 @@ import React from 'react'
 import { Modal, Typography, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from '../date/DateFormat';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 function Details(props) {
 
@@ -12,7 +13,7 @@ function Details(props) {
             backgroundColor: theme.palette.background.paper,
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
+            //padding: theme.spacing(2, 2, 3),
         },
     }));
 
@@ -47,14 +48,23 @@ function Details(props) {
                     transform: 'translate(-50%, -50%)'
                 }}
             >   
+                <CancelIcon
+                    style={{float:'right', cursor:'pointer'}}
+                    onClick={() => props.setIsDetailOpen(false)}
+                />
                 <div>
                     <Typography 
                         className='detailHeader'
                         style={{textAlign:'center'}}
                     >
-                        <h2>{props.todo}</h2> 
+                        <h2 style={{
+                            marginBottom: '10px', 
+                            color:'#49120D', 
+                            backgroundColor:'#66B032',
+                            borderBottom: '1px solid black',
+                        }}
+                        >{props.todo}</h2> 
                     </Typography>
-                    <Divider/>
                     <Typography style={{marginTop:'10px'}}>
                         <em>Date Created: </em>{dateFormat(props.dateCreated.toDate().toString())}
                     </Typography>
