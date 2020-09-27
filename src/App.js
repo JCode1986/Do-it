@@ -12,6 +12,7 @@ import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
 //import SignUp from './features/authentication/SignUp'
 import Footer from './features/footer/Footer'
+import CompletedTasks from './features/archives/CompletedTasks'
 
 const db = firebaseApp.firestore();
 
@@ -24,6 +25,7 @@ function App() {
   const [modifiedDate, setModifiedDate] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
+  const [archive, setArchive] = useState([])
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
@@ -47,6 +49,22 @@ function App() {
     })
     //dependencies
   }, []);
+
+  useEffect(() => {
+    db.collection('archive').onSnapshot(snapshot => {
+        //returns object with id, and todo
+        setArchive(snapshot.docs.map(doc => ({
+            id: doc.id, 
+            archivedTodo: doc.data().archivedTodo,
+            archivedDescription: doc.data().archivedDescription,
+            archivedDateCreated: doc.data().archivedDateCreated,
+            archivedDateDeadline: doc.data().archivedDateDeadline,
+            archivedModifiedDate: doc.data().archivedModifiedDate,
+            archivedPriorityLevel: doc.data().archivedPriorityLevel
+        })))
+    })
+    }, [])
+
   return (
     <>
     <AuthProvider>
@@ -54,26 +72,33 @@ function App() {
         <NavBar />
           <div className="App">
             <PrivateRoute exact path="/" component={Home}/>
-            {/* <SignUp exact path="/sign-up" /> */}
             <Route
               exact path="/form"
               render={(props) => 
                 <Form {...props}
-                  setTodos={setTodos}
-                  title={title} 
-                  setTitle={setTitle}
-                  description={description}
-                  setDescription={setDescription}
-                  dateCreated={dateCreated}
-                  setDateCreated={setDateCreated}
-                  dateDeadline={dateDeadline}
-                  setDateDeadline={setDateDeadline}
-                  priorityLevel={priorityLevel}
-                  setPriorityLevel={setPriorityLevel}
+                setTodos={setTodos}
+                title={title} 
+                setTitle={setTitle}
+                description={description}
+                setDescription={setDescription}
+                dateCreated={dateCreated}
+                setDateCreated={setDateCreated}
+                dateDeadline={dateDeadline}
+                setDateDeadline={setDateDeadline}
+                priorityLevel={priorityLevel}
+                setPriorityLevel={setPriorityLevel}
                 />           
               }
             />
             <Route exact path="/login" component={Login} />
+            <Route 
+              exact path="/completed-tasks"
+              render={(props) =>
+              <CompletedTasks {...props}
+                archive={archive}
+              />
+              }
+            />
             <Route 
               exact path="/tasks"
               render={(props) =>

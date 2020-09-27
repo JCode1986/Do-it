@@ -4,6 +4,7 @@ import 'firebase';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
 import UpdateModal from '../modals/UpdateModal';
+import CompletedApproval from '../modals/CompletedApproval'
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
@@ -58,6 +59,7 @@ function Todo(props) {
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isDetailOpen, setIsDetailOpen] = useState(false);
+    const [isArchiveOpen, setIsArchiveOpen] = useState(false);
     const [updateDescription, setUpdateDescription] = useState(['']);
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
@@ -78,8 +80,6 @@ function Todo(props) {
     const handleCloseDeleteDialog = () => {
         setIsDeleteDialogOpen(false);
     }
-
-    console.log(dateDeadline.toDate() > Date.now(), "what is this?")
 
     const due = () => {
         if(dateDeadline.toDate() <= Date.now()){
@@ -118,6 +118,16 @@ function Todo(props) {
                 setIsDeleteDialogOpen={setIsDeleteDialogOpen}
                 handleCloseDeleteDialog={handleCloseDeleteDialog}
                 id={id}
+            />
+            <CompletedApproval 
+                isArchiveOpen={isArchiveOpen}
+                setIsArchiveOpen={setIsArchiveOpen}
+                todo={todo}
+                description={description}
+                dateCreated={dateCreated}
+                modifiedDate={modifiedDate}
+                dateDeadline={dateDeadline}
+                priorityLevel={priorityLevel}
             />
             <UpdateModal 
                 isModalOpen={isModalOpen}
@@ -160,7 +170,8 @@ function Todo(props) {
                             <Grid item>
                                 <ButtonBase 
                                     className={classes.image}
-                                    onClick={() => setIsDetailOpen(true)}
+                                    //onClick={() => setIsDetailOpen(true)}
+                                    onClick={() => setIsArchiveOpen(true)}
                                 >
                                 {changeIconColor(priorityLevel)}
                                 </ButtonBase>
