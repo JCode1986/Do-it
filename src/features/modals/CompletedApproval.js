@@ -8,6 +8,7 @@ function CompletedApproval(props) {
     const db = firebase.firestore();
 
     const useStyles = makeStyles((theme) => ({
+
         paper: {
             position: 'absolute',
             width: 400,

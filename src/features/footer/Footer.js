@@ -7,8 +7,7 @@ function Footer() {
     return (
         <div className="footer">
         <Typography 
-          variant="body2" 
-          color="#E9A802" 
+          variant="body2"  
           align="center"
           style={{marginTop:'20px', marginBottom:'20px'}}
           >

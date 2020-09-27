@@ -83,7 +83,7 @@ function Details(props) {
                     <Divider/>
                     <Typography style={{marginBottom:'10px', marginTop:'10px'}}>
                     {
-                        !props.description || props.description == 0?
+                        !props.description || props.description === 0?
                         <Typography><strong><em>Description: </em> <br/></strong> No details provided...</Typography>
                         :
                         <Typography><strong><em>Description: </em> <br/></strong> {props.description}</Typography>

@@ -50,21 +50,6 @@ function App() {
     //dependencies
   }, []);
 
-  useEffect(() => {
-    db.collection('archive').onSnapshot(snapshot => {
-        //returns object with id, and todo
-        setArchive(snapshot.docs.map(doc => ({
-            id: doc.id, 
-            archivedTodo: doc.data().archivedTodo,
-            archivedDescription: doc.data().archivedDescription,
-            archivedDateCreated: doc.data().archivedDateCreated,
-            archivedDateDeadline: doc.data().archivedDateDeadline,
-            archivedModifiedDate: doc.data().archivedModifiedDate,
-            archivedPriorityLevel: doc.data().archivedPriorityLevel
-        })))
-    })
-    }, [])
-
   return (
     <>
     <AuthProvider>
@@ -122,6 +107,7 @@ function App() {
                   priorityLevel={priorityLevel}
                   setTitle={setTitle}
                   modifiedDate={modifiedDate}
+                  setModifiedDate={setModifiedDate}
                   />             
                 }
               />
