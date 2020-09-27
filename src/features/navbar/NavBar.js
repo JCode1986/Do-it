@@ -162,6 +162,16 @@ function PersistentDrawerLeft(props) {
             </ListItemIcon>
             <ListItemText primary="Tasks"/>
           </ListItem>
+          <ListItem 
+            button 
+            key="Archive"
+            onClick={() => {props.history.push('/completed-tasks')}}
+            >
+            <ListItemIcon>
+              <HomeIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Archive"/>
+          </ListItem>
         </List>
         <Divider />
         <List>

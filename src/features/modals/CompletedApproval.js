@@ -30,7 +30,8 @@ function CompletedApproval(props) {
               archivedDateCreated: props.dateCreated,
               archivedDateDeadline: props.dateDeadline,
               archivedModifiedDate: !props.modifiedDate ? "N/A" : props.modifiedDate,
-              archivedCompleted: firebase.firestore.FieldValue.serverTimestamp(),
+              //archivedCompleted: firebase.firestore.FieldValue.serverTimestamp(),
+              archivedCompleted: new Date(Date.now()),
               archivedPriorityLevel: props.priorityLevel
             })
             //props.history.push('/tasks');
