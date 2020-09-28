@@ -128,6 +128,7 @@ function Todo(props) {
                 modifiedDate={modifiedDate}
                 dateDeadline={dateDeadline}
                 priorityLevel={priorityLevel}
+                id={id}
             />
             <UpdateModal 
                 isModalOpen={isModalOpen}
@@ -162,10 +163,10 @@ function Todo(props) {
                     marginLeft: '4.3%',
                     }}
                 >
-                        <Grid 
+                        {/* <Grid 
                             container 
                             spacing={24}                        
-                        >
+                        > */}
                             <Grid item xs={12} sm container>
                             <Grid item>
                                 <ButtonBase 
@@ -217,7 +218,7 @@ function Todo(props) {
                             </Grid>
                             <Grid item>
                             </Grid>
-                        </Grid>
+                        {/* </Grid> */}
                     </Grid>
                 </Paper>
             </div>

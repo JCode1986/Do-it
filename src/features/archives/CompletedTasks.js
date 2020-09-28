@@ -8,8 +8,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
 import dateFormat from '../date/DateFormat';
+import CompletedDetails from './CompletedDetails';
+import './CompletedTasks.css'
+
 
 const useStyles = makeStyles({
     table: {
@@ -22,7 +26,9 @@ function CompletedTasks(props) {
 
     const classes = useStyles();
 
-    const [archives, setArchives] = useState([])
+    const [archives, setArchives] = useState([]);
+    const [description, setDescription] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         db.collection('archive').onSnapshot(snapshot => {
@@ -39,8 +45,31 @@ function CompletedTasks(props) {
             })))
         })
         }, [db])
+        
+            //find id
+    const details = (id) => {
+        setIsModalOpen(true);
+        setDescription(archives.find((archive) => archive.id === id).archivedDescription);
+    }
+
+    const priorities = (num) => {
+      if (num === 1) return 'Low';
+      if (num === 2) return 'Medium';
+      if (num === 3) return 'High'
+    }
 
     return (
+        <>
+        <CompletedDetails
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            archives={archives}
+            details={details}
+            description={description}
+        />
+        <Typography style={{marginTop:'40px', fontWeight:'bold', fontSize:'26px'}}>
+          Archive
+        </Typography>
         <TableContainer component={Paper} style={{marginTop: '20px'}}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -54,20 +83,28 @@ function CompletedTasks(props) {
           </TableHead>
           <TableBody>
             {archives.map((archive) => (
-              <TableRow key={archive.id}>
-                <TableCell component="th" align="center" scope="row">
+              <TableRow 
+                key={archive.id}
+                onClick={() => details(archive.id)}
+                style={{cursor:'pointer'}}
+                >
+                <TableCell 
+                    component="th" 
+                    align="center" 
+                    scope="row"
+                >
                   {archive.archivedTodo}
-                  {console.log(archive, "asdgasgdasgdas")}
                 </TableCell>
                 <TableCell align="center">{dateFormat(archive.archivedDateCreated.toDate().toString())}</TableCell>
                 <TableCell align="center">{dateFormat(archive.archivedDateDeadline.toDate().toString())}</TableCell>
                 <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
-                <TableCell align="center">{archive.archivedPriorityLevel}</TableCell>
+                <TableCell align="center">{priorities(archive.archivedPriorityLevel)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+      </>
     )
 }
 
