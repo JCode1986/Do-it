@@ -101,6 +101,9 @@ function Todo(props) {
         }
     }
 
+    const width = window.innerWidth;
+    console.log(window.innerWidth, "width")
+
     return (
         <>
             <DetailsModal
@@ -154,74 +157,65 @@ function Todo(props) {
             />
 
 {/* Todo List */}
-            <div className={classes.root}>
-                <Paper className={classes.paper} 
+            <Paper className={classes.paper} 
                 style={{
                     flex: '1',
                     display: 'flex', 
                     float: 'left', 
+                    flexDirection:"row",
                     marginLeft: '4.3%',
-                    }}
-                >
-                        {/* <Grid 
-                            container 
-                            spacing={24}                        
-                        > */}
-                            <Grid item xs={12} sm container>
-                            <Grid item>
-                                <ButtonBase 
-                                    className={classes.image}
-                                    //onClick={() => setIsDetailOpen(true)}
-                                    onClick={() => setIsArchiveOpen(true)}
-                                >
-                                {changeIconColor(priorityLevel)}
-                                </ButtonBase>
-                            </Grid>
-                                <Grid item xs container direction="column" spacing={1}>
-                                <Grid item xs>
-                                    <Typography 
-                                        gutterBottom variant="h5"
-                                        onClick={() => setIsDetailOpen(true)} 
-                                        style={{
-                                            color:'#E94435', cursor:'pointer'
-                                        }}>
-                                        {
-                                            !due() ? <strong>{todo}</strong>
-                                            :
-                                            <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
-                                        }
-                                    </Typography>
-                                    <Divider/>
-                                    <Typography 
-                                        style={{marginTop:'10px'}}
-                                        variant="body2"
-                                    >
-                                        <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
-                                    </Typography>
-                                    <Typography variant="body2">
-                                    <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <EditIcon 
-                                        style={{color:'darkblue', cursor:'pointer'}}
-                                        variant="contained" 
-                                        color="primary" 
-                                        onClick={handleOpenModal}
-                                    />
-                                    <DeleteForeverIcon 
-                                        className="deleteIcon"
-                                        style={{color:'red', cursor:'pointer'}} 
-                                        onClick={handleOpenDeleteDialog}   
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid item>
-                            </Grid>
-                        {/* </Grid> */}
+                }}
+            >
+                <Grid container>
+                    <Grid item>
+                        <ButtonBase 
+                            className={classes.image}
+                            onClick={() => setIsArchiveOpen(true)}
+                        >
+                        {changeIconColor(priorityLevel)}
+                        </ButtonBase>
                     </Grid>
-                </Paper>
-            </div>
+                    <Grid item xs container direction="column" spacing={1}>
+                        <Grid item xs>
+                            <Typography 
+                                gutterBottom variant="h5"
+                                onClick={() => setIsDetailOpen(true)} 
+                                style={{
+                                    color:'#E94435', cursor:'pointer'
+                                }}>
+                                {
+                                    !due() ? <strong>{todo}</strong>
+                                    :
+                                    <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
+                                }
+                            </Typography>
+                            <Divider/>
+                            <Typography 
+                                style={{marginTop:'10px'}}
+                                variant="body2"
+                            >
+                                <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
+                            </Typography>
+                            <Typography variant="body2">
+                            <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <EditIcon 
+                                style={{color:'darkblue', cursor:'pointer'}}
+                                variant="contained" 
+                                color="primary" 
+                                onClick={handleOpenModal}
+                            />
+                            <DeleteForeverIcon 
+                                className="deleteIcon"
+                                style={{color:'red', cursor:'pointer'}} 
+                                onClick={handleOpenDeleteDialog}   
+                            />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Paper>
         </>
     )
 }

@@ -42,6 +42,14 @@ const form = (props) => {
       setPriorityLevel(1);
       props.history.push('/tasks');
     }
+
+    const cancel = () => {
+      setTitle('');
+      setDescription('');
+      setDateDeadline(new Date(Date.now()));
+      setPriorityLevel(1);
+      props.history.push('/tasks');
+    }
     
     const capitalizeFirstLetter = (string) => {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -95,7 +103,7 @@ const form = (props) => {
                 Submit
             </Button>
             <Button 
-                onClick={() => props.history.push('/tasks')} 
+                onClick={cancel} 
                 variant="contained" 
                 >
                 Cancel
