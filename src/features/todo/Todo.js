@@ -128,6 +128,7 @@ function Todo(props) {
                 modifiedDate={modifiedDate}
                 dateDeadline={dateDeadline}
                 priorityLevel={priorityLevel}
+                id={id}
             />
             <UpdateModal 
                 isModalOpen={isModalOpen}

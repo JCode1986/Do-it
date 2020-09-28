@@ -1,0 +1,18 @@
+tr.MuiTableRow-root.MuiTableRow-head {
+    background: gainsboro;
+}
+
+th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter {
+    font: revert;
+    font-size: 20px;
+}
+
+tr.MuiTableRow-root:hover {
+    background-color:rgb(210, 233, 175);
+    transition-duration: 0.5 !important;
+}
+
+thead.MuiTableHead-root {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}

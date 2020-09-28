@@ -18,9 +18,8 @@ function CompletedApproval(props) {
             padding: theme.spacing(2, 4, 3),
         },
         }));
-        
-        const classes = useStyles();
 
+        const classes = useStyles();
         const addToArchive = (event) => {
             //stop refresh
             event.preventDefault();
@@ -35,8 +34,13 @@ function CompletedApproval(props) {
               archivedCompleted: new Date(Date.now()),
               archivedPriorityLevel: props.priorityLevel
             })
-            //props.history.push('/tasks');
+            deleteTodo(); 
           }
+
+    const deleteTodo = () => {
+        db.collection('todos').doc(props.id).delete();
+        props.setIsArchiveOpen(false);
+    }
 
     return (
         <div>

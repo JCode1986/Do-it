@@ -81,6 +81,7 @@ function App() {
               render={(props) =>
               <CompletedTasks {...props}
                 archive={archive}
+                setArchive={setArchive}
               />
               }
             />

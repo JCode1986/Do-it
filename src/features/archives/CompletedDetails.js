@@ -40,11 +40,11 @@ function CompletedDetails(props) {
                 style={{float:'right', cursor:'pointer'}}
                 onClick={() => props.setIsModalOpen(false)}
             />
-            <Typography variant="h5">
+            <Typography style={{marginBottom:'10px'}}variant="h5">
                 Description
             </Typography>
             <Divider/>
-            <Typography>
+            <Typography style={{marginTop:'20px'}}>
                 {props.description}
             </Typography>
             </div>

@@ -54,7 +54,7 @@ const form = (props) => {
         justify="space-evenly"
         alignItems="center"
       >
-        <h1>Create</h1>
+        <h1 style={{marginTop:'40px', marginBottom:0}}>Create</h1>
         <form>
           <FormControl>
               <TextField
@@ -63,7 +63,7 @@ const form = (props) => {
                 id="outlined-basic" 
                 label="Title" 
                 variant="outlined" 
-                helperText="Required: 20 chars max length"
+                helperText="Required: 15 chars max length"
                 value={capitalizeFirstLetter(title)}
                 onChange={event => setTitle(event.target.value)}
                 />
