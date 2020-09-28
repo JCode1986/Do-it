@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import UpdateDateAndTime from '../date/UpdateDateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
+import { toast } from "react-toastify";
 
 import { 
   Grid, 
@@ -55,6 +56,7 @@ export default function EditForm(props) {
       modifiedDate: new Date(Date.now()),
     //prevents from overiding in firebase
     }, { merge: true})
+    toast.success("Task Updated");
     setModalIsOpen(false);
   }
   

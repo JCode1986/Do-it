@@ -8,6 +8,7 @@ React Web app todo list.
 * [Visual Studio Code](https://code.visualstudio.com/) - IDE
 * [React.js](https://reactjs.org/docs/hello-world.html) - Front end
     * [Material-UI](https://material-ui.com/)
+    * [React-Toastify](https://www.npmjs.com/package/react-toastify)
 * [Firebase](https://firebase.google.com/) - Back end & Host
 
 ---

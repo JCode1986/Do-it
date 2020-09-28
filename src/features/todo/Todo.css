@@ -31,6 +31,11 @@ svg.MuiSvgIcon-root.MuiSvgIcon-colorPrimary:hover {
     transition-duration: 0.5 !important;
 }
 
+svg.MuiSvgIcon-root:hover {
+    transform: scale(1.25) !important;
+    transition-duration: 0.5 !important;
+}
+
 .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-1.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-true {
     flex-direction: inherit;
 }

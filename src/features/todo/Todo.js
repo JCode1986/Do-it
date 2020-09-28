@@ -9,13 +9,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import dateFormat from '../date/DateFormat'
-import ErrorIcon from '@material-ui/icons/Error';
+import DoneIcon from '@material-ui/icons/Done';
+import WarningIcon from '@material-ui/icons/Warning';
 import { withRouter } from 'react-router-dom';
 import { 
     Paper, 
     Grid, 
-    Typography, 
-    ButtonBase, 
+    Typography,  
     Divider,
 } from '@material-ui/core';
   
@@ -31,15 +31,11 @@ const useStyles = makeStyles((theme) => ({
         //margin: 'auto',
         marginTop: '35px',
     },
-    image: {
-      width: 50,
-      height: 50,
-    },
     img: {
       margin: 'auto',
       maxWidth: '100%',
       maxHeight: '100%',
-      marginRight: '15px',
+      marginRight: '3px',
     },
     closeButton: {
         position: 'absolute',
@@ -91,18 +87,15 @@ function Todo(props) {
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
             case 1:
-                return ( <ErrorIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
             case 2:
-                return ( <ErrorIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
             case 3:
-                return ( <ErrorIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
             default:
                 break;
         }
     }
-
-    const width = window.innerWidth;
-    console.log(window.innerWidth, "width")
 
     return (
         <>
@@ -168,12 +161,12 @@ function Todo(props) {
             >
                 <Grid container>
                     <Grid item>
-                        <ButtonBase 
-                            className={classes.image}
-                            onClick={() => setIsArchiveOpen(true)}
-                        >
                         {changeIconColor(priorityLevel)}
-                        </ButtonBase>
+                        <DoneIcon
+                            className={classes.image}
+                            style={{cursor:'pointer'}}
+                            onClick={() => setIsArchiveOpen(true)}
+                        />
                     </Grid>
                     <Grid item xs container direction="column" spacing={1}>
                         <Grid item xs>

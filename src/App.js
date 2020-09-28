@@ -13,7 +13,8 @@ import PrivateRoute from './features/authentication/PrivateRoute';
 //import SignUp from './features/authentication/SignUp'
 import Footer from './features/footer/Footer'
 import CompletedTasks from './features/archives/CompletedTasks'
-
+import {ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 const db = firebaseApp.firestore();
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
               />
               }
             />
+            <ToastContainer/>
             <Route 
               exact path="/tasks"
               render={(props) =>
