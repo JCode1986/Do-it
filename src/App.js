@@ -15,6 +15,7 @@ import Footer from './features/footer/Footer'
 import CompletedTasks from './features/archives/CompletedTasks'
 import {ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
+
 const db = firebaseApp.firestore();
 
 function App() {

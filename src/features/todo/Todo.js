@@ -12,6 +12,8 @@ import dateFormat from '../date/DateFormat'
 import DoneIcon from '@material-ui/icons/Done';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withRouter } from 'react-router-dom';
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 import { 
     Paper, 
     Grid, 
@@ -60,6 +62,7 @@ function Todo(props) {
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
+    const [showSomething, setShowSomething] = useState('');
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -95,6 +98,12 @@ function Todo(props) {
             default:
                 break;
         }
+    }
+
+    const priorityToString = (level) => {
+        if (level === 1) return "Priority Level: Low";
+        if (level === 2) return "Priority Level: Medium";
+        if (level === 3) return "Priority Level: High";
     }
 
     return (
@@ -161,27 +170,43 @@ function Todo(props) {
             >
                 <Grid container>
                     <Grid item>
-                        {changeIconColor(priorityLevel)}
-                        <DoneIcon
-                            className={classes.image}
-                            style={{cursor:'pointer'}}
-                            onClick={() => setIsArchiveOpen(true)}
-                        />
+                        <Tippy 
+                            trigger="mouseenter"
+                            content={priorityToString(priorityLevel)}
+                        >
+                            {changeIconColor(priorityLevel)}
+                        </Tippy>
+                        <Tippy
+                            trigger="mouseenter" 
+                            content="Complete this task?"
+                        >
+                            <DoneIcon
+                                className={classes.image}
+                                style={{cursor:'pointer'}}
+                                onClick={() => setIsArchiveOpen(true)}
+                            />
+                        </Tippy>
                     </Grid>
+
                     <Grid item xs container direction="column" spacing={1}>
                         <Grid item xs>
-                            <Typography 
-                                gutterBottom variant="h5"
-                                onClick={() => setIsDetailOpen(true)} 
-                                style={{
-                                    color:'#E94435', cursor:'pointer'
-                                }}>
-                                {
-                                    !due() ? <strong>{todo}</strong>
-                                    :
-                                    <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
-                                }
-                            </Typography>
+                            <Tippy
+                                trigger="mouseenter" 
+                                content="Show Details"
+                            >
+                                <Typography 
+                                    gutterBottom variant="h5"
+                                    onClick={() => setIsDetailOpen(true)} 
+                                    style={{
+                                        color:'#E94435', cursor:'pointer'
+                                    }}>
+                                    {
+                                        !due() ? <strong>{todo}</strong>
+                                        :
+                                        <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
+                                    }
+                                </Typography>
+                            </Tippy>
                             <Divider/>
                             <Typography 
                                 style={{marginTop:'10px'}}
@@ -194,17 +219,27 @@ function Todo(props) {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <EditIcon 
-                                style={{color:'darkblue', cursor:'pointer'}}
-                                variant="contained" 
-                                color="primary" 
-                                onClick={handleOpenModal}
-                            />
-                            <DeleteForeverIcon 
-                                className="deleteIcon"
-                                style={{color:'red', cursor:'pointer'}} 
-                                onClick={handleOpenDeleteDialog}   
-                            />
+                            <Tippy 
+                                content="Edit"
+                                trigger="mouseenter"
+                            >
+                                <EditIcon 
+                                    style={{color:'darkblue', cursor:'pointer'}}
+                                    variant="contained" 
+                                    color="primary" 
+                                    onClick={handleOpenModal}
+                                />
+                            </Tippy>
+                            <Tippy 
+                                content="Delete"
+                                trigger="mouseenter"    
+                            >
+                                <DeleteForeverIcon 
+                                    className="deleteIcon"
+                                    style={{color:'red', cursor:'pointer'}} 
+                                    onClick={handleOpenDeleteDialog}   
+                                />
+                            </Tippy>
                         </Grid>
                     </Grid>
                 </Grid>
