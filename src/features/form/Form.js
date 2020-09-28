@@ -6,6 +6,7 @@ import firebaseApp from '../../firebase';
 import firebase from 'firebase';
 import './Form.css'
 import { withRouter } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const db = firebaseApp.firestore();
 
@@ -36,6 +37,11 @@ const form = (props) => {
         dateDeadline: dateDeadline,
         priorityLevel: priorityLevel
       })
+      toast.success("New Task Created");
+      cancel();
+    }
+
+    const cancel = () => {
       setTitle('');
       setDescription('');
       setDateDeadline(new Date(Date.now()));
@@ -68,9 +74,10 @@ const form = (props) => {
                 onChange={event => setTitle(event.target.value)}
                 />
               <TextField 
+                autoComplete
                 multiline={true}
                 id="outlined-basic" 
-                label="Description" 
+                label="Details" 
                 variant="outlined" 
                 value={description}
                 onChange={event => setDescription(event.target.value)}
@@ -95,7 +102,7 @@ const form = (props) => {
                 Submit
             </Button>
             <Button 
-                onClick={() => props.history.push('/tasks')} 
+                onClick={cancel} 
                 variant="contained" 
                 >
                 Cancel

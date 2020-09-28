@@ -9,13 +9,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import dateFormat from '../date/DateFormat'
-import ErrorIcon from '@material-ui/icons/Error';
+import DoneIcon from '@material-ui/icons/Done';
+import WarningIcon from '@material-ui/icons/Warning';
 import { withRouter } from 'react-router-dom';
+import Tippy from '@tippy.js/react';
+import 'tippy.js/dist/tippy.css';
 import { 
     Paper, 
     Grid, 
-    Typography, 
-    ButtonBase, 
+    Typography,  
     Divider,
 } from '@material-ui/core';
   
@@ -31,15 +33,11 @@ const useStyles = makeStyles((theme) => ({
         //margin: 'auto',
         marginTop: '35px',
     },
-    image: {
-      width: 50,
-      height: 50,
-    },
     img: {
       margin: 'auto',
       maxWidth: '100%',
       maxHeight: '100%',
-      marginRight: '15px',
+      marginRight: '3px',
     },
     closeButton: {
         position: 'absolute',
@@ -64,6 +62,7 @@ function Todo(props) {
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
+    const [showSomething, setShowSomething] = useState('');
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -91,14 +90,20 @@ function Todo(props) {
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
             case 1:
-                return ( <ErrorIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
             case 2:
-                return ( <ErrorIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
             case 3:
-                return ( <ErrorIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
             default:
                 break;
         }
+    }
+
+    const priorityToString = (level) => {
+        if (level === 1) return "Priority Level: Low";
+        if (level === 2) return "Priority Level: Medium";
+        if (level === 3) return "Priority Level: High";
     }
 
     return (
@@ -154,74 +159,91 @@ function Todo(props) {
             />
 
 {/* Todo List */}
-            <div className={classes.root}>
-                <Paper className={classes.paper} 
+            <Paper className={classes.paper} 
                 style={{
                     flex: '1',
                     display: 'flex', 
                     float: 'left', 
+                    flexDirection:"row",
                     marginLeft: '4.3%',
-                    }}
-                >
-                        {/* <Grid 
-                            container 
-                            spacing={24}                        
-                        > */}
-                            <Grid item xs={12} sm container>
-                            <Grid item>
-                                <ButtonBase 
-                                    className={classes.image}
-                                    //onClick={() => setIsDetailOpen(true)}
-                                    onClick={() => setIsArchiveOpen(true)}
-                                >
-                                {changeIconColor(priorityLevel)}
-                                </ButtonBase>
-                            </Grid>
-                                <Grid item xs container direction="column" spacing={1}>
-                                <Grid item xs>
-                                    <Typography 
-                                        gutterBottom variant="h5"
-                                        onClick={() => setIsDetailOpen(true)} 
-                                        style={{
-                                            color:'#E94435', cursor:'pointer'
-                                        }}>
-                                        {
-                                            !due() ? <strong>{todo}</strong>
-                                            :
-                                            <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
-                                        }
-                                    </Typography>
-                                    <Divider/>
-                                    <Typography 
-                                        style={{marginTop:'10px'}}
-                                        variant="body2"
-                                    >
-                                        <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
-                                    </Typography>
-                                    <Typography variant="body2">
-                                    <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <EditIcon 
-                                        style={{color:'darkblue', cursor:'pointer'}}
-                                        variant="contained" 
-                                        color="primary" 
-                                        onClick={handleOpenModal}
-                                    />
-                                    <DeleteForeverIcon 
-                                        className="deleteIcon"
-                                        style={{color:'red', cursor:'pointer'}} 
-                                        onClick={handleOpenDeleteDialog}   
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid item>
-                            </Grid>
-                        {/* </Grid> */}
+                }}
+            >
+                <Grid container>
+                    <Grid item>
+                        <Tippy 
+                            trigger="mouseenter"
+                            content={priorityToString(priorityLevel)}
+                        >
+                            {changeIconColor(priorityLevel)}
+                        </Tippy>
+                        <Tippy
+                            trigger="mouseenter" 
+                            content="Complete this task?"
+                        >
+                            <DoneIcon
+                                className={classes.image}
+                                style={{cursor:'pointer'}}
+                                onClick={() => setIsArchiveOpen(true)}
+                            />
+                        </Tippy>
                     </Grid>
-                </Paper>
-            </div>
+
+                    <Grid item xs container direction="column" spacing={1}>
+                        <Grid item xs>
+                            <Tippy
+                                trigger="mouseenter" 
+                                content="Show Details"
+                            >
+                                <Typography 
+                                    gutterBottom variant="h5"
+                                    onClick={() => setIsDetailOpen(true)} 
+                                    style={{
+                                        color:'#E94435', cursor:'pointer'
+                                    }}>
+                                    {
+                                        !due() ? <strong>{todo}</strong>
+                                        :
+                                        <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
+                                    }
+                                </Typography>
+                            </Tippy>
+                            <Divider/>
+                            <Typography 
+                                style={{marginTop:'10px'}}
+                                variant="body2"
+                            >
+                                <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(dateCreated.toDate().toString())}</em>
+                            </Typography>
+                            <Typography variant="body2">
+                            <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Tippy 
+                                content="Edit"
+                                trigger="mouseenter"
+                            >
+                                <EditIcon 
+                                    style={{color:'darkblue', cursor:'pointer'}}
+                                    variant="contained" 
+                                    color="primary" 
+                                    onClick={handleOpenModal}
+                                />
+                            </Tippy>
+                            <Tippy 
+                                content="Delete"
+                                trigger="mouseenter"    
+                            >
+                                <DeleteForeverIcon 
+                                    className="deleteIcon"
+                                    style={{color:'red', cursor:'pointer'}} 
+                                    onClick={handleOpenDeleteDialog}   
+                                />
+                            </Tippy>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Paper>
         </>
     )
 }

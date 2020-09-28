@@ -3,6 +3,7 @@ import { Modal, Typography, Button } from '@material-ui/core'
 import '../../firebase';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
+import { toast } from "react-toastify";
 
 function CompletedApproval(props) {
     const db = firebase.firestore();
@@ -30,11 +31,11 @@ function CompletedApproval(props) {
               archivedDateCreated: props.dateCreated,
               archivedDateDeadline: props.dateDeadline,
               archivedModifiedDate: !props.modifiedDate ? "N/A" : props.modifiedDate,
-              //archivedCompleted: firebase.firestore.FieldValue.serverTimestamp(),
               archivedCompleted: new Date(Date.now()),
               archivedPriorityLevel: props.priorityLevel
             })
             deleteTodo(); 
+            toast.success("Task Completed and saved in Archive")
           }
 
     const deleteTodo = () => {
@@ -69,7 +70,7 @@ function CompletedApproval(props) {
                         id="simple-modal-description"
                         style={{marginBottom:'10px'}}
                     >
-                        Did you complete task?
+                        Complete task and place in archive?
                     </Typography>
                 <Button
                     onClick={addToArchive}

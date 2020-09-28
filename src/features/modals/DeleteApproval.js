@@ -3,6 +3,7 @@ import '../../firebase';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import{ Modal, Button, Typography } from '@material-ui/core';
+import { toast } from "react-toastify";
 
 function DeleteDialog(props) {
     const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
@@ -25,6 +26,7 @@ function DeleteDialog(props) {
     const deleteTodo = () => {
         db.collection('todos').doc(props.id).delete()
         setIsDeleteDialogOpen(false);
+        toast.error("Task Deleted");
     }
 
     return (
