@@ -49,20 +49,28 @@ function Details(props) {
                 }}
             >   
                 <CancelIcon
-                    style={{float:'right', cursor:'pointer'}}
+                    style={{
+                        float:'right', 
+                        cursor:'pointer', 
+                        marginTop:'5px',
+                        marginRight: '5px'
+                    }}
                     onClick={() => props.setIsDetailOpen(false)}
                 />
                 <div>
                     <Typography 
                         className='detailHeader'
-                        style={{textAlign:'center'}}
-                    >
-                        <h2 style={{
-                            marginBottom: '10px', 
+                        style={{
+                            textAlign:'center',                         
+                            marginBottom: '10px !important',
+                            marginTop: '0px',
+                            paddingTop: '1px', 
                             color:'#49120D', 
-                            backgroundColor:'#66B032',
+                            backgroundColor:'lightblue',
                             borderBottom: '1px solid black',
                         }}
+                    >
+                        <h2 
                         >{props.todo}</h2> 
                     </Typography>
                     <Typography style={{marginTop:'10px'}}>
@@ -90,7 +98,7 @@ function Details(props) {
                     }
                     </Typography>
                     <Divider/>
-                    <Typography style={{marginTop:'10px'}}>
+                    <Typography style={{marginTop:'10px', marginBottom:'10px'}}>
                         <strong><em>Priority Level: </em> <br/></strong> {level(props.priorityLevel)}
                     </Typography> 
                 </div>
