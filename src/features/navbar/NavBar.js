@@ -7,7 +7,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -117,9 +116,12 @@ function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap style={{color:'#49120D'}}>
-            Do it!
-          </Typography>
+          <img 
+            src={require("./do-it-logo.png")} 
+            alt="Do It!"
+            style={{height:'60px', cursor:'pointer'}}
+            onClick={() => {props.history.push('/tasks')}}
+          />
         </Toolbar>
       </AppBar>
       <Drawer

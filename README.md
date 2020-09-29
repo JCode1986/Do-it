@@ -1,7 +1,10 @@
 # ReacToDo
 
 ## Web Application
-React Web app todo list.
+- Application which a user can create a task, activity, or just something to do. User can also enter a deadline with optional details.
+- User will have the ability to update or delete specific tasks.
+- Once task is completed, this will be saved in an archived section.
+
 * [Deployed Site](https://react-todo-eb067.web.app)
 
 ## Tools
@@ -61,7 +64,11 @@ export default db;
 ---
 
 ## Pages
-
+* Home - `/home`
+* Login - `/login`
+* Create - `/form`
+* Tasks - `/tasks`
+* Archive - `/completed-tasks`
 ---
 ### Resources
 * [Youtube - Clever Programmer](https://www.youtube.com/watch?v=VqgTr-nd7Cg&list=PL-J2q3Ga50oMQa1JdSJxYoZELwOJAXExP&index=2&t=9057s)
