@@ -71,7 +71,10 @@ function Details(props) {
                         }}
                     >
                         <h2 
-                        >{props.todo}</h2> 
+                            style={{marginLeft: '20px',}}
+                        >
+                            {props.todo}       
+                        </h2> 
                     </Typography>
                     <Typography style={{marginTop:'10px'}}>
                         <em>Date Created: </em>{dateFormat(props.dateCreated.toDate().toString())}
@@ -89,7 +92,7 @@ function Details(props) {
                         <em>Deadline: </em>{dateFormat(props.dateDeadline.toDate().toString())}
                     </Typography> 
                     <Divider/>
-                    <Typography style={{marginBottom:'10px', marginTop:'10px'}}>
+                    <Typography style={{marginBottom:'10px', marginTop:'10px', paddingLeft:'20px', paddingRight:'20px'}}>
                     {
                         !props.description || props.description == 0?
                         <Typography><strong><em>Description: </em> <br/></strong> No details provided...</Typography>

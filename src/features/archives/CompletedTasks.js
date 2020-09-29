@@ -10,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 import dateFormat from '../date/DateFormat';
 import CompletedDetails from './CompletedDetails';
 import './CompletedTasks.css'
@@ -29,9 +30,20 @@ function CompletedTasks(props) {
     const [archives, setArchives] = useState([]);
     const [description, setDescription] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(+event.target.value);
+      setPage(0);
+    };
 
     useEffect(() => {
-        db.collection('archive').onSnapshot(snapshot => {
+        db.collection('archive').orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
             //returns object with id, and todo
             setArchives(snapshot.docs.map(doc => ({
                 id: doc.id, 
@@ -46,7 +58,7 @@ function CompletedTasks(props) {
         })
         }, [db])
         
-            //find id
+    //find id
     const details = (id) => {
         setIsModalOpen(true);
         setDescription(archives.find((archive) => archive.id === id).archivedDescription);
@@ -87,8 +99,8 @@ function CompletedTasks(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {archives.map((archive) => (
-              <TableRow 
+            {archives.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((archive) => (
+                <TableRow 
                 key={archive.id}
                 onClick={() => details(archive.id)}
                 style={{cursor:'pointer'}}
@@ -105,10 +117,19 @@ function CompletedTasks(props) {
                 <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
                 <TableCell align="center">{priorities(archive.archivedPriorityLevel)}</TableCell>
               </TableRow>
-            ))}
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25, 100]}
+        component="div"
+        count={archives.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
       </>
     )
 }
