@@ -31,7 +31,7 @@ function CompletedTasks(props) {
     const [description, setDescription] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);

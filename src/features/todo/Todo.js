@@ -14,6 +14,9 @@ import WarningIcon from '@material-ui/icons/Warning';
 import { withRouter } from 'react-router-dom';
 import Tippy from '@tippy.js/react';
 import 'tippy.js/dist/tippy.css';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { 
     Paper, 
     Grid, 
@@ -61,6 +64,15 @@ function Todo(props) {
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -167,22 +179,12 @@ function Todo(props) {
                 }}
             >
                 <Grid container>
-                    <Grid item>
+                    <Grid item >
                         <Tippy 
                             trigger="mouseenter"
                             content={priorityToString(priorityLevel)}
                         >
                             {changeIconColor(priorityLevel)}
-                        </Tippy>
-                        <Tippy
-                            trigger="mouseenter" 
-                            content="Completed this task?"
-                        >
-                            <DoneIcon
-                                className={classes.image}
-                                style={{cursor:'pointer'}}
-                                onClick={() => setIsArchiveOpen(true)}
-                            />
                         </Tippy>
                     </Grid>
                     <Grid item xs container direction="column" spacing={1}>
@@ -215,29 +217,58 @@ function Todo(props) {
                             <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
                             </Typography>
                         </Grid>
-                        <Grid item>
-                            <Tippy 
-                                content="Edit"
-                                trigger="mouseenter"
-                            >
+                        <Tippy 
+                            content="Options"
+                            trigger="mouseenter"
+                        >
+                        <MoreHorizIcon
+                            style={{cursor:'pointer'}}
+                            onClick={handleClick}
+                            />
+                        </Tippy>
+                         <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem onClick={handleClose}>
                                 <EditIcon 
-                                    style={{color:'darkblue', cursor:'pointer'}}
-                                    variant="contained" 
-                                    color="primary" 
+                                        style={{color:'darkblue', cursor:'pointer', marginRight:'10px'}}
+                                        variant="contained" 
+                                        color="primary" 
+                                        onClick={handleOpenModal}
+                                    />
+                                <p
                                     onClick={handleOpenModal}
-                                />
-                            </Tippy>
-                            <Tippy 
-                                content="Delete"
-                                trigger="mouseenter"    
-                            >
+                                >
+                                    Edit
+                                </p>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
                                 <DeleteForeverIcon 
-                                    className="deleteIcon"
-                                    style={{color:'red', cursor:'pointer'}} 
-                                    onClick={handleOpenDeleteDialog}   
+                                        className="deleteIcon"
+                                        style={{color:'red', cursor:'pointer', marginRight:'10px'}} 
+                                        onClick={handleOpenDeleteDialog}   
                                 />
-                            </Tippy>
-                        </Grid>
+                                <p  
+                                    onClick={handleOpenDeleteDialog}
+                                >
+                                    Delete
+                                </p>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <DoneIcon
+                                    className={classes.image}
+                                    style={{cursor:'pointer', marginRight:'10px'}}
+                                    onClick={() => setIsArchiveOpen(true)}
+                                />
+                                <p
+                                    onClick={() => setIsArchiveOpen(true)}
+                                >Completed</p> 
+                            </MenuItem>
+                        </Menu>
                     </Grid>
                 </Grid>
             </Paper>
