@@ -6,10 +6,18 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 35px;
 }
 
-
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
     transform: scale(1.03) !important;
     transition-duration: 0.5 !important;
+}
+
+.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
+    background-color:white;
+    transition-duration: 0.5 !important;
+}
+
+.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded {
+    background-color: whitesmoke;
 }
 
 svg.MuiSvgIcon-root.makeStyles-img-14:hover {

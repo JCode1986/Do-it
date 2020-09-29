@@ -62,7 +62,6 @@ function Todo(props) {
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
-    const [showSomething, setShowSomething] = useState('');
 
     const handleOpenModal = () => {
         setModalIsOpen(true);
@@ -178,7 +177,7 @@ function Todo(props) {
                         </Tippy>
                         <Tippy
                             trigger="mouseenter" 
-                            content="Complete this task?"
+                            content="Completed this task?"
                         >
                             <DoneIcon
                                 className={classes.image}

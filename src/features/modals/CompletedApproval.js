@@ -16,7 +16,7 @@ function CompletedApproval(props) {
             backgroundColor: theme.palette.background.paper,
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
-            padding: theme.spacing(2, 4, 3),
+            //padding: theme.spacing(2, 4, 3),
         },
         }));
 
@@ -35,7 +35,7 @@ function CompletedApproval(props) {
               archivedPriorityLevel: props.priorityLevel
             })
             deleteTodo(); 
-            toast.success("Task Completed and saved in Archive")
+            toast.success("Task Completed and archived")
           }
 
     const deleteTodo = () => {
@@ -53,30 +53,43 @@ function CompletedApproval(props) {
             >
                  <div 
                     className={classes.paper}
-                    style={{    
-                        width:'auto',        
+                    style={{           
                         position:'absolute',
                         top:'50%',
                         left: '50%',
-                        transform: 'translate(-50%, -50%)'
+                        transform: 'translate(-50%, -50%)',
+                        width: '330px',
+                        height: '180px'
                     }}
                 >
                     <div 
                         className="completeHeader"
+                        style={{
+                            backgroundColor:'lightblue',
+                            margin:'0px',
+                            paddingBottom:'1px',
+                            paddingTop:'1px',
+                            borderBottom: '1px solid black'
+                        }}
                     >
                     <h2 id="simple-modal-title">Complete Confirmation</h2>
                     </div>
                     <Typography 
                         id="simple-modal-description"
-                        style={{marginBottom:'10px'}}
+                        style={{marginBottom:'15px', marginTop: '15px'}}
                     >
-                        Complete task and place in archive?
+                        Completed task?
                     </Typography>
                 <Button
+                    style={{marginRight:'5px'}}
                     onClick={addToArchive}
+                    variant="contained"
+                    color="primary"
                     >Yes
                 </Button>
                 <Button
+                    variant="contained"
+                    style={{marginLeft:'5px'}}
                     onClick={() => props.setIsArchiveOpen(false)}
                     >No
                 </Button>
