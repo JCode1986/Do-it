@@ -94,7 +94,7 @@ const form = (props) => {
           <Grid>
             <Button
                 className="FormButtons"
-                disabled={!title} 
+                disabled={!title || title.split('').every(char => char === ' ')} 
                 type="submit" 
                 onClick={addTodo} 
                 variant="contained" 

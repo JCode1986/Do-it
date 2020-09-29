@@ -16,6 +16,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import ListIcon from '@material-ui/icons/List';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import InfoIcon from '@material-ui/icons/Info';
 import { withRouter } from 'react-router-dom';
 import './NavBar.css'
 
@@ -148,7 +153,7 @@ function PersistentDrawerLeft(props) {
             onClick={() => {props.history.push('/form')}} 
             key="Create a task">
             <ListItemIcon>
-              <HomeIcon/>
+              <AddCircleOutlineIcon/>
             </ListItemIcon>
             <ListItemText primary="Create a task"/>
           </ListItem>
@@ -158,7 +163,7 @@ function PersistentDrawerLeft(props) {
             onClick={() => {props.history.push('/tasks')}}
             >
             <ListItemIcon>
-              <HomeIcon/>
+              <ListIcon/>
             </ListItemIcon>
             <ListItemText primary="Tasks"/>
           </ListItem>
@@ -168,7 +173,7 @@ function PersistentDrawerLeft(props) {
             onClick={() => {props.history.push('/completed-tasks')}}
             >
             <ListItemIcon>
-              <HomeIcon/>
+              <ArchiveIcon/>
             </ListItemIcon>
             <ListItemText primary="Archive"/>
           </ListItem>
@@ -180,13 +185,13 @@ function PersistentDrawerLeft(props) {
             onClick={() => {props.history.push('/login')}}
             key="Log in">
             <ListItemIcon>
-              <HomeIcon/>
+              <AccountCircleIcon/>
             </ListItemIcon>
             <ListItemText primary="Log in"/>
           </ListItem>
           <ListItem button key="About">
             <ListItemIcon>
-              <HomeIcon/>
+              <InfoIcon/>
             </ListItemIcon>
             <ListItemText primary="About"/>
           </ListItem>

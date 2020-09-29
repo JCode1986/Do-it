@@ -70,6 +70,11 @@ function CompletedTasks(props) {
         <Typography style={{marginTop:'40px', fontWeight:'bold', fontSize:'26px'}}>
           Archive
         </Typography>
+        <Typography>
+          <em>
+          Completed: {archives.length}
+          </em>
+        </Typography>
         <TableContainer component={Paper} style={{marginTop: '20px'}}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
