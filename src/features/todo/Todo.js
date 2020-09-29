@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         width: 445,
         borderRadius: '20px',
         textAlign: 'center', 
-        //margin: 'auto',
         marginTop: '35px',
     },
     img: {
@@ -186,7 +185,6 @@ function Todo(props) {
                             />
                         </Tippy>
                     </Grid>
-
                     <Grid item xs container direction="column" spacing={1}>
                         <Grid item xs>
                             <Tippy
