@@ -10,11 +10,12 @@ import TodoHeader from './features/todo/TodoHeader'
 import Login from './features/authentication/Login'
 import { AuthProvider } from './features/authentication/Auth';
 import PrivateRoute from './features/authentication/PrivateRoute';
-//import SignUp from './features/authentication/SignUp'
+import SignUp from './features/authentication/SignUp'
 import Footer from './features/footer/Footer'
 import CompletedTasks from './features/archives/CompletedTasks'
 import {ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
+require('firebase/auth');
 
 const db = firebaseApp.firestore();
 
@@ -35,10 +36,10 @@ function App() {
     setDateDeadline(new Date(Date.now()));
     setDateCreated(new Date(Date.now()));
     setPriorityLevel(1);
-    //fires when app loads; take snapshot of database if something changes in 'todos' collection
-    //can create collection if it does not exist in snapshot
-    // db.collection('todos').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
-
+    
+      //fires when app loads; take snapshot of database if something changes in 'todos' collection
+      //can create collection if it does not exist in snapshot
+      //sort by priority level
       db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
       //returns object with id, and todo
       setTodos(snapshot.docs.map(doc => ({
@@ -58,9 +59,10 @@ function App() {
     <>
     <AuthProvider>
       <Router>
-        <NavBar />
           <div className="App">
+          <NavBar/>
             <PrivateRoute exact path="/" component={Home}/>
+            <Route exact path="/signup" component={SignUp}/>
             <Route
               exact path="/form"
               render={(props) => 

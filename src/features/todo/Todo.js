@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './Todo.css'
-import firebase from 'firebase';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
 import UpdateModal from '../modals/UpdateModal';

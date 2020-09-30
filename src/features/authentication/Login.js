@@ -83,6 +83,7 @@ const Login = ( {history} ) => {
             //label="Email Address"
             label="Auth work in progress..."
             name="email"
+            type="email"
             autoComplete="email"
             autoFocus
           />
