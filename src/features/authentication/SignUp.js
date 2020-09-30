@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { app } from 'firebase';
+import app from 'firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,9 +35,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const SignUp = ( {history} ) => {
   const classes = useStyles();
-
+  console.log(app.default.auth(), "what is this?")
   const handleSignUp = useCallback(async event => {
     event.preventDefault();
     const { email, password } = event.target.elements;
@@ -63,7 +64,7 @@ const SignUp = ( {history} ) => {
         </Typography>
         <form 
           className={classes.form} 
-          noValidate
+          //noValidate
           onSubmit={handleSignUp}
         >
           <TextField
