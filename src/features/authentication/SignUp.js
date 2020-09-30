@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { withRouter, Redirect } from "react-router"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -73,6 +74,7 @@ const SignUp = ( {history} ) => {
             id="email"
             label="Email Address"
             name="email"
+            type="email"
             autoComplete="email"
             autoFocus
           />
@@ -101,14 +103,13 @@ const SignUp = ( {history} ) => {
               Sign Up
             </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link 
+                style={{marginLeft:'100px'}}
+                href="#" 
+                variant="body2"
+              >
+                {"Already have an account? Log in"}
               </Link>
             </Grid>
           </Grid>
@@ -120,4 +121,4 @@ const SignUp = ( {history} ) => {
   );
 }
 
-export default SignUp;
+export default withRouter(SignUp);

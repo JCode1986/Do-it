@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Todo.css'
-import 'firebase';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
 import UpdateModal from '../modals/UpdateModal';
@@ -80,6 +79,7 @@ function Todo(props) {
 
     const handleCloseModal = () => {
         setModalIsOpen(false);
+        handleClose();
     }
 
     const handleOpenDeleteDialog = () => {
@@ -88,6 +88,7 @@ function Todo(props) {
 
     const handleCloseDeleteDialog = () => {
         setIsDeleteDialogOpen(false);
+        handleClose();
     }
 
     const due = () => {
@@ -144,6 +145,7 @@ function Todo(props) {
                 dateDeadline={dateDeadline}
                 priorityLevel={priorityLevel}
                 id={id}
+                handleClose={handleClose}
             />
             <UpdateModal 
                 isModalOpen={isModalOpen}
@@ -166,6 +168,7 @@ function Todo(props) {
                 setUpdateDescription={setUpdateDescription}
                 setUpdateDateDeadline={setUpdateDateDeadline}
                 setUpdatePriorityLevel={setUpdatePriorityLevel}
+                handleClose={handleClose}
             />
 
 {/* Todo List */}
@@ -233,40 +236,42 @@ function Todo(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={handleOpenModal}>
                                 <EditIcon 
-                                        style={{color:'darkblue', cursor:'pointer', marginRight:'10px'}}
+                                        style={{color:'darkblue', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
                                         variant="contained" 
                                         color="primary" 
                                         onClick={handleOpenModal}
                                     />
-                                <p
+                                <Typography
+                                    style={{float:'right'}}
                                     onClick={handleOpenModal}
                                 >
                                     Edit
-                                </p>
+                                </Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={handleOpenDeleteDialog}>
                                 <DeleteForeverIcon 
                                         className="deleteIcon"
-                                        style={{color:'red', cursor:'pointer', marginRight:'10px'}} 
+                                        style={{color:'red', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}} 
                                         onClick={handleOpenDeleteDialog}   
                                 />
-                                <p  
+
+                                <Typography  
                                     onClick={handleOpenDeleteDialog}
                                 >
                                     Delete
-                                </p>
+                                </Typography>
                             </MenuItem>
-                            <MenuItem onClick={handleClose}>
+                            <MenuItem onClick={() => setIsArchiveOpen(true)}>
                                 <DoneIcon
                                     className={classes.image}
-                                    style={{cursor:'pointer', marginRight:'10px'}}
+                                    style={{cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
                                     onClick={() => setIsArchiveOpen(true)}
                                 />
-                                <p
+                                <Typography
                                     onClick={() => setIsArchiveOpen(true)}
-                                >Completed</p> 
+                                >Completed</Typography> 
                             </MenuItem>
                         </Menu>
                     </Grid>

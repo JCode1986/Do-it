@@ -58,6 +58,7 @@ export default function EditForm(props) {
     }, { merge: true})
     toast.success("Task Updated");
     setModalIsOpen(false);
+    props.handleClose();
   }
   
   return (
