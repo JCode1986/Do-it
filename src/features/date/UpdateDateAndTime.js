@@ -45,7 +45,6 @@ function UpdateDateAndTime(props) {
                 margin="normal"
                 helperText={'Deadline Time'}
                 id="time-picker"
-                //defaultValue={updateDateDeadline}
                 value={updateDateDeadline}
                 onChange={handleUpdateDateChange}
                 KeyboardButtonProps={{'aria-label': 'change time',}}

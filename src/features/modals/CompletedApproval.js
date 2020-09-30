@@ -43,11 +43,16 @@ function CompletedApproval(props) {
         props.setIsArchiveOpen(false);
     }
 
+    const closeMenu = () => {
+        props.handleClose(false);
+        props.setIsArchiveOpen(false);
+    }
+
     return (
         <div>
             <Modal    
                 open={props.isArchiveOpen}
-                onClose={() => props.setIsArchiveOpen(false)}
+                onClose={closeMenu}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
@@ -90,7 +95,7 @@ function CompletedApproval(props) {
                 <Button
                     variant="contained"
                     style={{marginLeft:'5px'}}
-                    onClick={() => props.setIsArchiveOpen(false)}
+                    onClick={closeMenu}
                     >No
                 </Button>
                 </div>
