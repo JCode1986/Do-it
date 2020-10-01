@@ -74,7 +74,6 @@ const form = (props) => {
                 onChange={event => setTitle(event.target.value)}
                 />
               <TextField 
-                autoComplete
                 multiline={true}
                 id="outlined-basic" 
                 label="Details" 

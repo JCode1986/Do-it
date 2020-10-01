@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +58,21 @@ const Login = ( {history} ) => {
     if (currentUser) {
         return <Redirect to="/" />
     }
+
+    const uiConfig = {
+      signInFlow: "popup",
+      signInOptions: [
+        app.auth.GoogleAuthProvider.PROVIDER_ID,
+        app.auth.FacebookAuthProvider.PROVIDER_ID,
+        app.auth.GithubAuthProvider.PROVIDER_ID,
+        app.auth.EmailAuthProvider.PROVIDER_ID
+      ],
+      callbacks: {
+        signInSuccess: () => false
+      }
+    }
   
+    console.log(uiConfig.signInOptions[0], "hello?")
 
   return (
     <Container component="main" maxWidth="xs">
@@ -118,16 +133,24 @@ const Login = ( {history} ) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/sign-up" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        
-      </Box>
+      <Grid  
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+      > 
+      <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={app.auth()}
+        />    
+      </Grid> 
     </Container>
   );
 }

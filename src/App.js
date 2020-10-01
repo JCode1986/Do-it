@@ -27,7 +27,7 @@ function App() {
   const [modifiedDate, setModifiedDate] = useState([new Date(Date.now())]);
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
-  const [archive, setArchive] = useState([])
+  const [archive, setArchive] = useState([]);
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
@@ -62,6 +62,7 @@ function App() {
           <NavBar/>
             <PrivateRoute exact path="/" component={Home}/>
             <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/login" component={Login} />
             <Route
               exact path="/form"
               render={(props) => 
@@ -80,7 +81,6 @@ function App() {
                 />           
               }
             />
-            <Route exact path="/login" component={Login} />
             <Route 
               exact path="/completed-tasks"
               render={(props) =>

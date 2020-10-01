@@ -14,7 +14,6 @@ export default function DateAndTime(props) {
     const handleDateChange = (date) => {
       if(date._d < dateCreated) return null;
       setDateDeadline(date._d);
-      console.log(date._d)
     }
 
     const TextFieldComponent = (props) => {

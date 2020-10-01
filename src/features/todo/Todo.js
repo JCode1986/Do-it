@@ -225,6 +225,7 @@ function Todo(props) {
                             trigger="mouseenter"
                         >
                         <MoreHorizIcon
+                            className="options"
                             style={{cursor:'pointer'}}
                             onClick={handleClick}
                             />
