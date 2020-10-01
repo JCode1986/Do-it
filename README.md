@@ -58,14 +58,17 @@ export default db;
 
 ## Firebase authentication setup
 * [Youtube - Maksim Ivanov](https://www.youtube.com/watch?v=unr4s3jd9qA)
+* [Handling User Authentication](https://blog.logrocket.com/user-authentication-firebase-react-apps/)
 
 ## Firebase OAuth setup
 * [Youtube - lingonsaft](https://www.youtube.com/watch?v=zq0TuNqV0Ew)
+* [Github docs](https://github.com/firebase/firebaseui-web-react)
 ---
 
 ## Pages
 * Home - `/home`
 * Login - `/login`
+* Signup - `/signup`
 * Create - `/form`
 * Tasks - `/tasks`
 * Archive - `/completed-tasks`

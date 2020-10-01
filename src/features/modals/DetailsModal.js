@@ -58,7 +58,7 @@ function Details(props) {
                     onClick={() => props.setIsDetailOpen(false)}
                 />
                 <div>
-                    <Typography 
+                    <div 
                         className='detailHeader'
                         style={{
                             textAlign:'center',                         
@@ -70,12 +70,13 @@ function Details(props) {
                             borderBottom: '1px solid black',
                         }}
                     >
-                        <h2 
+                        <h1
+                            variant='h4'
                             style={{marginLeft: '20px',}}
-                        >
-                            {props.todo}       
-                        </h2> 
-                    </Typography>
+                        >                 
+                            {props.todo}  
+                        </h1>     
+                    </div>
                     <Typography style={{marginTop:'10px'}}>
                         <em>Date Created: </em>{dateFormat(props.dateCreated.toDate().toString())}
                     </Typography>
@@ -92,14 +93,14 @@ function Details(props) {
                         <em>Deadline: </em>{dateFormat(props.dateDeadline.toDate().toString())}
                     </Typography> 
                     <Divider/>
-                    <Typography style={{marginBottom:'10px', marginTop:'10px', paddingLeft:'20px', paddingRight:'20px'}}>
+                    <div style={{marginBottom:'10px', marginTop:'10px', paddingLeft:'20px', paddingRight:'20px'}}>
                     {
                         !props.description || props.description == 0?
-                        <Typography><strong><em>Description: </em> <br/></strong> No details provided...</Typography>
+                        <Typography><strong><em>Details: </em> <br/></strong> No details provided...</Typography>
                         :
-                        <Typography><strong><em>Description: </em> <br/></strong> {props.description}</Typography>
+                        <Typography><strong><em>Details: </em> <br/></strong> {props.description}</Typography>
                     }
-                    </Typography>
+                    </div>
                     <Divider/>
                     <Typography style={{marginTop:'10px', marginBottom:'10px'}}>
                         <strong><em>Priority Level: </em> <br/></strong> {level(props.priorityLevel)}

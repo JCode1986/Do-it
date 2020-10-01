@@ -11,6 +11,10 @@ svg.MuiSvgIcon-root.addIcon {
     background-color: whitesmoke;
 }
 
+.options:hover {
+    transform: scale(1.25) !important;
+    transition-duration: 0.5 !important;
+}
 
 .MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
     transform: scale(1.03) !important;

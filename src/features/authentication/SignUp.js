@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { withRouter, Redirect } from "react-router"
+import { withRouter } from "react-router"
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import app from 'firebase';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = ( {history} ) => {
   const classes = useStyles();
-  console.log(app.default.auth(), "what is this?")
   const handleSignUp = useCallback(async event => {
     event.preventDefault();
     const { email, password } = event.target.elements;
@@ -51,6 +51,19 @@ const SignUp = ( {history} ) => {
       alert(error);
     }
   }, [history]);
+
+  const uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [
+      app.auth.GoogleAuthProvider.PROVIDER_ID,
+      app.auth.FacebookAuthProvider.PROVIDER_ID,
+      app.auth.GithubAuthProvider.PROVIDER_ID,
+      app.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -107,7 +120,7 @@ const SignUp = ( {history} ) => {
             <Grid item>
               <Link 
                 style={{marginLeft:'100px'}}
-                href="#" 
+                href="/login" 
                 variant="body2"
               >
                 {"Already have an account? Log in"}
@@ -117,6 +130,10 @@ const SignUp = ( {history} ) => {
         </form>
       </div>
       <Box mt={8}>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={app.auth()}
+        />
       </Box>
     </Container>
   );
