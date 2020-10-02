@@ -13,3 +13,9 @@ svg.MuiSvgIcon-root.makeStyles-img-14 {
 button.MuiButtonBase-root.MuiIconButton-root.makeStyles-menuButton-4.MuiIconButton-colorInherit.MuiIconButton-edgeStart {
     color: #49120D;
 }
+
+.userPhoto {
+    width: 40px;
+    border-radius: 50%; 
+    margin-right: 10px;
+}

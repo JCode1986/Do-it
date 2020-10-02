@@ -6,9 +6,18 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 35px;
 }
 
-/* local hover */
-.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded {
+.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded {
     background-color: whitesmoke;
+}
+
+.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5;
+}
+
+.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded:hover {
+    background-color:white;    
+    transition-duration: 0.5;
 }
 
 .options:hover {
@@ -16,31 +25,6 @@ svg.MuiSvgIcon-root.addIcon {
     transition-duration: 0.5 !important;
 }
 
-.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    transform: scale(1.03) !important;
-    transition-duration: 0.5 !important;
-}
-
-.MuiPaper-root.makeStyles-paper-12.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    background-color:white;
-    transition-duration: 0.5 !important;
-}
-
-/* deployed hover */
-.MuiPaper-root.jss12.MuiPaper-elevation1.MuiPaper-rounded {
-    background-color: whitesmoke;
-}
-
-.MuiPaper-root.jss12.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    background-color:white;
-    transition-duration: 0.5;
-}
-
-.MuiPaper-root.jss12.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    transform: scale(1.03) !important;
-    transition-duration: 0.5 !important;
-}
-/* ===================== */
 
 svg.MuiSvgIcon-root.makeStyles-img-14:hover {
     transition-duration: 0.5;
@@ -50,26 +34,6 @@ svg.MuiSvgIcon-root.makeStyles-img-14:hover {
 h5.MuiTypography-root.MuiTypography-h5.MuiTypography-gutterBottom {
     margin-bottom: 0;
 }
-
-/* svg.MuiSvgIcon-root.MuiSvgIcon-colorPrimary:hover {
-    transform: scale(1.25) !important;
-    transition-duration: 0.5 !important;
-}
-
-.deleteIcon:hover {
-    transform: scale(1.25) !important;
-    transition-duration: 0.5 !important;
-}
-
-svg.MuiSvgIcon-root:hover {
-    transform: scale(1.25) !important;
-    transition-duration: 0.5 !important;
-} */
-
-/* svg.MuiSvgIcon-root:hover {
-    transform: scale(1.25);
-    transition-duration: 0.5;
-} */
 
 li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
     padding-bottom: 0;
@@ -88,6 +52,10 @@ li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiL
 li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button:hover {
     transform: scale(1.10);
     transition-duration: 0.5;
+}
+
+ul.MuiList-root.MuiMenu-list.MuiList-padding {
+    width: 155px;
 }
 
 @keyframes rotation {

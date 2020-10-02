@@ -95,8 +95,7 @@ const Login = ( {history} ) => {
             //required
             fullWidth
             id="email"
-            //label="Email Address"
-            label="Auth work in progress..."
+            label="Email Address"
             name="email"
             type="email"
             autoComplete="email"
