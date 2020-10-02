@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const SignUp = ( {history} ) => {
   const classes = useStyles();
   const handleSignUp = useCallback(async event => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import firebaseApp from '../../firebase';
-
+import Loading from '../loading/Loading'
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     if(pending) {
-        return <>Loading...</>
+        return <Loading/>
     };
 
     return (

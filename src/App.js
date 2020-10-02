@@ -39,16 +39,19 @@ function App() {
       //fires when app loads; take snapshot of database if something changes in 'todos' collection
       //can create collection if it does not exist in snapshot
       //sort by priority level
+
+      // db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
+      // //returns object with id, and todo
       db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
-      //returns object with id, and todo
-      setTodos(snapshot.docs.map(doc => ({
-        id: doc.id, 
-        todo: doc.data().todo,
-        description: doc.data().description,
-        dateCreated: doc.data().dateCreated,
-        dateDeadline: doc.data().dateDeadline,
-        modifiedDate: doc.data().modifiedDate,
-        priorityLevel: doc.data().priorityLevel
+        //returns object with id, and todo
+        setTodos(snapshot.docs.map(doc => ({
+          id: doc.id, 
+          todo: doc.data().todo,
+          description: doc.data().description,
+          dateCreated: doc.data().dateCreated,
+          dateDeadline: doc.data().dateDeadline,
+          modifiedDate: doc.data().modifiedDate,
+          priorityLevel: doc.data().priorityLevel
       })))
     })
     //dependencies

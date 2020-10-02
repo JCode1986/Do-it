@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -21,7 +22,9 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InfoIcon from '@material-ui/icons/Info';
 import { withRouter } from 'react-router-dom';
+import app from 'firebase';
 import './NavBar.css'
+import { Typography } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -84,6 +87,8 @@ const useStyles = makeStyles((theme) => ({
 
 function PersistentDrawerLeft(props) {
 
+  const user = app.auth().currentUser;
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -122,6 +127,31 @@ function PersistentDrawerLeft(props) {
             style={{height:'60px', cursor:'pointer'}}
             onClick={() => {props.history.push('/tasks')}}
           />
+        <div style={{marginLeft:"auto"}}>
+          {
+            !user ?
+            <Typography>
+              Not logged in
+            </Typography>
+            :
+            user.displayName ?
+            <Grid
+              container
+              direction="row"
+              justify="flex-end"
+              alignItems="center"
+            >
+              <img className="userPhoto"src={user.photoURL} alt={user.displayName} /> 
+              <Typography>
+              {user.displayName}
+            </Typography>
+            </Grid>
+            :
+            <Typography>
+              User: {user.email} 
+            </Typography>
+          }
+        </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -143,7 +173,7 @@ function PersistentDrawerLeft(props) {
         <List>
           <ListItem 
             button 
-            onClick={() => {props.history.push('/home')}}
+            onClick={() => {props.history.push('/')}}
             key="Home">
             <ListItemIcon>
               <HomeIcon/>
@@ -182,6 +212,18 @@ function PersistentDrawerLeft(props) {
         </List>
         <Divider />
         <List>
+          {
+            user ? 
+            <ListItem 
+            button 
+            onClick={() => {app.auth().signOut()}}
+            key="Log out">
+            <ListItemIcon>
+              <AccountCircleIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Log out"/>
+          </ListItem>
+          :
           <ListItem 
             button 
             onClick={() => {props.history.push('/login')}}
@@ -191,6 +233,7 @@ function PersistentDrawerLeft(props) {
             </ListItemIcon>
             <ListItemText primary="Log in"/>
           </ListItem>
+          }
           <ListItem button key="About">
             <ListItemIcon>
               <InfoIcon/>

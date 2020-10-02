@@ -101,11 +101,11 @@ function Todo(props) {
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
             case 1:
-                return ( <WarningIcon className={classes.img} style={{color:'green'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'green', fontSize:'35px'}} alt="complex"/> )
             case 2:
-                return ( <WarningIcon className={classes.img} style={{color:'gold'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'gold', fontSize:'35px'}} alt="complex"/> )
             case 3:
-                return ( <WarningIcon className={classes.img} style={{color:'red'}} alt="complex"/> )
+                return ( <WarningIcon className={classes.img} style={{color:'red', fontSize:'35px'}} alt="complex"/> )
             default:
                 break;
         }
