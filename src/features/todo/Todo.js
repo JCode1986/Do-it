@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react';
+import { TodoContext } from '../context/TodoContext';
+import { AuthContext} from '../authentication/Auth';
 import './Todo.css'
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
@@ -51,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
 function Todo(props) {
 
     const {todo, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
+    // const [todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
+    //     modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
+    //     archive, setArchive, userId, setUserId] = useContext(TodoContext);
 
     //access to use styles
     const classes = useStyles();
