@@ -22,7 +22,7 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InfoIcon from '@material-ui/icons/Info';
 import { withRouter } from 'react-router-dom';
-import app from 'firebase';
+import firebase from 'firebase';
 import './NavBar.css'
 import { Typography } from '@material-ui/core';
 
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 
 function PersistentDrawerLeft(props) {
 
-  const user = app.auth().currentUser;
+  const user = firebase.auth().currentUser;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -100,6 +100,11 @@ function PersistentDrawerLeft(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const logOut = () => {
+    firebase.auth().signOut()
+    props.history.push('/login');
+  }
 
   return (
     <div className={classes.root}>
@@ -216,7 +221,7 @@ function PersistentDrawerLeft(props) {
             user ? 
             <ListItem 
             button 
-            onClick={() => {app.auth().signOut()}}
+            onClick={logOut}
             key="Log out">
             <ListItemIcon>
               <AccountCircleIcon/>
