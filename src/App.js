@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
+import firebase from 'firebase'
 import Todo from './features/todo/Todo';
 import { TodoProvider } from './features/context/TodoContext';
+import { AuthContext } from './features/authentication/Auth';
 import firebaseApp from './firebase';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
@@ -29,7 +31,6 @@ function App() {
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
   const [archive, setArchive] = useState([]);
-  const [userId, setUserId] = useState('');
 
   //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
@@ -37,13 +38,13 @@ function App() {
     setDateDeadline(new Date(Date.now()));
     setDateCreated(new Date(Date.now()));
     setPriorityLevel(1);
-    
-    //setUserId(app.auth().currentUser.uid)
+
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     //sort by priority level
     //console.log(db.collection('users').doc(app.auth().currentUser.uid), "what is this?")
     db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
+    //db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
       //returns object with id, and todo
       setTodos(snapshot.docs.map(doc => ({
         id: doc.id, 
@@ -121,7 +122,6 @@ function App() {
                     setTitle={setTitle}
                     modifiedDate={modifiedDate}
                     setModifiedDate={setModifiedDate}
-                    userId={userId}
                     />             
                   }
                 />
