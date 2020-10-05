@@ -4,6 +4,7 @@ import { TodoContext } from '../context/TodoContext';
 import { AuthContext} from '../authentication/Auth';
 import './Todo.css';
 import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
+import Countdown from '../date/Countdown';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
 import UpdateModal from '../modals/UpdateModal';
@@ -67,21 +68,6 @@ function Todo(props) {
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [timeLeft, setTimeLeft] = useState(0);
-
-    const tick = () => {
-        let start = Math.round(new Date().getTime() / 1000);
-        let end = dateDeadline.seconds;
-        setTimeLeft(end - start);
-    }
-
-    useEffect(() => {
-        const interval = setInterval(tick, 1000)
-        return () => {
-            clearInterval(interval)
-        }
-    }, [dateDeadline])
-
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -109,12 +95,6 @@ function Todo(props) {
         handleClose();
     }
 
-    const due = () => {
-        if(dateDeadline.toDate() <= Date.now()){
-            return '(Due)'
-        }
-    }
-
     //changes priority icon color depending on level
     const changeIconColor = (priorityLevel) => {
         switch(priorityLevel) {
@@ -134,8 +114,6 @@ function Todo(props) {
         if (level === 2) return "Priority Level: Medium";
         if (level === 3) return "Priority Level: High";
     }
-
-    const day = Math.floor((dateDeadline.seconds - Math.round(new Date().getTime() / 1000)) / (3600*24));
 
     return (
         <>
@@ -222,11 +200,7 @@ function Todo(props) {
                                     style={{
                                         color:'#E94435', cursor:'pointer'
                                     }}>
-                                    {
-                                        !due() ? <strong>{todo}</strong>
-                                        :
-                                        <strong style={{color:'darkRed'}}>{todo}{due()}</strong>
-                                    }
+                                    <strong>{todo}</strong>
                                 </Typography>
                             </Tippy>
                             <Divider/>
@@ -239,19 +213,9 @@ function Todo(props) {
                             <Typography variant="body2">
                             <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
                             </Typography>
-                            <Typography variant="body2">
-                                <em>
-                                {
-                                    typeof timeLeft === 'number' && !day >= 1 ? 
-                                    <div variant="body2">Time Remaining: {new Date(timeLeft * 1000).toISOString().substr(11, 8)}</div>
-                                    :
-                                    day >= 1 ?
-                                    <div>Time Remaining: 24+ hours</div>
-                                    :
-                                    <div style={{color:'red'}}><strong>{due()}</strong></div>
-                                }
-                                </em>
-                            </Typography>
+                            <Countdown 
+                                dateDeadline={dateDeadline}
+                            />
                         </Grid>
                         <Tippy 
                             content="Options"

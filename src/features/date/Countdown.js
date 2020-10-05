@@ -1,34 +1,44 @@
 import React, { useState, useEffect } from 'react'
-
+import { Typography } from '@material-ui/core';
 function Countdown(props) {
-    const [timeLeft, setTimeLeft] = useState(10);
-    const [isDue, setIsDue] = useState(false);
+  
+    const [timeLeft, setTimeLeft] = useState(0);
 
-    console.log(props.dateDeadline.seconds - props.dateCreated.seconds, "seconds left")
-    // const tick = () => {
-    //     setTimeLeft(timeLeft => timeLeft + 1)
-    // }
-
-    // useEffect(() => {
-    //     const interval = setInterval(tick, 1000)
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // }, [])
+    const tick = () => {
+        let start = Math.round(new Date().getTime() / 1000);
+        let end = props.dateDeadline.seconds;
+        setTimeLeft(end - start);
+    }
 
     useEffect(() => {
-        if(timeLeft === 15) {
-            setTimeLeft('Poop');
-        }
+        const interval = setInterval(tick, 1000)
         return () => {
-            clearInterval(timeLeft)
+            clearInterval(interval)
         }
-    },[timeLeft] )
+    }, [props.dateDeadline])
 
+    const due = () => {
+        if(props.dateDeadline.toDate() <= Date.now()){
+            return '(Due)'
+        }
+    }
 
+    const day = Math.floor((props.dateDeadline.seconds - Math.round(new Date().getTime() / 1000)) / (3600*24));
     return (
         <div>
-            {timeLeft}
+            <Typography variant="body2">
+                <em>
+                {
+                    typeof timeLeft === 'number' && !day >= 1 ? 
+                    <div variant="body2">Time Remaining: {new Date(timeLeft * 1000).toISOString().substr(11, 8)}</div>
+                    :
+                    day >= 1 ?
+                    <div>Time Remaining: 24+ hours</div>
+                    :
+                    <div style={{color:'red'}}><strong>{due()}</strong></div>
+                }
+                </em>
+            </Typography>
         </div>
     )
 }
