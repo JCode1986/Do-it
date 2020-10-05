@@ -53,10 +53,11 @@ const Login = ( {history} ) => {
     }, [history]);
 
     const { currentUser } = useContext(AuthContext)
-
+    
     if (currentUser) {
         return <Redirect to="/" />
     }
+
 
     const uiConfig = {
       signInFlow: "popup",
@@ -71,8 +72,6 @@ const Login = ( {history} ) => {
       }
     }
   
-    console.log(uiConfig.signInOptions[0], "hello?")
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

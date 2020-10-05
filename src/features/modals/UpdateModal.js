@@ -3,7 +3,6 @@ import UpdateDateAndTime from '../date/UpdateDateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
 import { toast } from "react-toastify";
-
 import { 
   Grid, 
   FormControl, 
@@ -99,8 +98,6 @@ export default function EditForm(props) {
                   label="Title" 
                   variant="outlined" 
                   defaultValue={todo}
-                  //value={updateTitle}
-                  //value={todo}
                   onChange={event => setUpdateTitle(event.target.value)}
                   />
                 <TextField 
@@ -109,8 +106,6 @@ export default function EditForm(props) {
                   label="Description" 
                   variant="outlined" 
                   defaultValue={description}
-                  //value={updateDescription}
-                  //value={description}
                   onChange={event => setUpdateDescription(event.target.value)}
                 />    
                 <UpdateDateAndTime 

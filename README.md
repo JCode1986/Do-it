@@ -1,9 +1,9 @@
 # ReacToDo
 
 ## Web Application
-- Application which a user can create a task, activity, or just something to do. User can also enter a deadline with optional details.
+- Application which a user can login, and create a task, activity. User can also enter a deadline with optional details.
 - User will have the ability to update or delete specific tasks.
-- Once task is completed, this will be saved in an archived section.
+- Once task is completed, this will be saved in an archived section which the user will have access to, to track progression.
 
 * [Deployed Site](https://react-todo-eb067.web.app)
 

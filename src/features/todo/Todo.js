@@ -1,7 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import firebase from '../../firebase';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext} from '../authentication/Auth';
-import './Todo.css'
+import './Todo.css';
+import AccessAlarmsIcon from '@material-ui/icons/AccessAlarms';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
 import UpdateModal from '../modals/UpdateModal';
@@ -64,7 +66,22 @@ function Todo(props) {
     const [updateTitle, setUpdateTitle] = useState(['']);
     const [updateDateDeadline, setUpdateDateDeadline] = useState([new Date(Date.now())]);
     const [updatePriorityLevel, setUpdatePriorityLevel] = useState(1);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(0);
+
+    const tick = () => {
+        let start = Math.round(new Date().getTime() / 1000);
+        let end = dateDeadline.seconds;
+        setTimeLeft(end - start);
+    }
+
+    useEffect(() => {
+        const interval = setInterval(tick, 1000)
+        return () => {
+            clearInterval(interval)
+        }
+    }, [dateDeadline])
+
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -117,6 +134,8 @@ function Todo(props) {
         if (level === 2) return "Priority Level: Medium";
         if (level === 3) return "Priority Level: High";
     }
+
+    const day = Math.floor((dateDeadline.seconds - Math.round(new Date().getTime() / 1000)) / (3600*24));
 
     return (
         <>
@@ -219,6 +238,19 @@ function Todo(props) {
                             </Typography>
                             <Typography variant="body2">
                             <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(dateDeadline.toDate().toString())}</em>
+                            </Typography>
+                            <Typography variant="body2">
+                                <em>
+                                {
+                                    typeof timeLeft === 'number' && !day >= 1 ? 
+                                    <div variant="body2">Time Remaining: {new Date(timeLeft * 1000).toISOString().substr(11, 8)}</div>
+                                    :
+                                    day >= 1 ?
+                                    <div>Time Remaining: 24+ hours</div>
+                                    :
+                                    <div style={{color:'red'}}><strong>{due()}</strong></div>
+                                }
+                                </em>
                             </Typography>
                         </Grid>
                         <Tippy 
