@@ -11,7 +11,7 @@ svg.MuiSvgIcon-root.addIcon {
 }
 
 .MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
     transition-duration: 0.5;
 }
 

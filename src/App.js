@@ -5,7 +5,7 @@ import { AuthProvider } from './features/authentication/Auth';
 import { AuthContext } from './features/authentication/Auth';
 import {ToastContainer } from "react-toastify";
 import './App.css';
-import Todo from './features/todo/Todo';
+import TodoList from './features/todo/TodoList';
 import firebaseApp from './firebase';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
@@ -29,11 +29,8 @@ function App() {
   const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
   const [priorityLevel, setPriorityLevel] = useState([1]);
   const [archive, setArchive] = useState([]);
-  const [userId, setUserId] = useState('');
 
-  
-  const currentUser  = useContext(AuthContext)
-  // when app loads, listen to database and fetch new todos as they get added/removed
+    //when app loads, listen to database and fetch new todos as they get added/removed
   useEffect(() => {
     setTitle('');
     setDateDeadline(new Date(Date.now()));
@@ -111,7 +108,7 @@ function App() {
                   key={todo.id}
                   exact path="/tasks"
                   render={(props) =>
-                  <Todo {...props}
+                  <TodoList {...props}
                     todo={todo}
                     />             
                   }

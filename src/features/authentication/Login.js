@@ -63,9 +63,7 @@ const Login = ( {history} ) => {
       signInFlow: "popup",
       signInOptions: [
         app.auth.GoogleAuthProvider.PROVIDER_ID,
-        app.auth.FacebookAuthProvider.PROVIDER_ID,
         app.auth.GithubAuthProvider.PROVIDER_ID,
-        app.auth.EmailAuthProvider.PROVIDER_ID
       ],
       callbacks: {
         signInSuccess: () => false
@@ -143,10 +141,10 @@ const Login = ( {history} ) => {
         justify="center"
         alignItems="center"
       > 
-      <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={app.auth()}
-        />    
+        <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={app.auth()}
+          />  
       </Grid> 
     </Container>
   );
