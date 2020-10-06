@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { Button, FormControl, TextField, Grid } from '@material-ui/core';
-import PriorityLevel from '../priority/PriorityLevel'
+import PriorityLevel  from '../priority/PriorityLevel';
 import DateAndTime from '../date/DateAndTime'
 import firebaseApp from '../../firebase';
 import firebase from 'firebase';
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const db = firebaseApp.firestore();
 
 const form = (props) => {  
-  
+
   const {
     title, 
     description, 
