@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { TodoProvider } from './features/context/TodoContext';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
-import { AuthProvider } from './features/authentication/Auth';
 import { AuthContext } from './features/authentication/Auth';
 import {ToastContainer } from "react-toastify";
 import './App.css';
@@ -20,27 +19,27 @@ import "react-toastify/dist/ReactToastify.css"
 
 const db = firebaseApp.firestore();
 
-function App() {
-  //todos start off with empty array in use state
-  const [todos, setTodos] = useState([]);
-  const [description, setDescription] = useState(['']);
-  const [title, setTitle] = useState(['']);
-  const [dateCreated, setDateCreated] = useState([new Date(Date.now())]);
-  const [dateDeadline, setDateDeadline] = useState([new Date(Date.now())]);
-  const [priorityLevel, setPriorityLevel] = useState([1]);
-  const [archive, setArchive] = useState([]);
 
-    //when app loads, listen to database and fetch new todos as they get added/removed
+function App() {
+
+  const { currentUser } = useContext(AuthContext)
+
+  const [todos, setTodos] = useState([]);
+  const [archive, setArchive] = useState([]);
+  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
+  const [dateCreated, setDateCreated] = useState(new Date(Date.now()));
+  const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
+  const [priorityLevel, setPriorityLevel] = useState(1);
+
   useEffect(() => {
-    setTitle('');
-    setDateDeadline(new Date(Date.now()));
-    setDateCreated(new Date(Date.now()));
-    setPriorityLevel(1);
     
+  }, [currentUser])
+    //when app loads, listen to database and fetch new todos as they get added/removed
+  useEffect(() => {  
     //fires when app loads; take snapshot of database if something changes in 'todos' collection
     //can create collection if it does not exist in snapshot
     //sort by priority level
-    //console.log(db.collection('users').doc(app.auth().currentUser.uid), "what is this?")
     db.collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
       //returns object with id, and todo
       setTodos(snapshot.docs.map(doc => ({
@@ -58,7 +57,6 @@ function App() {
     
   return (
     <>
-    <AuthProvider>
       <TodoProvider>
         <Router>
             <div className="App">
@@ -118,7 +116,6 @@ function App() {
           </Router>
           <Footer/>
         </TodoProvider>
-      </AuthProvider>
     </>
   );
 }
