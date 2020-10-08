@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css"
 
 const db = firebaseApp.firestore();
 
-
 function App() {
 
   const { currentUser } = useContext(AuthContext)
