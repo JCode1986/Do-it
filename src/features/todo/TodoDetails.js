@@ -69,19 +69,19 @@ function TodoDetails(props) {
             </Grid>
             <Grid item xs container direction="column" spacing={1}>
                 <Grid item xs>
-                    <Tippy
-                        trigger="mouseenter" 
-                        content="Show Details"
-                    >
                         <Typography 
                             gutterBottom variant="h5"
                             onClick={() => props.setIsDetailOpen(true)} 
-                            style={{
-                                color:'#E94435', cursor:'pointer'
-                            }}>
-                            <strong>{props.todo}</strong>
+                        >
+                            <Tippy
+                                    trigger="mouseenter" 
+                                    content="Show Details"
+                                >
+                                <strong 
+                                    style={{ color:'#E94435', cursor:'pointer' }}className="title">{props.todo}
+                                </strong>
+                            </Tippy>
                         </Typography>
-                    </Tippy>
                     <Divider/>
                     <Typography 
                         style={{marginTop:'10px'}}

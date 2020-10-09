@@ -16,3 +16,17 @@
     transform: scale(1.25) !important;
     transition-duration: 0.5 !important;
 }
+
+svg.MuiSvgIcon-root.makeStyles-img-14:hover {
+    transition-duration: 0.5;
+    animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
