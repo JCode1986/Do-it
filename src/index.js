@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './features/authentication/Auth';
+import { TodoProvider } from './features/context/TodoContext';
 
 ReactDOM.render(
   <React.StrictMode>
         <AuthProvider>
-          <App />
+          <TodoProvider>
+            <App />
+          </TodoProvider>
         </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
