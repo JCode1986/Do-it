@@ -6,63 +6,11 @@ svg.MuiSvgIcon-root.addIcon {
     font-size: 35px;
 }
 
-.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded {
-    background-color: whitesmoke;
-}
-
-.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    transform: scale(1.03);
-    transition-duration: 0.5;
-}
-
-.MuiPaper-root.makeStyles-paper-13.MuiPaper-elevation1.MuiPaper-rounded:hover {
-    background-color:white;    
-    transition-duration: 0.5;
-}
-
-.options:hover {
-    transform: scale(1.25) !important;
-    transition-duration: 0.5 !important;
-}
-
-
 svg.MuiSvgIcon-root.makeStyles-img-14:hover {
     transition-duration: 0.5;
     animation: rotation 4s infinite linear;
 }
 
-h5.MuiTypography-root.MuiTypography-h5.MuiTypography-gutterBottom {
-    margin-bottom: 0;
-}
-
-li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
-    padding-bottom: 0;
-    padding-top: 0;
-}
-
 .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-1.MuiGrid-item.MuiGrid-direction-xs-column.MuiGrid-grid-xs-true {
     flex-direction: inherit;
-}
-
-li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
-    padding-bottom: 5px;
-    padding-top: 5px;
-}
-
-li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button:hover {
-    transform: scale(1.10);
-    transition-duration: 0.5;
-}
-
-ul.MuiList-root.MuiMenu-list.MuiList-padding {
-    width: 155px;
-}
-
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(359deg);
-    }
 }
