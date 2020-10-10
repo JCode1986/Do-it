@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(2),
-        width: 445,
+        width: 375,
         borderRadius: '20px',
         textAlign: 'center', 
         marginTop: '35px',
@@ -69,19 +69,16 @@ function TodoDetails(props) {
             </Grid>
             <Grid item xs container direction="column" spacing={1}>
                 <Grid item xs>
-                        <Typography 
-                            gutterBottom variant="h5"
-                            onClick={() => props.setIsDetailOpen(true)} 
-                        >
-                            <Tippy
-                                    trigger="mouseenter" 
-                                    content="Show Details"
-                                >
-                                <strong 
-                                    style={{ color:'#E94435', cursor:'pointer' }}className="title">{props.todo}
-                                </strong>
-                            </Tippy>
-                        </Typography>
+                        <Tippy
+                                trigger="mouseenter" 
+                                content="Show Details"
+                            >
+                            <Typography
+                                variant="h5"
+                                onClick={() => props.setIsDetailOpen(true)} 
+                                style={{ color:'#E94435', cursor:'pointer' }}className="title">{props.todo}
+                            </Typography>
+                        </Tippy>
                     <Divider/>
                     <Typography 
                         style={{marginTop:'10px'}}

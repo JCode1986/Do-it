@@ -25,7 +25,6 @@ export default function DateAndTime(props) {
         <Grid container justify="center">
             <KeyboardDatePicker
                 disableToolbar
-                //disabled
                 invalidDateMessage="Invalid Date Format"
                 disablePast="true"
                 animateYearScrolling="true"

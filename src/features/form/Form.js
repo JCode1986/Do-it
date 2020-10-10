@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, FormControl, TextField, Grid } from '@material-ui/core';
+import { TodoContext } from '../context/TodoContext';
 import PriorityLevel  from '../priority/PriorityLevel';
 import DateAndTime from '../date/DateAndTime'
 import firebaseApp from '../../firebase';
@@ -10,19 +11,19 @@ import { toast } from "react-toastify";
 
 const db = firebaseApp.firestore();
 
-const form = (props) => {  
+const Form = (props) => {  
 
-  const {
-    title, 
-    description, 
-    dateDeadline,
-    dateCreated,  
-    priorityLevel,
-    setTitle,
-    setDescription,
-    setPriorityLevel,
-    setDateDeadline,
-  } = props;
+  const { 
+     title,
+     description,
+     dateCreated,
+     dateDeadline,
+     priorityLevel,
+     setTitle,
+     setDescription,
+     setDateDeadline,
+     setPriorityLevel 
+    } = useContext(TodoContext);
 
     //add to do
     const addTodo = (event) => {
@@ -113,4 +114,4 @@ const form = (props) => {
     )
 }
 
-export default withRouter(form)
+export default withRouter(Form)

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import './TodoHeader.css'
 import { withRouter } from 'react-router-dom';
@@ -6,13 +7,16 @@ import Tippy from '@tippy.js/react';
 import 'tippy.js/dist/tippy.css';
 
 function TodoHeader(props) {
+
+  const { todos } = useContext(TodoContext);
+
     return (
         <div style={{marginTop:'50px' }}>
-          {!props.todos.length ? 
+          {!todos.length ? 
               <h1 className="todoHeader"><strong>Nothing to do...</strong></h1> : 
-              props.todos.length === 1 ? 
-              <h1 className="todoHeader"><strong>You have {props.todos.length} thing to do!</strong></h1> :
-              <h1 className="todoHeader"><strong>You have {props.todos.length} things to do!</strong></h1>
+              todos.length === 1 ? 
+              <h1 className="todoHeader"><strong>You have {todos.length} thing to do!</strong></h1> :
+              <h1 className="todoHeader"><strong>You have {todos.length} things to do!</strong></h1>
             } 
           <div>   
             <Tippy 
