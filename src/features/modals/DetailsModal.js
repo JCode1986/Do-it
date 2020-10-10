@@ -74,7 +74,7 @@ function Details(props) {
                             variant='h4'
                             style={{marginLeft: '20px',}}
                         >                 
-                            {props.todo}  
+                            {props.title}  
                         </h1>     
                     </div>
                     <Typography style={{marginTop:'10px'}}>

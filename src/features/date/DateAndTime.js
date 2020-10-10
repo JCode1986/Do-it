@@ -1,5 +1,6 @@
 import 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from '../context/TodoContext'
 import { Grid, TextField } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
 import {
@@ -9,11 +10,14 @@ import {
 } from '@material-ui/pickers';
 
 export default function DateAndTime(props) {
-    const {dateDeadline, setDateDeadline, dateCreated } = props;
+    const { setIsButtonDisabled } = useContext(TodoContext)
+    const { dateDeadline, setDateDeadline } = props;
 
     const handleDateChange = (date) => {
-      if(date._d < dateCreated) return null;
-      setDateDeadline(date._d);
+      if (dateDeadline.toString() !== date._d.toString()){
+          setDateDeadline(date._d);
+          setIsButtonDisabled(true);
+      }
     }
 
     const TextFieldComponent = (props) => {
@@ -25,7 +29,7 @@ export default function DateAndTime(props) {
         <Grid container justify="center">
             <KeyboardDatePicker
                 disableToolbar
-                invalidDateMessage="Invalid Date Format"
+                helperText={'Deadline Date'}
                 disablePast="true"
                 animateYearScrolling="true"
                 autoOk="true"
@@ -33,7 +37,6 @@ export default function DateAndTime(props) {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Deadline Date"
                 value={dateDeadline}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{'aria-label': 'change date',}}
@@ -43,7 +46,7 @@ export default function DateAndTime(props) {
                 margin="normal"
                 id="time-picker"
                 disablePast="true"
-                label="Deadline Time"
+                helperText={"Deadline Time"}
                 value={dateDeadline}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{'aria-label': 'change time',}}

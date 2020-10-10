@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { TodoContext } from '../context/TodoContext';
 import DateAndTime from '../date/DateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -14,16 +15,17 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
+  const { isButtonDisabled } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
-  const { id } = props.todo
-  const [title, setTitle] = useState(props.todo.todo);
+  const { id,  } = props.todo
+  const [title, setTitle] = useState(props.todo.title);
   const [description, setDescription] = useState(props.todo.description);
-  const [dateDeadline, setDateDeadline] = useState(props.todo.dateDeadline);
+  const [dateDeadline, setDateDeadline] = useState(props.todo.dateDeadline.toDate());
   const [priorityLevel, setPriorityLevel] = useState(props.todo.priorityLevel);
-
+  
   const updateTodo = () => {
     db.collection('todos').doc(id).set({
-      todo: title,
+      title,
       description,
       dateDeadline,
       priorityLevel,
@@ -32,18 +34,27 @@ export default function EditForm(props) {
     }, { merge: true}).then(() => {
       toast.success("Task Updated");
     }).catch(console.error)
+    cancelAndRevertToCurrent();
+    console.log('hi');
+  }
+
+  const cancelAndRevertToCurrent = () => {
+    setTitle(props.todo.title);
+    setDescription(props.todo.description);
+    setDateDeadline(props.todo.dateDeadline.toDate());
+    setPriorityLevel(props.todo.priorityLevel);
     handleCloseModal();
   }
 
   const checkIfDisabled = () => {
-    return title === props.todo.todo && description === props.todo.description
+    return title === props.todo.title && description === props.todo.description && !isButtonDisabled
   }
   
   return (
     <div>
       <Modal    
         open={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={cancelAndRevertToCurrent}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
@@ -106,7 +117,7 @@ export default function EditForm(props) {
                       Submit
                   </Button>
                   <Button 
-                    onClick={handleCloseModal}
+                    onClick={cancelAndRevertToCurrent}
                     variant="contained" 
                   >
                     Cancel

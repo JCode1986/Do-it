@@ -9,8 +9,8 @@ import CompletedApproval from '../modals/CompletedApproval'
 import { withRouter } from 'react-router-dom';
 
 function Todo(props) {
-
-    const {todo, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
+    const { setTitle, setDescription, setDateDeadline, setPriorityLevel } = useContext(TodoContext);
+    const {title, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -48,7 +48,7 @@ function Todo(props) {
             <DetailsModal
                 isDetailOpen={isDetailOpen}
                 setIsDetailOpen={setIsDetailOpen}
-                todo={todo}
+                title={title}
                 description={description}
                 dateDeadline={dateDeadline}
                 priorityLevel={priorityLevel}
@@ -64,7 +64,7 @@ function Todo(props) {
             <CompletedApproval 
                 isArchiveOpen={isArchiveOpen}
                 setIsArchiveOpen={setIsArchiveOpen}
-                todo={todo}
+                title={title}
                 description={description}
                 dateCreated={dateCreated}
                 modifiedDate={modifiedDate}
@@ -81,7 +81,7 @@ function Todo(props) {
             <TodoDetails
                 priorityLevel={priorityLevel}
                 setIsDetailOpen={setIsDetailOpen}
-                todo={todo}
+                title={title}
                 dateCreated={dateCreated}
                 dateDeadline={dateDeadline}
                 handleClick={handleClick}

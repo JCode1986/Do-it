@@ -26,7 +26,7 @@ function CompletedApproval(props) {
             event.preventDefault();
             //add to db; no need for spread since a new snapshot will trigger the map in use effect
             db.collection('archive').add({
-              archivedTodo: props.todo,
+              archivedTodo: props.title,
               archivedDescription: props.description,
               archivedDateCreated: props.dateCreated,
               archivedDateDeadline: props.dateDeadline,
