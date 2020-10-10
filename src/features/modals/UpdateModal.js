@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import UpdateDateAndTime from '../date/UpdateDateAndTime';
+import React, { useState } from 'react';
+import DateAndTime from '../date/DateAndTime';
 import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
 import fireBaseApp from '../../firebase';
 import { toast } from "react-toastify";
@@ -14,50 +14,29 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
+  const { isModalOpen, handleCloseModal } = props;
+  const { id } = props.todo
+  const [title, setTitle] = useState(props.todo.todo);
+  const [description, setDescription] = useState(props.todo.description);
+  const [dateDeadline, setDateDeadline] = useState(props.todo.dateDeadline);
+  const [priorityLevel, setPriorityLevel] = useState(props.todo.priorityLevel);
 
-  const { 
-    isModalOpen, 
-    setModalIsOpen,  
-    handleCloseModal,
-    dateDeadline,
-    updateTitle,
-    updateDescription,
-    updateDateDeadline,
-    updatePriorityLevel,
-    setUpdateTitle,
-    setUpdateDescription,
-    setUpdatePriorityLevel,
-    setUpdateDateDeadline,
-    priorityLevel,
-    todo,
-    description,
-    id
-  } = props;
-
-  useEffect(() => {
-    setUpdateTitle(todo)
-    setUpdateDescription(description)
-  }, [
-      todo, 
-      description, 
-      dateDeadline,  
-      setUpdateTitle, 
-      setUpdateDescription, 
-    ])
-
-  //update a task
   const updateTodo = () => {
     db.collection('todos').doc(id).set({
-      todo: updateTitle,
-      description: updateDescription,
-      dateDeadline: updateDateDeadline,
-      priorityLevel: updatePriorityLevel,
+      todo: title,
+      description,
+      dateDeadline,
+      priorityLevel,
       modifiedDate: new Date(Date.now()),
     //prevents from overiding in firebase
-    }, { merge: true})
-    toast.success("Task Updated");
-    setModalIsOpen(false);
-    props.handleClose();
+    }, { merge: true}).then(() => {
+      toast.success("Task Updated");
+    }).catch(console.error)
+    handleCloseModal();
+  }
+
+  const checkIfDisabled = () => {
+    return title === props.todo.todo && description === props.todo.description
   }
   
   return (
@@ -83,8 +62,7 @@ export default function EditForm(props) {
         >
           <div style={{backgroundColor:"lightblue", width:' -webkit-fill-available', border: '1px solid'}}>
             <h1
-                className="updateHeader"
-              
+                className="updateHeader"         
               >Update
             </h1>
           </div>
@@ -97,8 +75,8 @@ export default function EditForm(props) {
                   id="outlined-basic" 
                   label="Title" 
                   variant="outlined" 
-                  defaultValue={todo}
-                  onChange={event => setUpdateTitle(event.target.value)}
+                  defaultValue={title}
+                  onChange={event => setTitle(event.target.value)}
                   />
                 <TextField 
                   multiline={true}
@@ -106,22 +84,21 @@ export default function EditForm(props) {
                   label="Description" 
                   variant="outlined" 
                   defaultValue={description}
-                  onChange={event => setUpdateDescription(event.target.value)}
+                  onChange={event => setDescription(event.target.value)}
                 />    
-                <UpdateDateAndTime 
-                  updateDateDeadline={updateDateDeadline}
-                  setUpdateDateDeadline={setUpdateDateDeadline}
-                  dateDeadline={dateDeadline}
+                <DateAndTime 
+                  dateDeadline={dateDeadline} 
+                  setDateDeadline={setDateDeadline}
                 />
-                <UpdatePriorityLevel 
+                {/* <UpdatePriorityLevel 
                   updatePriorityLevel={updatePriorityLevel}
                   setUpdatePriorityLevel={setUpdatePriorityLevel}
                   priorityLevel={priorityLevel}
-                />
+                /> */}
                 <Grid>
                   <Button
                       className="FormButtons"
-                      disabled={!updateTitle} 
+                      disabled={checkIfDisabled()} 
                       type="submit" 
                       onClick={updateTodo} 
                       variant="contained" 
@@ -129,10 +106,10 @@ export default function EditForm(props) {
                       Submit
                   </Button>
                   <Button 
-                      onClick={handleCloseModal}
-                      variant="contained" 
-                      >
-                      Cancel
+                    onClick={handleCloseModal}
+                    variant="contained" 
+                  >
+                    Cancel
                   </Button>
                 </Grid>
               </FormControl>
