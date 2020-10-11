@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button, FormControl, TextField, Grid } from '@material-ui/core';
 import { TodoContext } from '../context/TodoContext';
 import PriorityLevel  from '../priority/PriorityLevel';
@@ -25,13 +25,19 @@ const Form = (props) => {
      setPriorityLevel 
     } = useContext(TodoContext);
 
+    useEffect(() => {
+      setTitle('');
+      setDescription('');
+      setDateDeadline(new Date(Date.now()));
+      setPriorityLevel(1);
+    }, [setTitle, setDescription, setDateDeadline, setPriorityLevel])
     //add to do
     const addTodo = (event) => {
       //stop refresh
       event.preventDefault();
       //add to db; no need for spread since a new snapshot will trigger the map in use effect
       db.collection('todos').add({
-        todo: title,
+        title: title,
         description: description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         dateCreated: dateCreated,

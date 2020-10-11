@@ -5,7 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import WarningIcon from '@material-ui/icons/Warning';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,14 +19,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SimpleSelect(props) {
   const classes = useStyles();
   
-  let { priorityLevel, setPriorityLevel, } = props
+  const { priorityLevel, setPriorityLevel } = props
 
   const handleChange = (event) => {
     setPriorityLevel(event.target.value);
   };
-
-      //changes priority icon color depending on level
-
 
   return (
     <div>
