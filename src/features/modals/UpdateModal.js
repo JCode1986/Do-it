@@ -15,7 +15,7 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
-  const { isButtonDisabled } = useContext(TodoContext);
+  const { isButtonDisabled, setIsButtonDisabled } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id,  } = props.todo
   const [title, setTitle] = useState(props.todo.title);
@@ -39,10 +39,11 @@ export default function EditForm(props) {
   }
 
   const cancelAndRevertToCurrent = () => {
-    setTitle(props.todo.title);
-    setDescription(props.todo.description);
-    setDateDeadline(props.todo.dateDeadline.toDate());
-    setPriorityLevel(props.todo.priorityLevel);
+    // setTitle(props.todo.title);
+    // setDescription(props.todo.description);
+    // setDateDeadline(props.todo.dateDeadline.toDate());
+    // setPriorityLevel(props.todo.priorityLevel);
+    setIsButtonDisabled(false);
     handleCloseModal();
   }
 
