@@ -14,7 +14,7 @@ export default function DateAndTime(props) {
     const { currentDateDeadline, setCurrentDateDeadline } = props;
     const [updatedDate, setUpdatedDate] = useState(currentDateDeadline);
 
-    //starts date time picker with data from database
+    // starts date time picker with data from database
     useEffect(() => {
       setDateDeadline(currentDateDeadline);
     }, [currentDateDeadline, setDateDeadline])

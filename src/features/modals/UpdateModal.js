@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import DateAndTime from '../date/DateAndTime';
 import PriorityLevel from '../priority/PriorityLevel'
@@ -15,7 +15,7 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
-  const { isButtonDisabled, setIsButtonDisabled, setDateDeadline } = useContext(TodoContext);
+  const { isButtonDisabled, setIsButtonDisabled } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id, title, description, dateDeadline, priorityLevel } = props.todo
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -23,10 +23,12 @@ export default function EditForm(props) {
   const [currentDateDeadline, setCurrentDateDeadline] = useState(dateDeadline.toDate());
   const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
 
-  // useEffect(() => {
-  //   setDateDeadline(dateDeadline.toDate())
-  // })
+  //loads the modal with deadline from datbase
+  useEffect(() => {
+    setCurrentDateDeadline(dateDeadline.toDate());
+  }, [setCurrentDateDeadline, dateDeadline]);
 
+  //updates the current task
   const updateTodo = () => {
     db.collection('todos').doc(id).set({
       title: currentTitle,
@@ -41,8 +43,9 @@ export default function EditForm(props) {
     cancelAndRevertToCurrent();
   }
 
+  //reverts back to previous value when user cancels out of an update, and a change was made to the time picker
   const cancelAndRevertToCurrent = () => {    
-    setDateDeadline(dateDeadline.toDate())
+    setCurrentDateDeadline(dateDeadline.toDate());
     setIsButtonDisabled(false);
     handleCloseModal();
   }
