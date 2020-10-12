@@ -1,5 +1,5 @@
 import 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { TodoContext } from '../context/TodoContext'
 import { Grid, TextField } from '@material-ui/core';
 import MomentUtils from '@date-io/moment';
@@ -12,11 +12,15 @@ import {
 export default function DateAndTime(props) {
     const { setIsButtonDisabled } = useContext(TodoContext)
     const { dateDeadline, setDateDeadline } = props;
+    const [ currentDateDeadline, setCurrentDateDeadline ] = useState(dateDeadline)
 
     const handleDateChange = (date) => {
-      if (dateDeadline.toString() !== date._d.toString()){
+      if (currentDateDeadline.toString() !== date._d.toString()){
           setDateDeadline(date._d);
           setIsButtonDisabled(true);
+      } else {
+        setIsButtonDisabled(false);
+        setDateDeadline(date._d);
       }
     }
 
