@@ -16,7 +16,6 @@ function CompletedApproval(props) {
             backgroundColor: theme.palette.background.paper,
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
-            //padding: theme.spacing(2, 4, 3),
         },
         }));
 
@@ -33,9 +32,10 @@ function CompletedApproval(props) {
               archivedModifiedDate: !props.modifiedDate ? "N/A" : props.modifiedDate,
               archivedCompleted: new Date(Date.now()),
               archivedPriorityLevel: props.priorityLevel
-            })
-            deleteTodo(); 
-            toast.success("Task Completed and archived")
+            }).then(() => {
+                deleteTodo(); 
+                toast.success("Task Completed and archived")
+            }).catch(console.error)
           }
 
     const deleteTodo = () => {

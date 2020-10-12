@@ -30,19 +30,20 @@ const Form = (props) => {
       setDescription('');
       setDateDeadline(new Date(Date.now()));
       setPriorityLevel(1);
-    }, [setTitle, setDescription, setDateDeadline, setPriorityLevel])
+    }, [setTitle, setDescription, setDateDeadline, setPriorityLevel]);
+
     //add to do
     const addTodo = (event) => {
       //stop refresh
       event.preventDefault();
       //add to db; no need for spread since a new snapshot will trigger the map in use effect
       db.collection('todos').add({
-        title: title,
-        description: description,
+        title,
+        description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        dateCreated: dateCreated,
-        dateDeadline: dateDeadline,
-        priorityLevel: priorityLevel
+        dateCreated,
+        dateDeadline,
+        priorityLevel
       })
       toast.success("New Task Created");
       cancel();
@@ -88,11 +89,7 @@ const Form = (props) => {
                 value={description}
                 onChange={event => setDescription(event.target.value)}
               />    
-          <DateAndTime 
-            dateDeadline={dateDeadline}
-            setDateDeadline={setDateDeadline}
-            dateCreated={dateCreated}
-          />
+          <DateAndTime />
           <PriorityLevel 
             priorityLevel={priorityLevel}
             setPriorityLevel={setPriorityLevel}
@@ -104,14 +101,15 @@ const Form = (props) => {
                 type="submit" 
                 onClick={addTodo} 
                 variant="contained" 
-                color="primary">
+                color="primary"
+              >
                 Submit
             </Button>
             <Button 
-                onClick={cancel} 
-                variant="contained" 
-                >
-                Cancel
+              onClick={cancel} 
+              variant="contained" 
+            >
+              Cancel
             </Button>
           </Grid>
         </FormControl>

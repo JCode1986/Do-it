@@ -9,7 +9,7 @@ import CompletedApproval from '../modals/CompletedApproval'
 import { withRouter } from 'react-router-dom';
 
 function Todo(props) {
-    const { setTitle, setDescription, setDateDeadline, setPriorityLevel } = useContext(TodoContext);
+    //const { setTitle, setDescription, setDateDeadline, setPriorityLevel } = useContext(TodoContext);
     const {title, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
