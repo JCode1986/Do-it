@@ -15,7 +15,9 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
-  const { isButtonDisabled, setIsButtonDisabled } = useContext(TodoContext);
+  const { isButtonDisabled,
+          setIsButtonDisabled,
+        } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id, title, description, dateDeadline, priorityLevel } = props.todo
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -26,7 +28,7 @@ export default function EditForm(props) {
   //loads the modal with deadline from datbase
   useEffect(() => {
     setCurrentDateDeadline(dateDeadline.toDate());
-  }, [setCurrentDateDeadline, dateDeadline]);
+  }, [dateDeadline]);
 
   //updates the current task
   const updateTodo = () => {
@@ -44,8 +46,11 @@ export default function EditForm(props) {
   }
 
   //reverts back to previous value when user cancels out of an update, and a change was made to the time picker
-  const cancelAndRevertToCurrent = () => {    
+  const cancelAndRevertToCurrent = () => {  
+    setCurrentTitle(title);
+    setCurrentDescription(description);
     setCurrentDateDeadline(dateDeadline.toDate());
+    setCurrentPriorityLevel(priorityLevel);  
     setIsButtonDisabled(false);
     handleCloseModal();
   }
