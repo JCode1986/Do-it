@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import DateAndTime from '../date/DateAndTime';
-import UpdatePriorityLevel from '../priority/UpdatePriorityLevel'
+import PriorityLevel from '../priority/PriorityLevel'
 import fireBaseApp from '../../firebase';
 import { toast } from "react-toastify";
 import { 
@@ -17,38 +17,42 @@ export default function EditForm(props) {
   const db = fireBaseApp.firestore();
   const { isButtonDisabled, setIsButtonDisabled } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
-  const { id,  } = props.todo
-  const [title, setTitle] = useState(props.todo.title);
-  const [description, setDescription] = useState(props.todo.description);
-  const [dateDeadline, setDateDeadline] = useState(props.todo.dateDeadline.toDate());
-  const [priorityLevel, setPriorityLevel] = useState(props.todo.priorityLevel);
-  
+  const { id, title, description, dateDeadline, priorityLevel } = props.todo
+  const [currentTitle, setCurrentTitle] = useState(title);
+  const [currentDescription, setCurrentDescription] = useState(description);
+  const [currentDateDeadline, setCurrentDateDeadline] = useState(dateDeadline.toDate());
+  const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
+
+  //loads the modal with deadline from datbase
+  useEffect(() => {
+    setCurrentDateDeadline(dateDeadline.toDate());
+  }, [setCurrentDateDeadline, dateDeadline]);
+
+  //updates the current task
   const updateTodo = () => {
     db.collection('todos').doc(id).set({
-      title,
-      description,
-      dateDeadline,
-      priorityLevel,
+      title: currentTitle,
+      description: currentDescription,
+      dateDeadline: currentDateDeadline,
+      priorityLevel: currentPriorityLevel,
       modifiedDate: new Date(Date.now()),
     //prevents from overiding in firebase
     }, { merge: true}).then(() => {
       toast.success("Task Updated");
     }).catch(console.error)
     cancelAndRevertToCurrent();
-    console.log('hi');
   }
 
-  const cancelAndRevertToCurrent = () => {
-    // setTitle(props.todo.title);
-    // setDescription(props.todo.description);
-    // setDateDeadline(props.todo.dateDeadline.toDate());
-    // setPriorityLevel(props.todo.priorityLevel);
+  //reverts back to previous value when user cancels out of an update, and a change was made to the time picker
+  const cancelAndRevertToCurrent = () => {    
+    setCurrentDateDeadline(dateDeadline.toDate());
     setIsButtonDisabled(false);
     handleCloseModal();
   }
 
+  //disables submit button if nothing was updated
   const checkIfDisabled = () => {
-    return title === props.todo.title && description === props.todo.description && !isButtonDisabled
+    return currentTitle === title && currentDescription === description && !isButtonDisabled
   }
   
   return (
@@ -88,7 +92,7 @@ export default function EditForm(props) {
                   label="Title" 
                   variant="outlined" 
                   defaultValue={title}
-                  onChange={event => setTitle(event.target.value)}
+                  onChange={event => setCurrentTitle(event.target.value)}
                   />
                 <TextField 
                   multiline={true}
@@ -96,15 +100,21 @@ export default function EditForm(props) {
                   label="Description" 
                   variant="outlined" 
                   defaultValue={description}
-                  onChange={event => setDescription(event.target.value)}
+                  onChange={event => setCurrentDescription(event.target.value)}
                 />    
                 <DateAndTime 
-                  dateDeadline={dateDeadline} 
-                  setDateDeadline={setDateDeadline}
+                  currentDateDeadline={currentDateDeadline} 
+                  setCurrentDateDeadline={setCurrentDateDeadline}
+                  dateDeadline={dateDeadline}
                 />
                 {/* <UpdatePriorityLevel 
-                  updatePriorityLevel={updatePriorityLevel}
-                  setUpdatePriorityLevel={setUpdatePriorityLevel}
+                  currentPriorityLevel={currentPriorityLevel}
+                  setCurrentPriorityLevel={setCurrentPriorityLevel}
+                  priorityLevel={priorityLevel}
+                /> */}
+                {/* <PriorityLevel 
+                  currentPriorityLevel={currentPriorityLevel}
+                  setCurrentPriorityLevel={setCurrentPriorityLevel}
                   priorityLevel={priorityLevel}
                 /> */}
                 <Grid>

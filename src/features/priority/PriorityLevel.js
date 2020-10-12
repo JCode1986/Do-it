@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,6 +20,7 @@ export default function SimpleSelect(props) {
   const classes = useStyles();
   
   const { priorityLevel, setPriorityLevel } = props
+  //const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
 
   const handleChange = (event) => {
     setPriorityLevel(event.target.value);
