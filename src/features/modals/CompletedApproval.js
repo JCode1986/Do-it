@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../authentication/Auth';
 import { Modal, Typography, Button } from '@material-ui/core'
 import '../../firebase';
 import firebase from 'firebase';
@@ -6,25 +7,29 @@ import { makeStyles } from '@material-ui/core/styles';
 import { toast } from "react-toastify";
 
 function CompletedApproval(props) {
-    const db = firebase.firestore();
-
     const useStyles = makeStyles((theme) => ({
-
         paper: {
-            position: 'absolute',
-            width: 400,
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-        },
+                position: 'absolute',
+                width: 400,
+                backgroundColor: theme.palette.background.paper,
+                border: '2px solid #000',
+                boxShadow: theme.shadows[5],
+            },
         }));
 
-        const classes = useStyles();
+    const classes = useStyles();
+    const db = firebase.firestore();
+    const { currentUser } = useContext(AuthContext)
+    const userData = db.collection('users').doc(currentUser.uid);
+    const userArchive = userData.collection('archive');
+    const userTasks = userData.collection('todos');
+
+    console.log(props.id, "what is this???")
         const addToArchive = (event) => {
             //stop refresh
             event.preventDefault();
             //add to db; no need for spread since a new snapshot will trigger the map in use effect
-            db.collection('archive').add({
+            userArchive.add({
               archivedTodo: props.title,
               archivedDescription: props.description,
               archivedDateCreated: props.dateCreated,
@@ -39,12 +44,12 @@ function CompletedApproval(props) {
           }
 
     const deleteTodo = () => {
-        db.collection('todos').doc(props.id).delete();
+        userTasks.doc(props.id).delete();
         props.setIsArchiveOpen(false);
     }
 
     const closeMenu = () => {
-        props.handleClose(false);
+        props.handleClose();
         props.setIsArchiveOpen(false);
     }
 

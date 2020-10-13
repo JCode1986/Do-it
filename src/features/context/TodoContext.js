@@ -13,14 +13,13 @@ export const TodoProvider = (props) => {
     const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
     const [priorityLevel, setPriorityLevel] = useState(0);
     const [isNewPriorityLevel, setIsNewPriorityLevel] = useState(true);
-    const [archive, setArchive] = useState([]);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+    
     return (
         <TodoContext.Provider value={
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
-            archive, setArchive, isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel }
+            isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel }
         }>
             {props.children}
         </TodoContext.Provider>

@@ -50,9 +50,10 @@ const Form = (props) => {
         dateCreated,
         dateDeadline,
         priorityLevel
-      })
-      toast.success("New Task Created");
-      cancel();
+      }).then(() => {
+        toast.success("New Task Created");
+        cancel();
+      }).catch(console.error)
     }
 
     const cancel = () => {
