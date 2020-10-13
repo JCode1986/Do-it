@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: theme.spacing(2),
-        width: 375,
+        width: 385,
         borderRadius: '20px',
         textAlign: 'center', 
         marginTop: '35px',

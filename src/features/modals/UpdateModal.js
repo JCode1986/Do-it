@@ -25,11 +25,13 @@ export default function EditForm(props) {
   const [currentDateDeadline, setCurrentDateDeadline] = useState(dateDeadline.toDate());
   const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
 
-  //loads the modal with deadline from datbase
+  //loads the modal with values from database
   useEffect(() => {
+    setCurrentTitle(title);
+    setCurrentDescription(description);
     setCurrentDateDeadline(dateDeadline.toDate());
     setCurrentPriorityLevel(priorityLevel);
-  }, [dateDeadline, priorityLevel]);
+  }, [title, description, dateDeadline, priorityLevel]);
 
   //updates the current task
   const updateTodo = () => {

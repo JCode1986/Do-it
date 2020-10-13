@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom';
+import { AuthContext } from '../authentication/Auth';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -22,9 +23,9 @@ const useStyles = makeStyles({
     },
   })
 
-function CompletedTasks(props) {
+function CompletedTasks() {
     const db = firebase.firestore();
-
+    const { currentUser } = useContext(AuthContext);
     const classes = useStyles();
 
     const [archives, setArchives] = useState([]);
@@ -42,8 +43,10 @@ function CompletedTasks(props) {
       setPage(0);
     };
 
+    const userArchive = db.collection('users').doc(currentUser.uid).collection('archive');
+
     useEffect(() => {
-        db.collection('archive').orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
+      userArchive.orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
             //returns object with id, and todo
             setArchives(snapshot.docs.map(doc => ({
                 id: doc.id, 
@@ -56,7 +59,7 @@ function CompletedTasks(props) {
                 archivedPriorityLevel: doc.data().archivedPriorityLevel
             })))
         })
-        }, [db])
+        }, [db, userArchive])
         
     //find id
     const details = (id) => {

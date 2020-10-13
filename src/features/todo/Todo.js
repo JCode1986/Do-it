@@ -29,7 +29,7 @@ function Todo(props) {
 
     const handleCloseModal = () => {
         setModalIsOpen(false);
-        handleClose();
+        setAnchorEl(null);
     }
 
     const handleOpenDeleteDialog = () => {
