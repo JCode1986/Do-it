@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import './Todo.css';
-import { TodoContext } from '../context/TodoContext';
 import TodoDetails from '../todo/TodoDetails';
 import DeleteApproval from '../modals/DeleteApproval'
 import DetailsModal from '../modals/DetailsModal'
@@ -9,7 +8,6 @@ import CompletedApproval from '../modals/CompletedApproval'
 import { withRouter } from 'react-router-dom';
 
 function Todo(props) {
-    //const { setTitle, setDescription, setDateDeadline, setPriorityLevel } = useContext(TodoContext);
     const {title, dateCreated, id, dateDeadline, priorityLevel, description, modifiedDate } = props.todo;
     const [isModalOpen, setModalIsOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
+import { AuthContext } from '../authentication/Auth';
 import DateAndTime from '../date/DateAndTime';
 import PriorityLevel from '../priority/PriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -16,6 +17,7 @@ import {
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
   const { isButtonDisabled, setIsButtonDisabled, setIsNewPriorityLevel } = useContext(TodoContext);
+  const { currentUser } = useContext(AuthContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id, title, description, dateDeadline, priorityLevel } = props.todo
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -31,7 +33,7 @@ export default function EditForm(props) {
 
   //updates the current task
   const updateTodo = () => {
-    db.collection('todos').doc(id).set({
+    db.collection('users').doc(currentUser.uid).collection('todos').doc(id).set({
       title: currentTitle,
       description: currentDescription,
       dateDeadline: currentDateDeadline,
@@ -112,11 +114,6 @@ export default function EditForm(props) {
                   setCurrentDateDeadline={setCurrentDateDeadline}
                   dateDeadline={dateDeadline}
                 />
-                {/* <UpdatePriorityLevel 
-                  currentPriorityLevel={currentPriorityLevel}
-                  setCurrentPriorityLevel={setCurrentPriorityLevel}
-                  priorityLevel={priorityLevel}
-                /> */}
                 <PriorityLevel 
                   currentPriorityLevel={currentPriorityLevel}
                   setCurrentPriorityLevel={setCurrentPriorityLevel}
