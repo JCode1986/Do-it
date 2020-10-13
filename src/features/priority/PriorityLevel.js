@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { TodoContext } from '../context/TodoContext';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,12 +19,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleSelect(props) {
   const classes = useStyles();
-  
-  const { priorityLevel, setPriorityLevel } = props
-  //const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
+  const { 
+    setIsButtonDisabled,
+    setPriorityLevel,
+    priorityLevel,
+    setIsNewPriorityLevel,
+    isNewPriorityLevel
+  } = useContext(TodoContext)
+  const { setCurrentPriorityLevel, currentPriorityLevel } = props
+  const [updatedPriorityLevel, setUpdatedPriorityLevel] = useState(priorityLevel);
 
-  const handleChange = (event) => {
-    setPriorityLevel(event.target.value);
+    useEffect(() => {
+      setPriorityLevel(currentPriorityLevel);
+      setIsNewPriorityLevel(false);
+    }, [setPriorityLevel, setIsNewPriorityLevel, currentPriorityLevel])
+
+    const handleChange = (event) => {
+    //==========================================FIX THIS========================================//
+    //just need to fix button enable on change if not the same as previous value
+    //create form
+    if(isNewPriorityLevel) {
+      setPriorityLevel(event.target.value);
+      console.log("Create")
+      return;
+    }
+
+    if(!isNewPriorityLevel) {
+      setCurrentPriorityLevel(event.target.value);
+    }
+
+    console.log(priorityLevel, "priority level")
+    console.log(currentPriorityLevel, "current level")
+    console.log(updatedPriorityLevel, "updated level")
+
+    
+    //for create form
+    // setPriorityLevel(event.target.value);
   };
 
   return (

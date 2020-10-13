@@ -27,8 +27,6 @@ export default function DateAndTime(props) {
         return;
       }
       if(updatedDate.toString() !== date._d.toString()) {
-        console.log(currentDateDeadline.toString(), "date from database")
-        console.log(date._d.toString(), "clicked date")
         setCurrentDateDeadline(date._d);
         setIsButtonDisabled(true);
       } else {

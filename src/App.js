@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { TodoContext } from './features/context/TodoContext';
+import React from 'react';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import {ToastContainer } from "react-toastify";
 import './App.css';
@@ -14,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css"
 import TodoList from './features/todo/TodoList';
 
 function App() {
-    
   return (
     <>
       <Router>

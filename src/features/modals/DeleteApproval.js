@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../../firebase';
+import { AuthContext } from '../authentication/Auth';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import{ Modal, Button, Typography, Grid } from '@material-ui/core';
 import { toast } from "react-toastify";
 
 function DeleteDialog(props) {
-    const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
     const db = firebase.firestore();
+    const { currentUser } = useContext(AuthContext);
+    const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
 
     const useStyles = makeStyles((theme) => ({
     paper: {
@@ -16,15 +18,13 @@ function DeleteDialog(props) {
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
-        //padding: theme.spacing(2, 4, 3),
     },
     }));
 
     const classes = useStyles();
 
-    //delete a task
     const deleteTodo = () => {
-        db.collection('todos').doc(props.id).delete()
+        db.collection('users').doc(currentUser.uid).collection('todos').doc(props.id).delete()
         setIsDeleteDialogOpen(false);
         toast.error("Task Deleted");
     }
