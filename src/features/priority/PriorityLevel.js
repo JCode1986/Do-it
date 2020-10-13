@@ -27,7 +27,7 @@ export default function SimpleSelect(props) {
     isNewPriorityLevel
   } = useContext(TodoContext)
   const { setCurrentPriorityLevel, currentPriorityLevel } = props
-  const [updatedPriorityLevel, setUpdatedPriorityLevel] = useState(priorityLevel);
+  const [updatedPriorityLevel, setUpdatedPriorityLevel] = useState(currentPriorityLevel);
 
     useEffect(() => {
       setPriorityLevel(currentPriorityLevel);
@@ -35,26 +35,23 @@ export default function SimpleSelect(props) {
     }, [setPriorityLevel, setIsNewPriorityLevel, currentPriorityLevel])
 
     const handleChange = (event) => {
-    //==========================================FIX THIS========================================//
-    //just need to fix button enable on change if not the same as previous value
-    //create form
+    //for create form
     if(isNewPriorityLevel) {
       setPriorityLevel(event.target.value);
       console.log("Create")
       return;
     }
 
-    if(!isNewPriorityLevel) {
-      setCurrentPriorityLevel(event.target.value);
+    //for update form
+    if(!isNewPriorityLevel && event.target.value === updatedPriorityLevel) {
+      setPriorityLevel(event.target.value);
+      setIsButtonDisabled(false);
     }
-
-    console.log(priorityLevel, "priority level")
-    console.log(currentPriorityLevel, "current level")
-    console.log(updatedPriorityLevel, "updated level")
-
-    
-    //for create form
-    // setPriorityLevel(event.target.value);
+    else {
+      setCurrentPriorityLevel(event.target.value);
+      setPriorityLevel(event.target.value);
+      setIsButtonDisabled(true);
+    }
   };
 
   return (

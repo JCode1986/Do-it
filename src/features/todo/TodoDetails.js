@@ -21,7 +21,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+      flexGrow: 2,
     },
     paper: {
         padding: theme.spacing(2),
@@ -29,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '20px',
         textAlign: 'center', 
         marginTop: '35px',
+        marginLeft: '50px',
+        marginRight: '50px',
     },
     img: {
       margin: 'auto',
@@ -49,114 +51,106 @@ function TodoDetails(props) {
     const classes = useStyles();
     
     return (
-        <Paper className={classes.paper} 
-        style={{
-            flex: '1',
-            display: 'flex', 
-            float: 'left', 
-            flexDirection:"row",
-            marginLeft: 0.041 * window.innerWidth
-        }}
-    >
-        <Grid container>
-            <Grid item >
-                <Tippy 
-                    trigger="mouseenter"
-                    content={priorityToString(props.priorityLevel)}
-                >
-                    {changeIconColor(props.priorityLevel)}
-                </Tippy>
-            </Grid>
-            <Grid item xs container direction="column" spacing={1}>
-                <Grid item xs>
-                            <Typography
-                                variant="h5"
-                                className="title"
-                            >
-                                <Tippy
-                                    trigger="mouseenter" 
-                                    content="Show Details"
-                                >
-                                    <strong
-                                        onClick={() => props.setIsDetailOpen(true)} 
-                                        style={{ color:'#E94435', cursor:'pointer' }}
-                                    >
-                                        {props.title}
-                                    </strong>
-                                </Tippy>
-                            </Typography>
-                    <Divider/>
-                    <Typography 
-                        style={{marginTop:'10px'}}
-                        variant="body2"
+        <Paper className={classes.paper}>
+            <Grid container>
+                <Grid item xs={1}>
+                    <Tippy 
+                        trigger="mouseenter"
+                        content={priorityToString(props.priorityLevel)}
                     >
-                        <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(props.dateCreated.toDate().toString())}</em>
-                    </Typography>
-                    <Typography variant="body2">
-                    <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(props.dateDeadline.toDate().toString())}</em>
-                    </Typography>
-                    <Countdown 
-                        dateDeadline={props.dateDeadline}
-                    />
+                        {changeIconColor(props.priorityLevel)}
+                    </Tippy>
                 </Grid>
-                <Tippy 
-                    content="Options"
-                    trigger="mouseenter"
-                >
-                <MoreHorizIcon
-                    className="options"
-                    style={{cursor:'pointer'}}
-                    onClick={props.handleClick}
-                    />
-                </Tippy>
-                <Menu
-                    id="simple-menu"
-                    anchorEl={props.anchorEl}
-                    keepMounted
-                    open={Boolean(props.anchorEl)}
-                    onClose={props.handleClose}
-                >
-                    <MenuItem onClick={props.handleOpenModal}>
-                        <EditIcon 
-                                style={{color:'darkblue', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
-                                variant="contained" 
-                                color="primary" 
+                <Grid item xs container direction="column" spacing={1}>
+                    <Grid item xs>
+                                <Typography
+                                    variant="h5"
+                                    className="title"
+                                >
+                                    <Tippy
+                                        trigger="mouseenter" 
+                                        content="Show Details"
+                                    >
+                                        <strong
+                                            onClick={() => props.setIsDetailOpen(true)} 
+                                            style={{ color:'#E94435', cursor:'pointer' }}
+                                        >
+                                            {props.title}
+                                        </strong>
+                                    </Tippy>
+                                </Typography>
+                        <Divider/>
+                        <Typography 
+                            style={{marginTop:'10px'}}
+                            variant="body2"
+                        >
+                            <em><strong style={{color:'#66B032'}}>Created:</strong> {dateFormat(props.dateCreated.toDate().toString())}</em>
+                        </Typography>
+                        <Typography variant="body2">
+                        <em><strong style={{color:'#FE2712'}}>Deadline:</strong> {dateFormat(props.dateDeadline.toDate().toString())}</em>
+                        </Typography>
+                        <Countdown 
+                            dateDeadline={props.dateDeadline}
+                        />
+                    </Grid>
+                    <Tippy 
+                        content="Options"
+                        trigger="mouseenter"
+                    >
+                    <MoreHorizIcon
+                        className="options"
+                        style={{cursor:'pointer'}}
+                        onClick={props.handleClick}
+                        />
+                    </Tippy>
+                    <Menu
+                        id="simple-menu"
+                        anchorEl={props.anchorEl}
+                        keepMounted
+                        open={Boolean(props.anchorEl)}
+                        onClose={props.handleClose}
+                    >
+                        <MenuItem onClick={props.handleOpenModal}>
+                            <EditIcon 
+                                    style={{color:'darkblue', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
+                                    variant="contained" 
+                                    color="primary" 
+                                    onClick={props.handleOpenModal}
+                                />
+                            <Typography
+                                style={{float:'right'}}
                                 onClick={props.handleOpenModal}
+                            >
+                                Edit
+                            </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={props.handleOpenDeleteDialog}>
+                            <DeleteForeverIcon 
+                                    className="deleteIcon"
+                                    style={{color:'red', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}} 
+                                    onClick={props.handleOpenDeleteDialog}   
                             />
-                        <Typography
-                            style={{float:'right'}}
-                            onClick={props.handleOpenModal}
-                        >
-                            Edit
-                        </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={props.handleOpenDeleteDialog}>
-                        <DeleteForeverIcon 
-                                className="deleteIcon"
-                                style={{color:'red', cursor:'pointer', marginRight:'10px', marginBottom:'5px'}} 
-                                onClick={props.handleOpenDeleteDialog}   
-                        />
 
-                        <Typography  
-                            onClick={props.handleOpenDeleteDialog}
-                        >
-                            Delete
-                        </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={() => props.setIsArchiveOpen(true)}>
-                        <DoneIcon
-                            className={classes.image}
-                            style={{cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
-                            onClick={() => props.setIsArchiveOpen(true)}
-                        />
-                        <Typography
-                            onClick={() => props.setIsArchiveOpen(true)}
-                        >Completed</Typography> 
-                    </MenuItem>
-                </Menu>
+                            <Typography  
+                                onClick={props.handleOpenDeleteDialog}
+                            >
+                                Delete
+                            </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={() => props.setIsArchiveOpen(true)}>
+                            <DoneIcon
+                                className={classes.image}
+                                style={{cursor:'pointer', marginRight:'10px', marginBottom:'5px'}}
+                                onClick={() => props.setIsArchiveOpen(true)}
+                            />
+                            <Typography
+                                onClick={() => props.setIsArchiveOpen(true)}
+                            >Completed</Typography> 
+                        </MenuItem>
+                    </Menu>
+                </Grid>
             </Grid>
-        </Grid>
-    </Paper>
+        </Paper>
     )
 }
 

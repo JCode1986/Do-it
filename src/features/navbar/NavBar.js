@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import clsx from 'clsx';
+import { AuthContext } from '../authentication/Auth';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import Drawer from '@material-ui/core/Drawer';
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PersistentDrawerLeft(props) {
-
+  const { currentUser } = useContext(AuthContext);
   const user = firebase.auth().currentUser;
 
   const classes = useStyles();
@@ -175,46 +176,51 @@ function PersistentDrawerLeft(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <ListItem 
-            button 
-            onClick={() => {props.history.push('/')}}
-            key="Home">
-            <ListItemIcon>
-              <HomeIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Home"/>
-          </ListItem>
-          <ListItem 
-            button
-            onClick={() => {props.history.push('/form')}} 
-            key="Create a task">
-            <ListItemIcon>
-              <AddCircleOutlineIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Create a task"/>
-          </ListItem>
-          <ListItem 
-            button 
-            key="Tasks"
-            onClick={() => {props.history.push('/tasks')}}
-            >
-            <ListItemIcon>
-              <ListIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Tasks"/>
-          </ListItem>
-          <ListItem 
-            button 
-            key="Archive"
-            onClick={() => {props.history.push('/completed-tasks')}}
-            >
-            <ListItemIcon>
-              <ArchiveIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Archive"/>
-          </ListItem>
-        </List>
+          {
+            user? 
+            <List>
+              <ListItem 
+                button 
+                onClick={() => {props.history.push('/')}}
+                key="Home">
+                <ListItemIcon>
+                  <HomeIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Home"/>
+              </ListItem>
+              <ListItem 
+                button
+                onClick={() => {props.history.push('/form')}} 
+                key="Create a task">
+                <ListItemIcon>
+                  <AddCircleOutlineIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Create a task"/>
+              </ListItem>
+              <ListItem 
+                button 
+                key="Tasks"
+                onClick={() => {props.history.push('/tasks')}}
+                >
+                <ListItemIcon>
+                  <ListIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Tasks"/>
+              </ListItem>
+              <ListItem 
+                button 
+                key="Archive"
+                onClick={() => {props.history.push('/completed-tasks')}}
+                >
+                <ListItemIcon>
+                  <ArchiveIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Archive"/>
+              </ListItem>
+            </List> 
+            :
+            null
+          }
         <Divider />
         <List>
           {

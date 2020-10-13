@@ -24,24 +24,23 @@ function CompletedApproval(props) {
     const userArchive = userData.collection('archive');
     const userTasks = userData.collection('todos');
 
-    console.log(props.id, "what is this???")
-        const addToArchive = (event) => {
-            //stop refresh
-            event.preventDefault();
-            //add to db; no need for spread since a new snapshot will trigger the map in use effect
-            userArchive.add({
-              archivedTodo: props.title,
-              archivedDescription: props.description,
-              archivedDateCreated: props.dateCreated,
-              archivedDateDeadline: props.dateDeadline,
-              archivedModifiedDate: !props.modifiedDate ? "N/A" : props.modifiedDate,
-              archivedCompleted: new Date(Date.now()),
-              archivedPriorityLevel: props.priorityLevel
-            }).then(() => {
-                deleteTodo(); 
-                toast.success("Task Completed and archived")
-            }).catch(console.error)
-          }
+    const addToArchive = (event) => {
+        //stop refresh
+        event.preventDefault();
+        //add to db; no need for spread since a new snapshot will trigger the map in use effect
+        userArchive.add({
+            archivedTodo: props.title,
+            archivedDescription: props.description,
+            archivedDateCreated: props.dateCreated,
+            archivedDateDeadline: props.dateDeadline,
+            archivedModifiedDate: !props.modifiedDate ? "N/A" : props.modifiedDate,
+            archivedCompleted: new Date(Date.now()),
+            archivedPriorityLevel: props.priorityLevel
+        }).then(() => {
+            deleteTodo(); 
+            toast.success("Task Completed and archived")
+        }).catch(console.error)
+    }
 
     const deleteTodo = () => {
         userTasks.doc(props.id).delete();
