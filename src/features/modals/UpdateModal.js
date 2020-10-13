@@ -15,9 +15,7 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
-  const { isButtonDisabled,
-          setIsButtonDisabled,
-        } = useContext(TodoContext);
+  const { isButtonDisabled, setIsButtonDisabled, setIsNewPriorityLevel } = useContext(TodoContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id, title, description, dateDeadline, priorityLevel } = props.todo
   const [currentTitle, setCurrentTitle] = useState(title);
@@ -28,7 +26,8 @@ export default function EditForm(props) {
   //loads the modal with deadline from datbase
   useEffect(() => {
     setCurrentDateDeadline(dateDeadline.toDate());
-  }, [dateDeadline]);
+    setCurrentPriorityLevel(priorityLevel);
+  }, [dateDeadline, priorityLevel]);
 
   //updates the current task
   const updateTodo = () => {
@@ -52,6 +51,7 @@ export default function EditForm(props) {
     setCurrentDateDeadline(dateDeadline.toDate());
     setCurrentPriorityLevel(priorityLevel);  
     setIsButtonDisabled(false);
+    setIsNewPriorityLevel(false);
     handleCloseModal();
   }
 
@@ -117,11 +117,11 @@ export default function EditForm(props) {
                   setCurrentPriorityLevel={setCurrentPriorityLevel}
                   priorityLevel={priorityLevel}
                 /> */}
-                {/* <PriorityLevel 
+                <PriorityLevel 
                   currentPriorityLevel={currentPriorityLevel}
                   setCurrentPriorityLevel={setCurrentPriorityLevel}
                   priorityLevel={priorityLevel}
-                /> */}
+                />
                 <Grid>
                   <Button
                       className="FormButtons"

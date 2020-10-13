@@ -9,9 +9,13 @@ import './Form.css'
 import { withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
 
-const db = firebaseApp.firestore();
+import { AuthContext } from '../authentication/Auth';
+
+
 
 const Form = (props) => {  
+  const { currentUser } = useContext(AuthContext);
+  const db = firebaseApp.firestore();
 
   const { 
      title,
@@ -22,7 +26,8 @@ const Form = (props) => {
      setTitle,
      setDescription,
      setDateDeadline,
-     setPriorityLevel 
+     setPriorityLevel,
+     setIsNewPriorityLevel
     } = useContext(TodoContext);
 
     useEffect(() => {
@@ -30,14 +35,15 @@ const Form = (props) => {
       setDescription('');
       setDateDeadline(new Date(Date.now()));
       setPriorityLevel(1);
-    }, [setTitle, setDescription, setDateDeadline, setPriorityLevel]);
+      setIsNewPriorityLevel(true);
+    }, [setTitle, setDescription, setDateDeadline, setPriorityLevel, setIsNewPriorityLevel]);
 
-    //add to do
+    //add to do for user
     const addTodo = (event) => {
       //stop refresh
       event.preventDefault();
       //add to db; no need for spread since a new snapshot will trigger the map in use effect
-      db.collection('todos').add({
+      db.collection('users').doc(currentUser.uid).collection('todos').add({
         title,
         description,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -88,12 +94,9 @@ const Form = (props) => {
                 variant="outlined" 
                 value={description}
                 onChange={event => setDescription(event.target.value)}
-              />    
+              /> 
           <DateAndTime />
-          <PriorityLevel 
-            priorityLevel={priorityLevel}
-            setPriorityLevel={setPriorityLevel}
-          />
+          <PriorityLevel />
           <Grid>
             <Button
                 className="FormButtons"
