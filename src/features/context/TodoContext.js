@@ -11,7 +11,7 @@ export const TodoProvider = (props) => {
     const [dateCreated, setDateCreated] = useState(new Date(Date.now()));
     const [modifiedDate, setModifiedDate] = useState(new Date(Date.now()));
     const [dateDeadline, setDateDeadline] = useState(new Date(Date.now()));
-    const [priorityLevel, setPriorityLevel] = useState(0);
+    const [priorityLevel, setPriorityLevel] = useState(1);
     const [isNewPriorityLevel, setIsNewPriorityLevel] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     

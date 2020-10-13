@@ -126,7 +126,9 @@ const SignUp = ( {history} ) => {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
+      <Box mt={8}
+        style={{marginTop: "0"}}
+      >
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={app.auth()}
