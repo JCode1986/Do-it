@@ -76,3 +76,4 @@ export default db;
 ### Resources
 * [Youtube - Clever Programmer](https://www.youtube.com/watch?v=VqgTr-nd7Cg&list=PL-J2q3Ga50oMQa1JdSJxYoZELwOJAXExP&index=2&t=9057s)
 * [Login Template](https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-in/SignIn.js)
+* [Do it Video](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
