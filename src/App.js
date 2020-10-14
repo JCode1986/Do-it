@@ -17,22 +17,23 @@ import Video from './features/video/Video';
 
 function App() {
   const { isVideoPlaying } = useContext(TodoContext);
+
   return (
     <>
       <Router>
-          <div className="App">
-            <NavBar />
-            { isVideoPlaying ? <Video /> : null }
-            <ToastContainer/>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route exact path="/tasks" component={TodoList} />
-            <Route exact path="/signup" component={SignUp}/>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/form" component={Form}/>
-            <Route exact path="/completed-tasks" component={CompletedTasks} /> 
-          </div>
-        </Router>
-        <Footer/>
+        <div className="App">
+          <NavBar />
+          { isVideoPlaying ? <Video /> : null }
+          <ToastContainer/>
+          <PrivateRoute exact path="/" component={Home} />
+          <Route exact path="/tasks" component={TodoList} />
+          <Route exact path="/signup" component={SignUp}/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/form" component={Form}/>
+          <Route exact path="/completed-tasks" component={CompletedTasks} /> 
+          <Footer/>
+        </div>
+      </Router>
     </>
   );
 }
