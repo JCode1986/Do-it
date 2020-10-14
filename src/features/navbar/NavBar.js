@@ -127,12 +127,22 @@ function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img 
-            src={require("./do-it-logo.png")} 
-            alt="Do It!"
-            style={{height:'60px', cursor:'pointer'}}
-            onClick={() => {props.history.push('/tasks')}}
-          />
+          {
+            user?
+              <img 
+                src={require("./do-it-logo.png")} 
+                alt="Do It!"
+                style={{height:'60px', cursor:'pointer'}}
+                onClick={() => {props.history.push('/tasks')}}
+              />
+              :
+              <img 
+              src={require("./do-it-logo.png")} 
+              style={{height:'60px'}}
+              alt="Do It!"
+              />
+
+          }
         <div style={{marginLeft:"auto"}}>
           {
             !user ?

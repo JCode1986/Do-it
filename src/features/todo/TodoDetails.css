@@ -7,6 +7,11 @@
     transition-duration: 0.5;
 }
 
+.MuiPaper-root.jss23541.MuiPaper-elevation1.MuiPaper-rounded:hover {
+    transform: scale(1.03);
+    transition-duration: 0.5;
+}
+
 .MuiPaper-root.makeStyles-paper-19.MuiPaper-elevation1.MuiPaper-rounded:hover {
     background-color:white;    
     transition-duration: 0.5;

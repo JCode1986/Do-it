@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { withRouter, Redirect } from "react-router"
 import { AuthContext } from "./Auth"
 import app from 'firebase';
@@ -14,7 +14,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import ForgotPassword from '../authentication/ForgotPassword';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = ( {history} ) => {
     const classes = useStyles();
-  
+    const [isOpen, setIsOpen] = useState(false);
+
     const handleLogin = useCallback(async event => {
       event.preventDefault();
       const { email, password } = event.target.elements;
@@ -72,6 +74,10 @@ const Login = ( {history} ) => {
   
   return (
     <Container component="main" maxWidth="xs">
+      <ForgotPassword 
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -88,7 +94,6 @@ const Login = ( {history} ) => {
           <TextField
             variant="outlined"
             margin="normal"
-            //required
             fullWidth
             id="email"
             label="Email Address"
@@ -123,7 +128,9 @@ const Login = ( {history} ) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2"
+                onClick={() => setIsOpen(true)}
+              >
                 Forgot password?
               </Link>
             </Grid>
