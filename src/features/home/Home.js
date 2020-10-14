@@ -3,8 +3,7 @@ import firebaseApp from "../../firebase"
 import app from 'firebase';
 import Button from '@material-ui/core/Button';
 
-function Home(props) {
-    console.log("User id:", app.auth().currentUser.uid)
+function Home() {
     return (
         <div style={{marginTop:'40px'}}>
             <h1>Welcome {app.auth().currentUser.displayName}</h1>

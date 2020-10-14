@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import { AuthContext } from '../authentication/Auth';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import Drawer from '@material-ui/core/Drawer';
@@ -87,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function PersistentDrawerLeft(props) {
-  const { currentUser } = useContext(AuthContext);
   const user = firebase.auth().currentUser;
 
   const classes = useStyles();

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
+import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../authentication/Auth';
-import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
+import { priorityToString } from '../priority/priorityFunctions';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -67,12 +68,6 @@ function CompletedTasks() {
         setDescription(archives.find((archive) => archive.id === id).archivedDescription);
     }
 
-    const priorities = (num) => {
-      if (num === 1) return 'Low';
-      if (num === 2) return 'Medium';
-      if (num === 3) return 'High'
-    }
-
     return (
         <>
         <CompletedDetails
@@ -118,7 +113,7 @@ function CompletedTasks() {
                 <TableCell align="center">{dateFormat(archive.archivedDateCreated.toDate().toString())}</TableCell>
                 <TableCell align="center">{dateFormat(archive.archivedDateDeadline.toDate().toString())}</TableCell>
                 <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
-                <TableCell align="center">{priorities(archive.archivedPriorityLevel)}</TableCell>
+                <TableCell align="center">{priorityToString(archive.archivedPriorityLevel)}</TableCell>
               </TableRow>
               ))}
           </TableBody>
