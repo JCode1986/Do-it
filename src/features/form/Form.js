@@ -8,7 +8,6 @@ import firebase from 'firebase';
 import './Form.css'
 import { withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
-
 import { AuthContext } from '../authentication/Auth';
 
 

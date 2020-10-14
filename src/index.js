@@ -10,7 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
         <AuthProvider>
           <TodoProvider>
-            <App />
+              <App />
           </TodoProvider>
         </AuthProvider>
   </React.StrictMode>,

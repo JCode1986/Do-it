@@ -1,11 +1,17 @@
 import React, { useContext } from 'react'
 import { TodoContext } from '../context/TodoContext';
+import { withRouter } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import './Footer.css'
 
-function Footer() {
-    const { setIsVideoPlaying } = useContext(TodoContext)
+function Footer(props) {
+    const { setIsVideoPlaying } = useContext(TodoContext);
+    const playVideo = () => {
+      setIsVideoPlaying(true);
+      props.history.push("/do-it");
+    }
+
     return (
         <div className="footer">
         <Typography 
@@ -16,7 +22,7 @@ function Footer() {
             {'Copyright © '}
             <Link 
               color="inherit" 
-              onClick={() => setIsVideoPlaying(true)}
+              onClick={playVideo}
               style={{cursor:"pointer"}}
             >
             Do it!
@@ -28,4 +34,4 @@ function Footer() {
     );
   }
 
-export default Footer
+export default withRouter(Footer)

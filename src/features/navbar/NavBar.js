@@ -21,6 +21,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ListIcon from '@material-ui/icons/List';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import StarRateIcon from '@material-ui/icons/StarRate';
 import InfoIcon from '@material-ui/icons/Info';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
@@ -101,10 +102,16 @@ function PersistentDrawerLeft(props) {
     setOpen(false);
   };
 
+
   const logOut = () => {
     setIsVideoPlaying(false);
     firebase.auth().signOut()
     props.history.push('/login');
+  }
+
+  const playVideo = () => {
+    setIsVideoPlaying(true);
+    props.history.push('/do-it');
   }
 
   const doIt = () => {
@@ -289,6 +296,16 @@ function PersistentDrawerLeft(props) {
               <InfoIcon/>
             </ListItemIcon>
             <ListItemText primary="About"/>
+          </ListItem>
+          <Divider/>
+          <ListItem 
+            button 
+            onClick={playVideo}
+            key="Need Motivation?">
+            <ListItemIcon>
+              <StarRateIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Need Motivation?"/>
           </ListItem>
         </List>
       </Drawer>
