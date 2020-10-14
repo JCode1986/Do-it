@@ -1,8 +1,8 @@
 import React from 'react'
 import { changeIconColor, priorityToString } from '../priority/priorityFunctions';
+import { makeStyles } from '@material-ui/core/styles';
 import Countdown from '../date/Countdown';
 import './TodoDetails.css';
-import { makeStyles } from '@material-ui/core/styles';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
 import dateFormat from '../date/DateFormat'
@@ -12,12 +12,7 @@ import 'tippy.js/dist/tippy.css';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { 
-    Paper, 
-    Grid, 
-    Typography,  
-    Divider,
-} from '@material-ui/core';
+import { Paper, Grid, Typography, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {

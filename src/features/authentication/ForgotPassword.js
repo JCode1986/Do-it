@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
 import { TextField, FormControl, Button, Grid, Typography } from '@material-ui/core';
+import { toast } from "react-toastify";
+import firebase from 'firebase';
+import Modal from '@material-ui/core/Modal';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -20,13 +21,14 @@ function ForgotPassword(props) {
 
     function passwordResetEmail(Email) {
         firebase.auth().sendPasswordResetEmail(Email)
-          .then(function (user) {
-            alert(`Password reset has been sent to ${email}`)
+            .then(function (user) {
+            toast.success(`Password Reset sent to ${email}`);
             props.setIsOpen(false);
-          }).catch(function (e) {
+            }).catch(function (e) {
             console.log(e)
-          })
-      }
+        })
+    }
+    
     return (
         <Modal
           open={props.isOpen}

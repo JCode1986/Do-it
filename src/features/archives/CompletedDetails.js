@@ -46,7 +46,7 @@ function CompletedDetails(props) {
             <Divider/>
             <Typography style={{marginTop:'20px'}}>
                 {
-                    !props.description || props.description == 0 ? <Typography>No details provided...</Typography> 
+                    !props.description || props.description === 0 ? <Typography>No details provided...</Typography> 
                     :
                     props.description
                 }

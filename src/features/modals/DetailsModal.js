@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, Typography, Divider } from '@material-ui/core';
+import { priorityToString } from '../priority/priorityFunctions'
 import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from '../date/DateFormat';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -16,16 +17,6 @@ function Details(props) {
         },
     }));
 
-    const level = (priority) => {
-        if(priority === 1) {
-            return 'Low';
-        } else if (priority === 2) {
-            return 'Medium';
-        } else {
-            return 'High';
-        }
-    }
-    
     const classes = useStyles();
 
     return (
@@ -94,7 +85,7 @@ function Details(props) {
                     <Divider/>
                     <div style={{marginBottom:'10px', marginTop:'10px', paddingLeft:'20px', paddingRight:'20px'}}>
                     {
-                        !props.description || props.description == 0?
+                        !props.description || props.description === 0?
                         <Typography><strong><em>Details: </em> <br/></strong> No details provided...</Typography>
                         :
                         <Typography><strong><em>Details: </em> <br/></strong> {props.description}</Typography>
@@ -102,7 +93,7 @@ function Details(props) {
                     </div>
                     <Divider/>
                     <Typography style={{marginTop:'10px', marginBottom:'10px'}}>
-                        <strong><em>Priority Level: </em> <br/></strong> {level(props.priorityLevel)}
+                        <strong><em>Priority Level: </em> <br/></strong> {priorityToString(props.priorityLevel)}
                     </Typography> 
                 </div>
             </div> 
