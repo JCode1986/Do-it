@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from '../context/TodoContext';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
@@ -87,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 function PersistentDrawerLeft(props) {
   const user = firebase.auth().currentUser;
-
+  const { setIsVideoPlaying } = useContext(TodoContext);
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -101,8 +102,38 @@ function PersistentDrawerLeft(props) {
   };
 
   const logOut = () => {
+    setIsVideoPlaying(false);
     firebase.auth().signOut()
     props.history.push('/login');
+  }
+
+  const doIt = () => {
+    setIsVideoPlaying(false);
+    props.history.push('/tasks');
+  }
+
+  const home = () => {
+    setIsVideoPlaying(false);
+    props.history.push('/');
+  }
+
+  const create = () => {
+    setIsVideoPlaying(false);
+    props.history.push('/form');
+  }
+
+  const tasks = () => {
+    setIsVideoPlaying(false);
+    props.history.push('/tasks');
+  }
+
+  const archive = () => {
+    setIsVideoPlaying(false);
+    props.history.push('/completed-tasks')
+  }
+
+  const about = () => {
+    setIsVideoPlaying(false);
   }
 
   return (
@@ -131,7 +162,7 @@ function PersistentDrawerLeft(props) {
                 src={require("./do-it-logo.png")} 
                 alt="Do It!"
                 style={{height:'60px', cursor:'pointer'}}
-                onClick={() => {props.history.push('/tasks')}}
+                onClick={doIt}
               />
               :
               <img 
@@ -189,7 +220,7 @@ function PersistentDrawerLeft(props) {
             <List>
               <ListItem 
                 button 
-                onClick={() => {props.history.push('/')}}
+                onClick={home}
                 key="Home">
                 <ListItemIcon>
                   <HomeIcon/>
@@ -198,7 +229,7 @@ function PersistentDrawerLeft(props) {
               </ListItem>
               <ListItem 
                 button
-                onClick={() => {props.history.push('/form')}} 
+                onClick={create} 
                 key="Create a task">
                 <ListItemIcon>
                   <AddCircleOutlineIcon/>
@@ -208,7 +239,7 @@ function PersistentDrawerLeft(props) {
               <ListItem 
                 button 
                 key="Tasks"
-                onClick={() => {props.history.push('/tasks')}}
+                onClick={tasks}
                 >
                 <ListItemIcon>
                   <ListIcon/>
@@ -218,7 +249,7 @@ function PersistentDrawerLeft(props) {
               <ListItem 
                 button 
                 key="Archive"
-                onClick={() => {props.history.push('/completed-tasks')}}
+                onClick={archive}
                 >
                 <ListItemIcon>
                   <ArchiveIcon/>

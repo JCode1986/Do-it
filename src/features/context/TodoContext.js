@@ -15,12 +15,14 @@ export const TodoProvider = (props) => {
     const [isNewPriorityLevel, setIsNewPriorityLevel] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [isPending, setIsPending] = useState(false);
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     
     return (
         <TodoContext.Provider value={
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
-            isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isPending, setIsPending }
+            isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isPending, setIsPending,
+            isVideoPlaying, setIsVideoPlaying }
         }>
             {props.children}
         </TodoContext.Provider>

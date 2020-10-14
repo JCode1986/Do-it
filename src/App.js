@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TodoContext } from './features/context/TodoContext'
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import {ToastContainer } from "react-toastify";
 import './App.css';
@@ -12,13 +13,16 @@ import SignUp from './features/authentication/SignUp'
 import Footer from './features/footer/Footer'
 import "react-toastify/dist/ReactToastify.css"
 import TodoList from './features/todo/TodoList';
+import Video from './features/video/Video';
 
 function App() {
+  const { isVideoPlaying } = useContext(TodoContext);
   return (
     <>
       <Router>
           <div className="App">
             <NavBar />
+            { isVideoPlaying ? <Video /> : null }
             <ToastContainer/>
             <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/tasks" component={TodoList} />
