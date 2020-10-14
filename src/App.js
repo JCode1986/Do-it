@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { TodoContext } from './features/context/TodoContext'
+import { TodoContext } from './features/context/TodoContext';
+import { AuthContext } from './features/authentication/Auth';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 import {ToastContainer } from "react-toastify";
 import './App.css';
@@ -17,20 +18,24 @@ import Video from './features/video/Video';
 
 function App() {
   const { isVideoPlaying } = useContext(TodoContext);
-
+  const { currentUser } = useContext(AuthContext);
   return (
     <>
       <Router>
         <div className="App">
           <NavBar />
-          { isVideoPlaying ? <Video /> : null }
           <ToastContainer/>
-          <PrivateRoute exact path="/" component={Home} />
-          <Route exact path="/tasks" component={TodoList} />
-          <Route exact path="/signup" component={SignUp}/>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/form" component={Form}/>
-          <Route exact path="/completed-tasks" component={CompletedTasks} /> 
+          { isVideoPlaying ? <Video /> : null }
+          { !currentUser ? <Login/> :  
+          <>
+            <PrivateRoute exact path="/" component={Home} />
+            <Route exact path="/tasks" component={TodoList} />
+            <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/form" component={Form}/>
+            <Route exact path="/completed-tasks" component={CompletedTasks} /> 
+          </>
+          }
           <Footer/>
         </div>
       </Router>
