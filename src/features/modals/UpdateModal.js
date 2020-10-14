@@ -48,7 +48,7 @@ export default function EditForm(props) {
     cancelAndRevertToCurrent();
   }
 
-  //reverts back to previous value when user cancels out of an update, and a change was made to the time picker
+  //reverts back to previous value when user cancels out of an update, and a change was made
   const cancelAndRevertToCurrent = () => {  
     setCurrentTitle(title);
     setCurrentDescription(description);
@@ -86,10 +86,7 @@ export default function EditForm(props) {
             transform: 'translate(-50%, -50%)'}}
         >
           <div style={{backgroundColor:"lightblue", width:' -webkit-fill-available', border: '1px solid'}}>
-            <h1
-                className="updateHeader"         
-              >Update
-            </h1>
+            <h1 className="updateHeader">Update</h1>
           </div>
           <form>
           <Divider/>

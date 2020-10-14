@@ -29,27 +29,32 @@ function TodoList() {
     return (
         <div>
             <TodoHeader/>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              style={{
-                border:"2px solid black", 
-                width: "95%",
-                marginTop: "20px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                borderRadius: "20px",
-                paddingBottom: "35px"
-            }}
-            >
-                {todos.map(todo => 
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-              />)}
-            </Grid>
+            {
+              todos.length ? 
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                style={{
+                  border:"2px solid black", 
+                  width: "95%",
+                  marginTop: "20px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  borderRadius: "20px",
+                  paddingBottom: "35px",
+              }}
+              >
+                  {todos.map(todo => 
+                  <Todo
+                    key={todo.id}
+                    todo={todo}
+                />)}
+              </Grid>
+              :
+              null
+            }
         </div>
     )
 }
