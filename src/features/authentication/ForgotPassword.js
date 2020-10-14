@@ -19,16 +19,16 @@ function ForgotPassword(props) {
     const classes = useStyles();
     const [email, setEmail] = useState('');
 
-    function passwordResetEmail(Email) {
-        firebase.auth().sendPasswordResetEmail(Email)
-            .then(function (user) {
-            toast.success(`Password Reset sent to ${email}`);
-            props.setIsOpen(false);
-            }).catch(function (e) {
-            console.log(e)
-        })
-    }
-    
+    const passwordResetEmail = ((email) => {
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                toast.success(`Password Reset sent to ${email}`);
+                props.setIsOpen(false);
+            }).catch((e) => {
+                console.log(e)
+            });
+    })
+
     return (
         <Modal
           open={props.isOpen}
@@ -39,38 +39,41 @@ function ForgotPassword(props) {
             <FormControl           
                 style={{position:"initial"}} 
                 className={classes.paper}
+                
             >
-            <Typography
-                variant="h5"
-                >
-                Password Reset
-            </Typography>
-                <TextField
-                    type="email"
-                    autoComplete="email"
-                    autoFocus
-                    multiline={true}
-                    id="outlined-basic" 
-                    label="Email Address" 
-                    variant="outlined" 
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                />
-                <Grid>
-                    <Button 
-                        style={{marginRight:'25px'}}
-                        onClick={() => passwordResetEmail(email)}
-                        variant="contained" 
-                    >
-                        Submit
-                    </Button>
-                    <Button 
-                        onClick={() => props.setIsOpen(false)}
-                        variant="contained" 
-                    >
-                        Cancel
-                    </Button>
-                </Grid>
+                <form onSubmit={() => passwordResetEmail(email)}>
+                    <Typography
+                        variant="h5"
+                        >
+                        Password Reset
+                    </Typography>
+                    <TextField
+                        type="email"
+                        autoComplete="email"
+                        autoFocus
+                        id="outlined-basic" 
+                        label="Email Address" 
+                        variant="outlined" 
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                    />
+                    <Grid>
+                        <Button 
+                            type="submit"
+                            style={{marginRight:'25px'}}
+                            variant="contained" 
+                        >
+                            Submit
+                        </Button>
+                        <Button 
+                            type="submit"
+                            onClick={() => props.setIsOpen(false)}
+                            variant="contained" 
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
+                </form>
             </FormControl>
         </Modal>
     )

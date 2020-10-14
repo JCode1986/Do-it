@@ -10,8 +10,6 @@ import { withRouter } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { AuthContext } from '../authentication/Auth';
 
-
-
 const Form = (props) => {  
   const { currentUser } = useContext(AuthContext);
   const db = firebaseApp.firestore();
@@ -86,7 +84,7 @@ const Form = (props) => {
                 helperText="Required: 15 chars max length"
                 value={capitalizeFirstLetter(title)}
                 onChange={event => setTitle(event.target.value)}
-                />
+              />
               <TextField 
                 multiline={true}
                 id="outlined-basic" 
