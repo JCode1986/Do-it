@@ -71,8 +71,27 @@ const Form = (props) => {
         direction="column"
         justify="space-evenly"
         alignItems="center"
+        className="FormGrid"
+        style={{
+          borderRadius:"20px", 
+          width:"45%",
+          marginTop:"50px",
+          marginLeft:"auto",
+          marginRight:"auto",
+        }}
       >
-        <h1 style={{marginTop:'40px', marginBottom:0}}>Create</h1>
+        <h1 style={{
+          marginTop:'25px', 
+          marginBottom:0, 
+          backgroundColor:"#7ed957",
+          minWidth: "-webkit-fill-available",
+          margin: "auto",
+          paddingTop: "15px",
+          paddingBottom:" 15px",
+          borderTopLeftRadius:"20px",
+          borderTopRightRadius:"20px",
+          color:"white"
+          }}>Create</h1>
         <form>
           <FormControl>
               <TextField

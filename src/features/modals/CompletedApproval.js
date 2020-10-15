@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../authentication/Auth';
-import { Modal, Typography, Button } from '@material-ui/core'
-import '../../firebase';
-import firebase from 'firebase';
+import { Modal, Typography, Button, Divider } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { toast } from "react-toastify";
+import '../../firebase';
+import './Modal.css'
+import firebase from 'firebase';
 
 function CompletedApproval(props) {
     const useStyles = makeStyles((theme) => ({
@@ -12,8 +13,11 @@ function CompletedApproval(props) {
                 position: 'absolute',
                 width: 400,
                 backgroundColor: theme.palette.background.paper,
-                border: '2px solid #000',
-                boxShadow: theme.shadows[5],
+                // boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+                // border: '2px solid #000',
+                // boxShadow: theme.shadows[5],
+                //border: '1px solid #000',
+                //borderRadius:"20px"
             },
         }));
 
@@ -68,7 +72,10 @@ function CompletedApproval(props) {
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
                         width: '330px',
-                        height: '180px'
+                        height: '180px',
+                        outline:'none',
+                        borderRadius:'20px',
+                        boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
                     }}
                 >
                     <div 
@@ -78,10 +85,12 @@ function CompletedApproval(props) {
                             margin:'0px',
                             paddingBottom:'1px',
                             paddingTop:'1px',
-                            borderBottom: '1px solid black'
+                            borderTopLeftRadius:"20px", 
+                            borderTopRightRadius:"20px"
                         }}
                     >
                     <h2 id="simple-modal-title">Complete Confirmation</h2>
+                    <Divider/>   
                     </div>
                     <Typography 
                         id="simple-modal-description"

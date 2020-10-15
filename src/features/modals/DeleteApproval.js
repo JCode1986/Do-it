@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import '../../firebase';
+import './Modal.css'
 import { AuthContext } from '../authentication/Auth';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import{ Modal, Button, Typography, Grid } from '@material-ui/core';
+import{ Modal, Button, Typography, Grid, Divider } from '@material-ui/core';
 import { toast } from "react-toastify";
 
 function DeleteDialog(props) {
@@ -13,11 +14,11 @@ function DeleteDialog(props) {
 
     const useStyles = makeStyles((theme) => ({
     paper: {
-        position: 'absolute',
-        width: 500,
+        // position: 'absolute',
+        // width: 500,
         backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
+        // border: '2px solid #000',
+        // boxShadow: theme.shadows[5],
     },
     }));
 
@@ -46,6 +47,9 @@ function DeleteDialog(props) {
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
                         height: '180px',
+                        outline:'none',
+                        borderRadius:'20px',
+                        boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
                     }}
                 >
                     <div 
@@ -56,10 +60,14 @@ function DeleteDialog(props) {
                             margin: '0',
                             paddingTop: '1px',
                             paddingBottom:'1px',
-                            borderBottom: '1px solid black'
+                            borderTopLeftRadius:"20px", 
+                            borderTopRightRadius:"20px"
                         }}
                     >
-                    <h2 id="simple-modal-title">Delete Confirmation</h2>
+                    <h2 id="simple-modal-title">
+                        Delete Confirmation
+                    </h2>
+                    <Divider/>   
                     </div>
                     <Typography 
                         id="simple-modal-description"

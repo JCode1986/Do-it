@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { Grid } from '@material-ui/core';
+import './TodoList.css'
 import firebase from 'firebase';
 import TodoHeader from './TodoHeader'
 import Todo from './Todo';
@@ -41,15 +42,7 @@ function TodoList() {
                 direction="row"
                 justify="center"
                 alignItems="center"
-                style={{
-                  border:"2px solid black", 
-                  width: "95%",
-                  marginTop: "20px",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  borderRadius: "20px",
-                  paddingBottom: "35px",
-              }}
+                className="TodoListGrid"
               >
                   {todos.map(todo => 
                   <Todo
