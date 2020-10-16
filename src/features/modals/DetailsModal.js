@@ -1,23 +1,15 @@
 import React from 'react'
 import { Modal, Typography, Divider } from '@material-ui/core';
-import { priorityToString } from '../priority/priorityFunctions'
-import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from '../date/DateFormat';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 function Details(props) {
 
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-            position: 'absolute',
-            width: 400,
-            backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
-            boxShadow: theme.shadows[5],
-        },
-    }));
-
-    const classes = useStyles();
+    const priority = () => {
+        if(props.priorityLevel === 1) return "Low";
+        if(props.priorityLevel === 2) return "Medium";
+        if(props.priorityLevel === 3) return "High";
+    }
 
     return (
         <div>
@@ -28,14 +20,9 @@ function Details(props) {
                 aria-describedby="simple-modal-description"
             >
             <div 
-                className={classes.paper}
+                className="InsideModal"
                 style={{    
-                    width:'570px',  
-                    maxWidth: 'auto',      
-                    position:'absolute',
-                    top:'50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)'
+                    width: "30%",
                 }}
             >   
                 <CancelIcon
@@ -49,23 +36,16 @@ function Details(props) {
                 />
                 <div>
                     <div 
-                        className='detailHeader'
-                        style={{
-                            textAlign:'center',                         
-                            marginBottom: '10px !important',
-                            marginTop: '0px',
-                            paddingTop: '1px', 
-                            color:'#49120D', 
-                            backgroundColor:'lightblue',
-                            borderBottom: '1px solid black',
-                        }}
+                        className='ModalHeaderBackground'
+                        style={{backgroundColor:"#7ed957"}}
                     >
                         <h1
                             variant='h4'
-                            style={{marginLeft: '20px',}}
+                            className="ModalHeader"
                         >                 
                             {props.title}  
-                        </h1>     
+                        </h1>  
+                        <Divider/>   
                     </div>
                     <Typography style={{marginTop:'10px'}}>
                         <em>Date Created: </em>{dateFormat(props.dateCreated.toDate().toString())}
@@ -93,7 +73,7 @@ function Details(props) {
                     </div>
                     <Divider/>
                     <Typography style={{marginTop:'10px', marginBottom:'10px'}}>
-                        <strong><em>Priority Level: </em> <br/></strong> {priorityToString(props.priorityLevel)}
+                        <strong><em>Priority Level: </em> <br/></strong> {priority(props.priorityLevel)}
                     </Typography> 
                 </div>
             </div> 

@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../authentication/Auth';
+import { TodoContext } from '../context/TodoContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { priorityToString } from '../priority/priorityFunctions';
+import Loading from '../loading/Loading';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -27,6 +29,8 @@ const useStyles = makeStyles({
 function CompletedTasks() {
     const db = firebase.firestore();
     const { currentUser } = useContext(AuthContext);
+    const userArchive = db.collection('users').doc(currentUser.uid).collection('archive');
+    const {  isPending, setIsPending } = useContext(TodoContext);
     const classes = useStyles();
 
     const [archives, setArchives] = useState([]);
@@ -44,29 +48,32 @@ function CompletedTasks() {
       setPage(0);
     };
 
-    const userArchive = db.collection('users').doc(currentUser.uid).collection('archive');
 
     useEffect(() => {
+      //setIsPending(true);
       userArchive.orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
             //returns object with id, and todo
-            setArchives(snapshot.docs.map(doc => ({
-                id: doc.id, 
-                archivedTodo: doc.data().archivedTodo,
-                archivedDescription: doc.data().archivedDescription,
-                archivedDateCreated: doc.data().archivedDateCreated,
-                archivedCompleted: doc.data().archivedCompleted,
-                archivedDateDeadline: doc.data().archivedDateDeadline,
-                archivedModifiedDate: doc.data().archivedModifiedDate,
-                archivedPriorityLevel: doc.data().archivedPriorityLevel
-            })))
-        })
-        }, [db, userArchive])
+        setArchives(snapshot.docs.map(doc => ({
+            id: doc.id, 
+            archivedTodo: doc.data().archivedTodo,
+            archivedDescription: doc.data().archivedDescription,
+            archivedDateCreated: doc.data().archivedDateCreated,
+            archivedCompleted: doc.data().archivedCompleted,
+            archivedDateDeadline: doc.data().archivedDateDeadline,
+            archivedModifiedDate: doc.data().archivedModifiedDate,
+            archivedPriorityLevel: doc.data().archivedPriorityLevel
+        })))
+        //setIsPending(false);
+      })
+    }, [db, userArchive])
         
     //find id
     const details = (id) => {
         setIsModalOpen(true);
         setDescription(archives.find((archive) => archive.id === id).archivedDescription);
     }
+
+    if(isPending) return <Loading/>
 
     return (
         <>

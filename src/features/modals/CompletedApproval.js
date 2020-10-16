@@ -1,23 +1,13 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../authentication/Auth';
-import { Modal, Typography, Button } from '@material-ui/core'
-import '../../firebase';
-import firebase from 'firebase';
-import { makeStyles } from '@material-ui/core/styles';
+import { Modal, Typography, Button, Divider, Grid } from '@material-ui/core'
 import { toast } from "react-toastify";
+import '../../firebase';
+import './Modal.css'
+import CancelIcon from '@material-ui/icons/Cancel';
+import firebase from 'firebase';
 
 function CompletedApproval(props) {
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-                position: 'absolute',
-                width: 400,
-                backgroundColor: theme.palette.background.paper,
-                border: '2px solid #000',
-                boxShadow: theme.shadows[5],
-            },
-        }));
-
-    const classes = useStyles();
     const db = firebase.firestore();
     const { currentUser } = useContext(AuthContext)
     const userData = db.collection('users').doc(currentUser.uid);
@@ -60,28 +50,24 @@ function CompletedApproval(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                 <div 
-                    className={classes.paper}
-                    style={{           
-                        position:'absolute',
-                        top:'50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '330px',
-                        height: '180px'
-                    }}
+                <Grid
+                    container
+                    direction="column"
+                    justify="space-evenly"
+                    alignItems="center"
+                    className="InsideModal"
+                    style={{ width:"25%" }}
                 >
                     <div 
-                        className="completeHeader"
-                        style={{
-                            backgroundColor:'lightblue',
-                            margin:'0px',
-                            paddingBottom:'1px',
-                            paddingTop:'1px',
-                            borderBottom: '1px solid black'
-                        }}
+                        className="ModalHeaderBackground"
+                        style={{ backgroundColor:"lightblue" }}
                     >
-                    <h2 id="simple-modal-title">Complete Confirmation</h2>
+                        <CancelIcon 
+                            className="CancelIcon"
+                            onClick={() => closeMenu()}
+                        />
+                        <h2 id="simple-modal-title">Complete Confirmation</h2>
+                        <Divider/>   
                     </div>
                     <Typography 
                         id="simple-modal-description"
@@ -89,20 +75,22 @@ function CompletedApproval(props) {
                     >
                         Completed task?
                     </Typography>
-                <Button
-                    style={{marginRight:'5px'}}
-                    onClick={addToArchive}
-                    variant="contained"
-                    color="primary"
-                    >Yes
-                </Button>
-                <Button
-                    variant="contained"
-                    style={{marginLeft:'5px'}}
-                    onClick={closeMenu}
-                    >No
-                </Button>
-                </div>
+                    <Grid style={{marginBottom:"15px"}}>
+                        <Button
+                            style={{marginRight:'5px'}}
+                            onClick={addToArchive}
+                            variant="contained"
+                            color="primary"
+                            >Yes
+                        </Button>
+                        <Button
+                            variant="contained"
+                            style={{marginLeft:'5px'}}
+                            onClick={closeMenu}
+                            >No
+                        </Button>
+                    </Grid>
+                </Grid>
             </Modal>
         </div>
     )
