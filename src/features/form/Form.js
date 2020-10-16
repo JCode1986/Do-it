@@ -90,7 +90,8 @@ const Form = (props) => {
           paddingBottom:" 15px",
           borderTopLeftRadius:"20px",
           borderTopRightRadius:"20px",
-          color:"white"
+          color:"white",
+          textShadow: "3px 3px 3px black"
           }}>Create</h1>
         <form>
           <FormControl>

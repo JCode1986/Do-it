@@ -1,4 +1,5 @@
 import React from 'react'
+import HeroSlider from './HeroSlider';
 import firebaseApp from "../../firebase"
 import app from 'firebase';
 import Button from '@material-ui/core/Button';
@@ -14,6 +15,7 @@ function Home() {
             >
                 Log out
             </Button>
+            <HeroSlider/>
         </div>
     )
 }

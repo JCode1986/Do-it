@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { TodoContext } from '../context/TodoContext';
+import { Typography, Grid } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import firebase from 'firebase';
-import { Typography, Grid } from '@material-ui/core';
-import { withRouter } from 'react-router-dom';
 
 function NavBarToolBar(props) {
     const { setIsVideoPlaying } = useContext(TodoContext);

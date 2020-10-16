@@ -1,23 +1,10 @@
 import React from 'react'
 import { Modal, Typography, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import dateFormat from '../date/DateFormat';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 function Details(props) {
 
-    const useStyles = makeStyles((theme) => ({
-        paper: {
-            position: 'absolute',
-            width: 400,
-            backgroundColor: 'white'
-            // backgroundColor: theme.palette.background.paper,
-            // border: '2px solid #000',
-            // boxShadow: theme.shadows[5],
-        },
-    }));
-
-    const classes = useStyles();
     const priority = () => {
         if(props.priorityLevel === 1) return "Low";
         if(props.priorityLevel === 2) return "Medium";
@@ -33,17 +20,9 @@ function Details(props) {
                 aria-describedby="simple-modal-description"
             >
             <div 
-                className={classes.paper}
+                className="InsideModal"
                 style={{    
-                    width:'570px',  
-                    maxWidth: 'auto',      
-                    position:'absolute',
-                    top:'50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    outline:'none',
-                    borderRadius:'20px',
-                    boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+                    width: "30%",
                 }}
             >   
                 <CancelIcon
@@ -57,22 +36,12 @@ function Details(props) {
                 />
                 <div>
                     <div 
-                        className='detailHeader'
-                        style={{
-                            textAlign:'center',                         
-                            marginBottom: '10px !important',
-                            paddingBottom: '1px',
-                            marginTop: '0px',
-                            paddingTop: '1px', 
-                            color:'#49120D', 
-                            backgroundColor:'lightblue',
-                            borderTopLeftRadius:"20px", 
-                            borderTopRightRadius:"20px"
-                        }}
+                        className='ModalHeaderBackground'
+                        style={{backgroundColor:"#7ed957"}}
                     >
                         <h1
                             variant='h4'
-                            style={{marginLeft: '20px',}}
+                            className="ModalHeader"
                         >                 
                             {props.title}  
                         </h1>  

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import './Modal.css'
+import CancelIcon from '@material-ui/icons/Cancel';
 import DateAndTime from '../date/DateAndTime';
 import PriorityLevel from '../priority/PriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -73,27 +74,13 @@ export default function EditForm(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <Grid
-          container
-          direction="column"
-          justify="space-evenly"
-          alignItems="center"
-          className="InsideModal"
-          style={{
-            backgroundColor:'white', 
-            width:'40%',   
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            borderRadius:'20px',
-            boxShadow: "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
-            outline:'none'
-          }}
-        >
-          <div style={{backgroundColor:"lightblue", width:' -webkit-fill-available', borderTopLeftRadius:"20px",
-            borderTopRightRadius:"20px"}}>
-            <h1 className="updateHeader">Update</h1>
+        <div className="InsideModal" style={{width:"45%"}} >
+          <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
+            <CancelIcon 
+              className="CancelIcon"
+              onClick={() => cancelAndRevertToCurrent()}
+            />
+            <h1 className="ModalHeader">Update</h1>
           </div>
           <form>
           <Divider/>
@@ -144,7 +131,7 @@ export default function EditForm(props) {
                 </Grid>
               </FormControl>
             </form>
-          </Grid>
+          </div>
       </Modal>
     </div>
   );
