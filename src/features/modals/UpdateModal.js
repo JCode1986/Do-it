@@ -66,6 +66,8 @@ export default function EditForm(props) {
     return currentTitle === title && currentDescription === description && !isButtonDisabled
   }
   
+  var w = window.innerWidth;
+
   return (
     <div>
       <Modal    
@@ -74,7 +76,8 @@ export default function EditForm(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className="InsideModal" style={{width:"45%"}} >
+        {/* style={{width:"40%"}} */}
+          <div className="InsideModal" style={{width: w < 500 ? "auto" : "40%"}}>
           <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
             <CancelIcon 
               className="CancelIcon"
