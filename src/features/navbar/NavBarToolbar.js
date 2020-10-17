@@ -1,15 +1,57 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { TodoContext } from '../context/TodoContext';
 import { Typography, Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
+import Loading from '../loading/Loading';
+import ProfileMenu from './ProfileMenu';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import firebase from 'firebase';
+import app from '../../firebase';
 
 function NavBarToolBar(props) {
-    const { setIsVideoPlaying } = useContext(TodoContext);
-    const user = firebase.auth().currentUser;
+  const user = firebase.auth().currentUser;
+  const db = app.firestore();
+  const { setIsVideoPlaying, setIsPending, isPending, setName, name } = useContext(TodoContext);
+  const [updatedName, setUpdatedName] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
+  const users = db.collection('users');
+
+  async function fetchFunction() {
+    try{
+    setIsPending(true)
+    const doc = await users.doc(user.uid).collection('displayName').doc('name').get();
+        if (!doc.exists) {
+          setUpdatedName(user.displayName);
+          setIsPending(false)
+          return;
+        } else {
+          setName(doc.data().displayName);
+          setUpdatedName(doc.data().displayName);
+          setIsPending(false)
+          return;
+        }
+      }
+      catch(error) {
+        console.log(error);
+      }
+    }
+    
+    useEffect(() => {
+      fetchFunction();
+      setUpdatedName(name);
+  }, [])
+
+  if(isPending) return <div style={{ display:"none" }}><Loading /></div>
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const doIt = () => {
         setIsVideoPlaying(false);
@@ -18,13 +60,19 @@ function NavBarToolBar(props) {
     
     return (
         <Toolbar>
+        <ProfileMenu
+          anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
+          handleClose={handleClose}
+          updatedName={updatedName}
+          setUpdatedName={setUpdatedName}
+        />
         <IconButton
           color="inherit"
           aria-label="open drawer"
           onClick={props.handleDrawerOpen}
           onClose={props.handleDrawerClose}
           edge="start"
-        //   className={clsx(classes.menuButton, open && classes.hide)}
         >
           <MenuIcon />
         </IconButton>
@@ -50,16 +98,20 @@ function NavBarToolBar(props) {
             Not logged in
           </Typography>
           :
-          user.displayName ?
+          user ?
           <Grid
             container
             direction="row"
             justify="flex-end"
             alignItems="center"
-          >
-            <img className="userPhoto"src={user.photoURL} alt={user.displayName} /> 
+          >            
+            <img 
+              className="userPhoto"src={user.photoURL} 
+              alt={user.displayName} 
+              onClick={handleClick}
+            /> 
             <Typography>
-            {user.displayName}
+            {updatedName}
           </Typography>
           </Grid>
           :

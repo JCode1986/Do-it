@@ -15,7 +15,8 @@ function TodoList() {
 
     useEffect(() => {
         setIsPending(true);  
-        db.collection('users').doc(currentUser.uid).collection('todos').orderBy('priorityLevel', 'desc').onSnapshot(snapshot => {
+        db.collection('users').doc(currentUser.uid).collection('todos').orderBy('priorityLevel', 'desc')
+        .onSnapshot(snapshot => {
           setTodos(snapshot.docs.map(doc => ({
             id: doc.id, 
             title: doc.data().title,

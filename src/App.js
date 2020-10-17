@@ -19,6 +19,7 @@ import Video from './features/video/Video';
 function App() {
   const { isVideoPlaying } = useContext(TodoContext);
   const { currentUser } = useContext(AuthContext);
+
   return (
     <>
       <Router>
