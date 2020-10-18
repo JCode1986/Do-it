@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext';
 import { Modal, Typography, Divider, Grid } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import '../modals/Modal.css'
 
 function CompletedDetails(props) {
+    const { width } = useContext(TodoContext);
     return (
         <Modal
         open={props.isModalOpen}
@@ -13,11 +15,10 @@ function CompletedDetails(props) {
          >
             <Grid 
                 className="InsideModal"
-                style={{ width:'30%' }}
+                style={{ width: width < 500 ? "100%" : "30%" }}
             >  
              <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
                 <CancelIcon className="CancelIcon"
-                    // style={{float:'right', cursor:'pointer', marginRight:'8px', marginTop:'8px'}}
                     onClick={() => props.setIsModalOpen(false)}
                 />
                 <Typography className="ModalHeader" style={{ marginBottom:"15px" }}variant="h5">

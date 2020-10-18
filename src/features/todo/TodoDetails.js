@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function TodoDetails(props) {
-
     const classes = useStyles();
     
     return (
@@ -116,7 +115,7 @@ function TodoDetails(props) {
                                 style={{float:'right'}}
                                 onClick={props.handleOpenModal}
                             >
-                                Edit
+                                Edit                            
                             </Typography>
                         </MenuItem>
                         <MenuItem onClick={props.handleOpenDeleteDialog}>

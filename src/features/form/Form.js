@@ -24,7 +24,8 @@ const Form = (props) => {
      setDescription,
      setDateDeadline,
      setPriorityLevel,
-     setIsNewPriorityLevel
+     setIsNewPriorityLevel,
+     width
     } = useContext(TodoContext);
 
     useEffect(() => {
@@ -74,7 +75,7 @@ const Form = (props) => {
         className="FormGrid"
         style={{
           borderRadius:"20px", 
-          width:"45%",
+          width: width < 500 ? "100%" : "45%",
           marginTop:"50px",
           marginLeft:"auto",
           marginRight:"auto",

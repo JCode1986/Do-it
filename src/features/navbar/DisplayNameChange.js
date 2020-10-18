@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { Modal, TextField, Button, Divider, Grid } from '@material-ui/core';
 import app from '../../firebase';
@@ -7,6 +8,7 @@ import { toast } from "react-toastify";
 
 function DisplayNameChange(props) {
     const db = app.firestore();
+    const { width } = useContext(TodoContext);
     const { isOpen, cancel, updatedName, setUpdatedName, setIsOpen, setAnchorEl } = props;
     const user = firebase.auth().currentUser;
     const users = db.collection('users');
@@ -31,49 +33,53 @@ function DisplayNameChange(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <Grid
-                    container
-                    direction="column"
-                    justify="space-evenly"
-                    alignItems="center"
-                    className="InsideModal"
-                    style={{ width:"25%" }}
-                >
-                    <div 
-                        className="ModalHeaderBackground"
-                        style={{ backgroundColor:"lightblue" }}
+                <form onSubmit={saveChangeDisplayName}>
+                    <Grid
+                        container
+                        direction="column"
+                        justify="space-evenly"
+                        alignItems="center"
+                        className="InsideModal"
+                        style={{ width: width < 500 ? "100%" : "25%" }}
                     >
-                        <CancelIcon 
-                            className="CancelIcon"
-                            onClick={cancel}
+                        <div 
+                            className="ModalHeaderBackground"
+                            style={{ backgroundColor:"lightblue" }}
+                        >
+                            <CancelIcon 
+                                className="CancelIcon"
+                                onClick={cancel}
+                            />
+                            <h2 id="simple-modal-title">Change Display Name</h2>
+                            <Divider/>   
+                        </div>
+                        <TextField 
+                            id="simple-modal-description"
+                            autoComplete="false"
+                            label="Name" 
+                            type="name"
+                            variant="outlined" 
+                            value={updatedName}
+                            style={{marginBottom:'15px', marginTop: '15px'}}
+                            onChange={e => setUpdatedName(e.target.value)}
                         />
-                        <h2 id="simple-modal-title">Change Display Name</h2>
-                        <Divider/>   
-                    </div>
-                    <TextField 
-                        id="simple-modal-description"
-                        label="Name Name" 
-                        variant="outlined" 
-                        value={updatedName}
-                        style={{marginBottom:'15px', marginTop: '15px'}}
-                        onChange={e => setUpdatedName(e.target.value)}
-                    />
-                    <Grid style={{marginBottom:"15px"}}>
-                        <Button
-                            style={{marginRight:'5px'}}
-                            variant="contained"
-                            color="primary"
-                            onClick={saveChangeDisplayName}
-                            >Yes
-                        </Button>
-                        <Button
-                            variant="contained"
-                            style={{marginLeft:'5px'}}
-                            onClick={cancel}
-                            >No
-                        </Button>
+                        <Grid style={{marginBottom:"15px"}}>
+                            <Button
+                                style={{marginRight:'5px'}}
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                >Yes
+                            </Button>
+                            <Button
+                                variant="contained"
+                                style={{marginLeft:'5px'}}
+                                onClick={cancel}
+                                >No
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </form>
             </Modal>
         </div>
     )
