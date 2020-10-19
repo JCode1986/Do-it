@@ -3,6 +3,7 @@ import { TodoContext } from '../context/TodoContext';
 import { Typography, Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import Loading from '../loading/Loading';
+import NavBarQuotes from './NavBarQuotes';
 import ProfileMenu from './ProfileMenu';
 import Toolbar from '@material-ui/core/Toolbar';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -82,12 +83,15 @@ function NavBarToolBar(props) {
         </IconButton>
         {
           user?
+          <>
             <img 
               src={require("./do-it-logo.png")} 
               alt="Do It!"
               style={{height:'60px', cursor:'pointer'}}
               onClick={doIt}           
             />
+            <NavBarQuotes/>
+          </>
             :
             <img 
             src={require("./do-it-logo.png")} 
