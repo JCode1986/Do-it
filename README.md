@@ -10,10 +10,10 @@
 ## Tools
 * [Visual Studio Code](https://code.visualstudio.com/) - IDE
 * [React.js](https://reactjs.org/docs/hello-world.html) - Front end
-    * [Material-UI](https://material-ui.com/)
-    * [React-Toastify](https://www.npmjs.com/package/react-toastify)
-    * [React-Tippy](https://github.com/tvkhoa/react-tippy)
-    * [React-Id-Swiper](https://react-id-swiper.ashernguyen.site/doc/get-started)
+    * [Material UI](https://material-ui.com/)
+    * [React Toastify](https://www.npmjs.com/package/react-toastify)
+    * [React Tippy](https://github.com/tvkhoa/react-tippy)
+    * [React-Material UI Carousel](https://www.npmjs.com/package/react-material-ui-carousel)
 * [Firebase](https://firebase.google.com/) - Back end & Host
 
 ---

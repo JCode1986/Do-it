@@ -32,4 +32,11 @@
     margin-top: 5px;
     margin-right: 5px;
     color: black;
+    border-radius: 50px;
+    font-size: 35px;
+}
+
+.CancelIcon:hover {
+    background-color:white;    
+    transition-duration: 0.5;
 }

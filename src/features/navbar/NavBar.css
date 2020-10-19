@@ -19,3 +19,7 @@ button.MuiButtonBase-root.MuiIconButton-root.makeStyles-menuButton-4.MuiIconButt
     border-radius: 50%; 
     margin-right: 10px;
 }
+
+li.MuiButtonBase-root.MuiListItem-root.MuiMenuItem-root.MuiMenuItem-gutters.MuiListItem-gutters.MuiListItem-button {
+    left: 785;
+}

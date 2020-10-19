@@ -40,7 +40,7 @@ function ProfileMenu(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(false)}
-        style={{marginTop:'40px', marginLeft:'20px'}}
+        style={{marginTop:'40px', marginLeft:'20px' }}
       >
         <MenuItem onClick={() => setIsOpen(true)}>Change Display Name</MenuItem>
         <MenuItem onClick={logOut}>Logout</MenuItem>

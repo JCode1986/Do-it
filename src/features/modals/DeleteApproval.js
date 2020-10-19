@@ -5,7 +5,7 @@ import{ Modal, Button, Typography, Grid, Divider } from '@material-ui/core';
 import { toast } from "react-toastify";
 import '../../firebase';
 import './Modal.css'
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 import firebase from 'firebase';
 
 function DeleteDialog(props) {
@@ -28,9 +28,9 @@ function DeleteDialog(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <div className="InsideModal" style={{width: width < 500 ? "100%" : "30%"}} >
+                <div className="InsideModal" style={{width: width < 500 ? "100%" : "460px"}} >
                 <div className="ModalHeaderBackground" style={{backgroundColor:"lightcoral"}}>
-                <CancelIcon 
+                <ClearIcon 
                     className="CancelIcon"
                     onClick={() => handleCloseDeleteDialog()}
                 />

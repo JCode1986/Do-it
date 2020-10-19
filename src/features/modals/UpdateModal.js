@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import './Modal.css'
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 import DateAndTime from '../date/DateAndTime';
 import PriorityLevel from '../priority/PriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -75,9 +75,9 @@ export default function EditForm(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className="InsideModal" style={{width: width < 500 ? "98%" : "40%"}}>
+        <div className="InsideModal" style={{width: width < 500 ? "98%" : "600px"}}>
           <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
-            <CancelIcon 
+            <ClearIcon 
               className="CancelIcon"
               onClick={() => cancelAndRevertToCurrent()}
             />

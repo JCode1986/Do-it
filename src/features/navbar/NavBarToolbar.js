@@ -21,21 +21,21 @@ function NavBarToolBar(props) {
 
   useEffect(() => {
       async function fetchFunction() {
+        setIsPending(true);
         try{
-          setIsPending(true)
           const doc = await users.doc(user.uid).collection('displayName').doc('name').get();
           if (!user.displayName && doc.exists) {
-            setUpdatedName(doc.data().displayName);
-            setIsPending(false);
+            setUpdatedName(doc.data().displayName);  
+            setIsPending(false);  
             return;
           } else if(!doc.exists) {
               setUpdatedName(user.email);
-              setIsPending(false);
+              setIsPending(false);  
               return;
           } else {
               setName(doc.data().displayName);
               setUpdatedName(doc.data().displayName);
-              setIsPending(false);
+              setIsPending(false);  
               return;
           }
         }
@@ -44,7 +44,7 @@ function NavBarToolBar(props) {
         }
       }
     fetchFunction();
-    setIsPending(false);
+    setIsPending(false);  
   }, [user])
 
   if(isPending) return <div style={{ display:"none" }}><Loading /></div>

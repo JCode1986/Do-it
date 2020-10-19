@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { TodoContext } from '../context/TodoContext';
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 import { Modal, TextField, Button, Divider, Grid } from '@material-ui/core';
 import app from '../../firebase';
 import firebase from 'firebase';
@@ -46,7 +46,7 @@ function DisplayNameChange(props) {
                             className="ModalHeaderBackground"
                             style={{ backgroundColor:"lightblue" }}
                         >
-                            <CancelIcon 
+                            <ClearIcon 
                                 className="CancelIcon"
                                 onClick={cancel}
                             />

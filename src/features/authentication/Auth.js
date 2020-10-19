@@ -11,13 +11,12 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         firebaseApp.auth().onAuthStateChanged((user) => {
             setCurrentUser(user);
-            // console.log(user.displayName)
             setPending(false);
         });
     }, []);
 
     if(pending) {
-        return <Loading/>
+        return <div style={{display:"none"}}><Loading/></div>
     };
 
     return (
