@@ -56,10 +56,7 @@ const Login = ( {history} ) => {
 
     const { currentUser } = useContext(AuthContext)
     
-    if (currentUser) {
-        return <Redirect to="/" />
-    }
-
+    if (currentUser) return <Redirect to="/" />
 
     const uiConfig = {
       signInFlow: "popup",
@@ -68,7 +65,7 @@ const Login = ( {history} ) => {
         app.auth.GithubAuthProvider.PROVIDER_ID,
       ],
       callbacks: {
-        signInSuccess: () => false
+        signInSuccessWithAuthResult: () => false,
       }
     }
   

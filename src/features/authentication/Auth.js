@@ -16,12 +16,12 @@ export const AuthProvider = ({children}) => {
     }, []);
 
     if(pending) {
-        return <Loading/>
+        return <div style={{display:"none"}}><Loading/></div>
     };
 
     return (
         <AuthContext.Provider
-            value={{currentUser, setCurrentUser}}
+            value={{currentUser, setCurrentUser }}
         >
             {children}
         </AuthContext.Provider>

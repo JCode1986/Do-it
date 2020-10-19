@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
-import '../../firebase';
-import './Modal.css'
-import CancelIcon from '@material-ui/icons/Cancel';
 import { AuthContext } from '../authentication/Auth';
-import firebase from 'firebase';
+import { TodoContext } from '../context/TodoContext';
 import{ Modal, Button, Typography, Grid, Divider } from '@material-ui/core';
 import { toast } from "react-toastify";
+import '../../firebase';
+import './Modal.css'
+import ClearIcon from '@material-ui/icons/Clear';
+import firebase from 'firebase';
 
 function DeleteDialog(props) {
     const db = firebase.firestore();
     const { currentUser } = useContext(AuthContext);
+    const { width } = useContext(TodoContext);
     const {isDeleteDialogOpen, setIsDeleteDialogOpen, handleCloseDeleteDialog, } = props;
 
     const deleteTodo = () => {
@@ -26,9 +28,9 @@ function DeleteDialog(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <div className="InsideModal" style={{width:"30%"}} >
+                <div className="InsideModal" style={{width: width < 500 ? "100%" : "460px"}} >
                 <div className="ModalHeaderBackground" style={{backgroundColor:"lightcoral"}}>
-                <CancelIcon 
+                <ClearIcon 
                     className="CancelIcon"
                     onClick={() => handleCloseDeleteDialog()}
                 />

@@ -1,15 +1,17 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../authentication/Auth';
+import { TodoContext } from '../context/TodoContext';
 import { Modal, Typography, Button, Divider, Grid } from '@material-ui/core'
 import { toast } from "react-toastify";
+import ClearIcon from '@material-ui/icons/Clear';
 import '../../firebase';
 import './Modal.css'
-import CancelIcon from '@material-ui/icons/Cancel';
 import firebase from 'firebase';
 
 function CompletedApproval(props) {
     const db = firebase.firestore();
-    const { currentUser } = useContext(AuthContext)
+    const { currentUser } = useContext(AuthContext);
+    const { width } = useContext(TodoContext);
     const userData = db.collection('users').doc(currentUser.uid);
     const userArchive = userData.collection('archive');
     const userTasks = userData.collection('todos');
@@ -56,13 +58,13 @@ function CompletedApproval(props) {
                     justify="space-evenly"
                     alignItems="center"
                     className="InsideModal"
-                    style={{ width:"25%" }}
+                    style={{ width: width < 500 ? "100%" : "400px" }}
                 >
                     <div 
                         className="ModalHeaderBackground"
                         style={{ backgroundColor:"lightblue" }}
                     >
-                        <CancelIcon 
+                        <ClearIcon 
                             className="CancelIcon"
                             onClick={() => closeMenu()}
                         />

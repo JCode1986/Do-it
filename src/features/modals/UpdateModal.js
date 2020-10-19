@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import './Modal.css'
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 import DateAndTime from '../date/DateAndTime';
 import PriorityLevel from '../priority/PriorityLevel'
 import fireBaseApp from '../../firebase';
@@ -18,7 +18,7 @@ import {
 
 export default function EditForm(props) {
   const db = fireBaseApp.firestore();
-  const { isButtonDisabled, setIsButtonDisabled, setIsNewPriorityLevel } = useContext(TodoContext);
+  const { isButtonDisabled, setIsButtonDisabled, setIsNewPriorityLevel, width } = useContext(TodoContext);
   const { currentUser } = useContext(AuthContext);
   const { isModalOpen, handleCloseModal } = props;
   const { id, title, description, dateDeadline, priorityLevel } = props.todo
@@ -26,6 +26,7 @@ export default function EditForm(props) {
   const [currentDescription, setCurrentDescription] = useState(description);
   const [currentDateDeadline, setCurrentDateDeadline] = useState(dateDeadline.toDate());
   const [currentPriorityLevel, setCurrentPriorityLevel] = useState(priorityLevel);
+
 
   //loads the modal with values from database
   useEffect(() => {
@@ -66,8 +67,6 @@ export default function EditForm(props) {
     return currentTitle === title && currentDescription === description && !isButtonDisabled
   }
   
-  var w = window.innerWidth;
-
   return (
     <div>
       <Modal    
@@ -76,10 +75,9 @@ export default function EditForm(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {/* style={{width:"40%"}} */}
-          <div className="InsideModal" style={{width: w < 500 ? "auto" : "40%"}}>
+        <div className="InsideModal" style={{width: width < 500 ? "98%" : "600px"}}>
           <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
-            <CancelIcon 
+            <ClearIcon 
               className="CancelIcon"
               onClick={() => cancelAndRevertToCurrent()}
             />

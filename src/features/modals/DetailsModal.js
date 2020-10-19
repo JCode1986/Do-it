@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { TodoContext } from '../context/TodoContext';
 import { Modal, Typography, Divider } from '@material-ui/core';
 import dateFormat from '../date/DateFormat';
-import CancelIcon from '@material-ui/icons/Cancel';
+import ClearIcon from '@material-ui/icons/Clear';
 
 function Details(props) {
-
+    const { width } = useContext(TodoContext);
     const priority = () => {
         if(props.priorityLevel === 1) return "Low";
         if(props.priorityLevel === 2) return "Medium";
@@ -21,17 +22,10 @@ function Details(props) {
             >
             <div 
                 className="InsideModal"
-                style={{    
-                    width: "30%",
-                }}
+                style={{ width: width < 500 ? "100%" : "600px" }}
             >   
-                <CancelIcon
-                    style={{
-                        float:'right', 
-                        cursor:'pointer', 
-                        marginTop:'5px',
-                        marginRight: '5px'
-                    }}
+                <ClearIcon
+                    className="CancelIcon"
                     onClick={() => props.setIsDetailOpen(false)}
                 />
                 <div>

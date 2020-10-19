@@ -1,12 +1,10 @@
-import React, { useState, createContext } from 'react'
-import firebase from 'firebase'
+import React, { useState, createContext, useEffect } from 'react'
 
 //create context outside of function
 //export context and provier
 export const TodoContext = createContext();
 
 export const TodoProvider = (props) => {
-    const user = firebase.auth().currentUser
     const [todos, setTodos] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -19,13 +17,30 @@ export const TodoProvider = (props) => {
     const [isPending, setIsPending] = useState(false);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [name, setName] = useState('');
-    
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight)
+
+    useEffect(() => {
+        // Handler to call on window resize
+        function handleResize() {
+          // Set window width/height to state
+          setWidth(window.innerWidth)
+          setHeight(window.innerHeight)
+        }  
+        // Add event listener
+        window.addEventListener("resize", handleResize);   
+        // Call handler right away so state gets updated with initial window size
+        handleResize();   
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+      }, []); // Empty array ensures that effect is only run on mount
+  
     return (
         <TodoContext.Provider value={
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
             isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isPending, setIsPending,
-            isVideoPlaying, setIsVideoPlaying, name, setName }
+            isVideoPlaying, setIsVideoPlaying, name, setName, width, setWidth, height, setHeight }
         }>
             {props.children}
         </TodoContext.Provider>

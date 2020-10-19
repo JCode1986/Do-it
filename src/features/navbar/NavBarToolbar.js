@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Loading from '../loading/Loading';
 import ProfileMenu from './ProfileMenu';
 import Toolbar from '@material-ui/core/Toolbar';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import firebase from 'firebase';
@@ -13,35 +14,38 @@ import app from '../../firebase';
 function NavBarToolBar(props) {
   const user = firebase.auth().currentUser;
   const db = app.firestore();
-  const { setIsVideoPlaying, setIsPending, isPending, setName, name } = useContext(TodoContext);
+  const { setIsVideoPlaying, setIsPending, isPending, setName } = useContext(TodoContext);
   const [updatedName, setUpdatedName] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const users = db.collection('users');
 
-  async function fetchFunction() {
-    try{
-    setIsPending(true)
-    const doc = await users.doc(user.uid).collection('displayName').doc('name').get();
-        if (!doc.exists) {
-          setUpdatedName(user.displayName);
-          setIsPending(false)
-          return;
-        } else {
-          setName(doc.data().displayName);
-          setUpdatedName(doc.data().displayName);
-          setIsPending(false)
-          return;
+  useEffect(() => {
+      async function fetchFunction() {
+        setIsPending(true);
+        try{
+          const doc = await users.doc(user.uid).collection('displayName').doc('name').get();
+          if (!user.displayName && doc.exists) {
+            setUpdatedName(doc.data().displayName);  
+            setIsPending(false);  
+            return;
+          } else if(!doc.exists) {
+              setUpdatedName(user.email);
+              setIsPending(false);  
+              return;
+          } else {
+              setName(doc.data().displayName);
+              setUpdatedName(doc.data().displayName);
+              setIsPending(false);  
+              return;
+          }
+        }
+        catch(error) {
+          console.log(error);
         }
       }
-      catch(error) {
-        console.log(error);
-      }
-    }
-    
-    useEffect(() => {
-      fetchFunction();
-      setUpdatedName(name);
-  }, [])
+    fetchFunction();
+    setIsPending(false);  
+  }, [user])
 
   if(isPending) return <div style={{ display:"none" }}><Loading /></div>
 
@@ -104,12 +108,21 @@ function NavBarToolBar(props) {
             direction="row"
             justify="flex-end"
             alignItems="center"
-          >            
-            <img 
-              className="userPhoto"src={user.photoURL} 
-              alt={user.displayName} 
+          >   
+          {
+            user.displayName ? 
+              <img 
+                className="userPhoto"src={user.photoURL} 
+                alt={user.displayName} 
+                onClick={handleClick}
+              /> 
+            :
+            <AccountCircleIcon
+              className="userPhoto"
               onClick={handleClick}
-            /> 
+              style={{fontSize:"40px"}}
+            />
+          } 
             <Typography>
             {updatedName}
           </Typography>
