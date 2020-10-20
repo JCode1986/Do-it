@@ -78,3 +78,4 @@ export default db;
 * [Youtube - Clever Programmer](https://www.youtube.com/watch?v=VqgTr-nd7Cg&list=PL-J2q3Ga50oMQa1JdSJxYoZELwOJAXExP&index=2&t=9057s)
 * [Login Template](https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-in/SignIn.js)
 * [Do it Video](https://www.youtube.com/watch?v=ZXsQAXx_ao0)
+* [Motivational Qutoes](https://www.region10.org/r10website/assets/File/100%20Motivational%20Quotes%20That%20WillInspire%20You%20to%20Succeed.pdf)

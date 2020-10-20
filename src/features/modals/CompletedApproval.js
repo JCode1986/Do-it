@@ -68,7 +68,7 @@ function CompletedApproval(props) {
                             className="CancelIcon"
                             onClick={() => closeMenu()}
                         />
-                        <h2 id="simple-modal-title">Complete Confirmation</h2>
+                        <h2 className="ModalHeader">Complete Confirmation</h2>
                         <Divider/>   
                     </div>
                     <Typography 
