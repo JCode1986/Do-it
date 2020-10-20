@@ -21,7 +21,7 @@ function CompletedDetails(props) {
                 <ClearIcon className="CancelIcon"
                     onClick={() => props.setIsModalOpen(false)}
                 />
-                <Typography className="ModalHeader" style={{ marginBottom:"15px" }}variant="h5">
+                <Typography className="ModalHeader" variant="h5">
                     Details
                 </Typography>
             </div>

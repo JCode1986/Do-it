@@ -23,7 +23,9 @@
 .ModalHeader {
     margin-left: 20px; 
     margin-top: auto;
-    padding-top: 20px;
+    margin: auto;
+    padding-bottom: 5px;
+    padding-top: 10px;
 }
 
 .CancelIcon {

@@ -75,7 +75,11 @@ export default function EditForm(props) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className="InsideModal" style={{width: width < 500 ? "98%" : "600px"}}>
+        <div className="InsideModal" 
+          style={{
+            width: width < 500 ? "98%" : "600px",
+            height: width < 500 ? "100%" : "auto"
+          }}>
           <div className="ModalHeaderBackground" style={{backgroundColor:"#7ed957"}}>
             <ClearIcon 
               className="CancelIcon"
