@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { changeIconColor, priorityToString } from '../priority/priorityFunctions';
 import { makeStyles } from '@material-ui/core/styles';
 import Countdown from '../date/Countdown';
@@ -43,7 +43,13 @@ const useStyles = makeStyles((theme) => ({
 
 function TodoDetails(props) {
     const classes = useStyles();
+    const iElement = useRef(null);
     
+    const menu = () => {
+        props.handleOpenModal();
+        iElement.current.focus();
+    }
+
     return (
         <Paper id="CardContainer" className={classes.paper}>
             <Grid container>
@@ -98,6 +104,7 @@ function TodoDetails(props) {
                         />
                     </Tippy>
                     <Menu
+                        ref={iElement}
                         id="simple-menu"
                         anchorEl={props.anchorEl}
                         keepMounted

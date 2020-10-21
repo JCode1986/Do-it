@@ -27,9 +27,9 @@ function App() {
           <NavBar />
           <ToastContainer/>
           <PrivateRoute exact path="/" component={Home} />
-          { isVideoPlaying ? <Video /> : null }
           { !currentUser ? <Login/> :  
             <>
+              { isVideoPlaying ? <Video /> : null }
               <Route exact path="/tasks" component={TodoList} />
               <Route exact path="/signup" component={SignUp}/>
               <Route exact path="/login" component={Login} />

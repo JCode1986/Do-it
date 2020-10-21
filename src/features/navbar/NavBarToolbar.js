@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 import { TodoContext } from '../context/TodoContext';
 import { Typography, Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import Loading from '../loading/Loading';
 import NavBarQuotes from './NavBarQuotes';
 import ProfileMenu from './ProfileMenu';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,40 +14,35 @@ import app from '../../firebase';
 function NavBarToolBar(props) {
   const user = firebase.auth().currentUser;
   const db = app.firestore();
-  const { setIsVideoPlaying, setIsPending, isPending, setName } = useContext(TodoContext);
+  const { setIsVideoPlaying, setName } = useContext(TodoContext);
   const [updatedName, setUpdatedName] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const users = db.collection('users');
 
   useEffect(() => {
-      async function fetchFunction() {
-        setIsPending(true);
-        try{
-          const doc = await users.doc(user.uid).collection('displayName').doc('name').get();
-          if (!user.displayName && doc.exists) {
-            setUpdatedName(doc.data().displayName);  
-            setIsPending(false);  
+    async function fetchFunction() {
+      try{
+        const doc = await users.doc(user.uid).collection('displayName').doc('name').get()
+        if (!user.displayName && doc.exists) {
+          setUpdatedName(doc.data().displayName);  
+          return;
+        } else if(!doc.exists) {
+            setUpdatedName(user.email);  
             return;
-          } else if(!doc.exists) {
-              setUpdatedName(user.email);
-              setIsPending(false);  
-              return;
-          } else {
-              setName(doc.data().displayName);
-              setUpdatedName(doc.data().displayName);
-              setIsPending(false);  
-              return;
-          }
-        }
-        catch(error) {
-          console.log(error);
+        } else {
+            setName(doc.data().displayName);
+            setUpdatedName(doc.data().displayName);
+            return;
         }
       }
+      catch(error) {
+        console.log(error);
+      }
+    }
     fetchFunction();
-    setIsPending(false);  
   }, [user])
 
-  if(isPending) return <div style={{ display:"none" }}><Loading /></div>
+  //if(isPending) return <div style={{ display:"none" }}><Loading /></div>
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -126,8 +120,8 @@ function NavBarToolBar(props) {
               onClick={handleClick}
               style={{fontSize:"40px"}}
             />
-          } 
-            <Typography>
+          }
+          <Typography>
             {updatedName}
           </Typography>
           </Grid>

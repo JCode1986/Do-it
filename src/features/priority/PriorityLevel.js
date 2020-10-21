@@ -38,7 +38,6 @@ export default function SimpleSelect(props) {
     //for create form
     if(isNewPriorityLevel) {
       setPriorityLevel(event.target.value);
-      console.log("Create")
       return;
     }
 
