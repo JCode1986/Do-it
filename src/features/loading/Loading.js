@@ -13,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
   
   export default function CircularIndeterminate() {
     const classes = useStyles();
-  
+      
     return (
-      <Grid 
-      container
-      direction="row"
-      justify="center"
-      alignItems="center"
-      style={{marginTop:'20%'}}
-      className={classes.root}>
-        Loading... <CircularProgress />
-      </Grid>
+        <Grid 
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          className={classes.root}
+        >
+          <CircularProgress />
+        </Grid>
     );
   }

@@ -2,10 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../authentication/Auth';
-import { TodoContext } from '../context/TodoContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { priorityToString } from '../priority/priorityFunctions';
-import Loading from '../loading/Loading';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -19,7 +17,6 @@ import dateFormat from '../date/DateFormat';
 import CompletedDetails from './CompletedDetails';
 import './CompletedTasks.css'
 
-
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -29,8 +26,7 @@ const useStyles = makeStyles({
 function CompletedTasks() {
     const db = firebase.firestore();
     const { currentUser } = useContext(AuthContext);
-    const userArchive = db.collection('users').doc(currentUser.uid).collection('archive');
-    const {  isPending, setIsPending } = useContext(TodoContext);
+    const userArchive = db.collection('users').doc(currentUser.uid).collection('archive')
     const classes = useStyles();
 
     const [archives, setArchives] = useState([]);
@@ -50,21 +46,31 @@ function CompletedTasks() {
 
 
     useEffect(() => {
-      //setIsPending(true);
-      userArchive.orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
-            //returns object with id, and todo
-        setArchives(snapshot.docs.map(doc => ({
-            id: doc.id, 
-            archivedTodo: doc.data().archivedTodo,
-            archivedDescription: doc.data().archivedDescription,
-            archivedDateCreated: doc.data().archivedDateCreated,
-            archivedCompleted: doc.data().archivedCompleted,
-            archivedDateDeadline: doc.data().archivedDateDeadline,
-            archivedModifiedDate: doc.data().archivedModifiedDate,
-            archivedPriorityLevel: doc.data().archivedPriorityLevel
-        })))
-        //setIsPending(false);
-      })
+      let mounted = true;
+
+      const getArchives = async () => {
+        try {
+          await userArchive.orderBy('archivedCompleted', 'desc').onSnapshot(snapshot => {
+            if(mounted) {
+              //returns object with id, and todo
+              setArchives(snapshot.docs.map(doc => ({
+                id: doc.id, 
+                archivedTodo: doc.data().archivedTodo,
+                archivedDescription: doc.data().archivedDescription,
+                archivedDateCreated: doc.data().archivedDateCreated,
+                archivedCompleted: doc.data().archivedCompleted,
+                archivedDateDeadline: doc.data().archivedDateDeadline,
+                archivedModifiedDate: doc.data().archivedModifiedDate,
+                archivedPriorityLevel: doc.data().archivedPriorityLevel
+              })))
+            }
+          })         
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getArchives();
+      return () => mounted = false;
     }, [db, userArchive])
         
     //find id
@@ -72,8 +78,6 @@ function CompletedTasks() {
         setIsModalOpen(true);
         setDescription(archives.find((archive) => archive.id === id).archivedDescription);
     }
-
-    if(isPending) return <Loading/>
 
     return (
         <>
@@ -103,27 +107,27 @@ function CompletedTasks() {
               <TableCell align="center">Priority Level</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {archives.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((archive) => (
-                <TableRow 
-                key={archive.id}
-                onClick={() => details(archive.id)}
-                style={{cursor:'pointer'}}
-                >
-                <TableCell 
-                    component="th" 
-                    align="center" 
-                    scope="row"
-                >
-                  {archive.archivedTodo}
-                </TableCell>
-                <TableCell align="center">{dateFormat(archive.archivedDateCreated.toDate().toString())}</TableCell>
-                <TableCell align="center">{dateFormat(archive.archivedDateDeadline.toDate().toString())}</TableCell>
-                <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
-                <TableCell align="center">{priorityToString(archive.archivedPriorityLevel)}</TableCell>
-              </TableRow>
-              ))}
-          </TableBody>
+            <TableBody>
+              {archives.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((archive) => (
+                  <TableRow 
+                  key={archive.id}
+                  onClick={() => details(archive.id)}
+                  style={{cursor:'pointer'}}
+                  >
+                  <TableCell 
+                      component="th" 
+                      align="center" 
+                      scope="row"
+                  >
+                    {archive.archivedTodo}
+                  </TableCell>
+                  <TableCell align="center">{dateFormat(archive.archivedDateCreated.toDate().toString())}</TableCell>
+                  <TableCell align="center">{dateFormat(archive.archivedDateDeadline.toDate().toString())}</TableCell>
+                  <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
+                  <TableCell align="center">{priorityToString(archive.archivedPriorityLevel)}</TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
         </Table>
       </TableContainer>
       <TablePagination

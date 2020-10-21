@@ -14,7 +14,6 @@ export const TodoProvider = (props) => {
     const [priorityLevel, setPriorityLevel] = useState(1);
     const [isNewPriorityLevel, setIsNewPriorityLevel] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-    const [isPending, setIsPending] = useState(false);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [name, setName] = useState('');
     const [width, setWidth] = useState(window.innerWidth);
@@ -39,8 +38,8 @@ export const TodoProvider = (props) => {
         <TodoContext.Provider value={
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
-            isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isPending, setIsPending,
-            isVideoPlaying, setIsVideoPlaying, name, setName, width, setWidth, height, setHeight }
+            isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isVideoPlaying, 
+            setIsVideoPlaying, name, setName, width, setWidth, height, setHeight }
         }>
             {props.children}
         </TodoContext.Provider>
