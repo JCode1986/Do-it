@@ -10,11 +10,11 @@ import LoadFunction from '../loading/loadFunction';
 
 function TodoList() {
     const db = firebase.firestore();
-    const { todos, setTodos } = useContext(TodoContext);
+    const { todos, setTodos, setIsList, isList } = useContext(TodoContext);
     const { currentUser } = useContext(AuthContext);
     const [loader, showLoader, hideLoader] = LoadFunction();
 
-    useEffect(() => {           
+    useEffect(() => {         
       const getTasks = async() => {
         showLoader();
         try {
@@ -38,6 +38,10 @@ function TodoList() {
         getTasks();
     //dependencies
     }, [db, currentUser]);
+
+    useEffect(() => {
+      setIsList(true);
+    }, [])
 
     return (
       <div>

@@ -15,6 +15,7 @@ export const TodoProvider = (props) => {
     const [isNewPriorityLevel, setIsNewPriorityLevel] = useState(true);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const [isList, setIsList] = useState(false);
     const [name, setName] = useState('');
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight)
@@ -33,13 +34,17 @@ export const TodoProvider = (props) => {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
       }, []); // Empty array ensures that effect is only run on mount
+
+      const showList = () => {
+        document.location.pathname == '/tasks' ? setIsList(true) : setIsList(false);
+      } 
   
     return (
         <TodoContext.Provider value={
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
             isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isVideoPlaying, 
-            setIsVideoPlaying, name, setName, width, setWidth, height, setHeight }
+            setIsVideoPlaying, name, setName, width, setWidth, height, setHeight, showList, setIsList, isList }
         }>
             {props.children}
         </TodoContext.Provider>

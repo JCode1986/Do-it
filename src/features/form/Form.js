@@ -25,7 +25,8 @@ const Form = (props) => {
      setDateDeadline,
      setPriorityLevel,
      setIsNewPriorityLevel,
-     width
+     width,
+     setIsList
     } = useContext(TodoContext);
 
     useEffect(() => {
@@ -35,6 +36,10 @@ const Form = (props) => {
       setPriorityLevel(1);
       setIsNewPriorityLevel(true);
     }, [setTitle, setDescription, setDateDeadline, setPriorityLevel, setIsNewPriorityLevel]);
+
+    useEffect(() => {
+      setIsList(false);
+    }, [])
 
     //add to do for user
     const addTodo = (event) => {
