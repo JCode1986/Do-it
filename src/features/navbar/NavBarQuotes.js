@@ -35,9 +35,13 @@ function NavBarQuotes() {
 
     return (
         <div
-        style={{marginLeft:'20px'}}
+        style={{marginLeft:'20px', width:'70%'}}
         >
-        {loader || <Typography>{quote}</Typography>}
+        {loader || <Typography
+                        style={{float:'left'}}
+                    >
+                        {quote}
+                    </Typography>}
         </div>
     )
 }
