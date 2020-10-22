@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
+import NavBar from './features/navbar/NavBar'
+import {Route, BrowserRouter as Router} from 'react-router-dom'
 import { TodoContext } from './features/context/TodoContext';
 import { AuthContext } from './features/authentication/Auth';
-import {Route, BrowserRouter as Router} from 'react-router-dom'
 import {ToastContainer } from "react-toastify";
 import './App.css';
 import Form from './features/form/Form'
 import Home from './features/home/Home'
-import NavBar from './features/navbar/NavBar'
 import Login from './features/authentication/Login'
 import CompletedTasks from './features/archives/CompletedTasks';
 import PrivateRoute from './features/authentication/PrivateRoute';
@@ -17,7 +17,7 @@ import TodoList from './features/todo/TodoList';
 import Video from './features/video/Video';
 
 function App() {
-  const { isVideoPlaying } = useContext(TodoContext);
+  const { isVideoPlaying, isList } = useContext(TodoContext);
   const { currentUser } = useContext(AuthContext);
 
   return (
