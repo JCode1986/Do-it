@@ -55,8 +55,10 @@ function DisplayNameChange(props) {
                         </div>
                         <TextField 
                             id="simple-modal-description"
+                            inputProps={{ maxLength: 20 }}
                             autoComplete="false"
                             label="Name" 
+                            helperText="20 max characters"
                             type="name"
                             variant="outlined" 
                             value={updatedName}
