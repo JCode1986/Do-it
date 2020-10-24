@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import clsx from 'clsx';
-// import NavBarTransitions from './NavBarTransitions';
+import {Route} from 'react-router-dom'
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { TodoContext } from '../context/TodoContext';
+import { AuthContext } from '../authentication/Auth';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,7 @@ import './NavBar.css'
 import NavBarToolBar from './NavBarToolbar';
 import NavBarList from './NavBarList';
 import TodoList from '../todo/TodoList';
+import CompletedTasks from '../archives/CompletedTasks'
 
 const drawerWidth = 240;	
 
@@ -79,8 +80,8 @@ function PersistentDrawerLeft() {
   const classes = useStyles();
   // const classes = NavBarTransitions();
   const theme = useTheme();
-  const { isList, openDrawer, setOpenDrawer } = useContext(TodoContext);
-  // const [open, setOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpenDrawer(true);
@@ -89,6 +90,9 @@ function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpenDrawer(false);
   };
+
+  const showList = () => !currentUser ? null : <Route exact path="/tasks" component={TodoList} />;
+  const showArchives = () => !currentUser ? null : <Route exact path="/completed-tasks" component={CompletedTasks} />;
 
   return (
     <div className={classes.root}>
@@ -127,7 +131,8 @@ function PersistentDrawerLeft() {
           [classes.contentShift]: openDrawer,
         })}
         >
-          {isList ? <TodoList /> : null}
+          {showList()}
+          {showArchives()}
       </main>
     </div>
   );

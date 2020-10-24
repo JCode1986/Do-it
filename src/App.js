@@ -30,11 +30,10 @@ function App() {
           { !currentUser ? <Login/> :  
             <>
               { isVideoPlaying ? <Video /> : null }
-              <Route exact path="/tasks" component={TodoList} />
               <Route exact path="/signup" component={SignUp}/>
               <Route exact path="/login" component={Login} />
               <Route exact path="/form" component={Form}/>
-              <Route exact path="/completed-tasks" component={CompletedTasks} /> 
+              {/* <Route exact path="/completed-tasks" component={CompletedTasks} />  */}
             </>
           }
           <Footer/>

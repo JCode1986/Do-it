@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 function CompletedTasks() {
     const db = firebase.firestore();
-    const { setIsList } = useContext(TodoContext)
     const { currentUser } = useContext(AuthContext);
     const userArchive = db.collection('users').doc(currentUser.uid).collection('archive')
     const classes = useStyles();
@@ -74,10 +73,6 @@ function CompletedTasks() {
       getArchives();
       return () => mounted = false;
     }, [db, userArchive])
-
-    useEffect(() => {
-      setIsList(false);
-    })
         
     //find id
     const details = (id) => {
