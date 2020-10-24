@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
+import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { priorityToString } from '../priority/priorityFunctions';
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 
 function CompletedTasks() {
     const db = firebase.firestore();
+    const { setIsList } = useContext(TodoContext)
     const { currentUser } = useContext(AuthContext);
     const userArchive = db.collection('users').doc(currentUser.uid).collection('archive')
     const classes = useStyles();
@@ -72,6 +74,10 @@ function CompletedTasks() {
       getArchives();
       return () => mounted = false;
     }, [db, userArchive])
+
+    useEffect(() => {
+      setIsList(false);
+    })
         
     //find id
     const details = (id) => {

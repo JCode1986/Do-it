@@ -17,7 +17,7 @@ import TodoList from './features/todo/TodoList';
 import Video from './features/video/Video';
 
 function App() {
-  const { isVideoPlaying, isList } = useContext(TodoContext);
+  const { isVideoPlaying } = useContext(TodoContext);
   const { currentUser } = useContext(AuthContext);
 
   return (
@@ -25,7 +25,7 @@ function App() {
       <Router>
         <div className="App">
           <NavBar />
-          <ToastContainer/>
+          <ToastContainer />
           <PrivateRoute exact path="/" component={Home} />
           { !currentUser ? <Login/> :  
             <>

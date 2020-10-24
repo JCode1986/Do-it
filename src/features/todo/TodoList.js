@@ -1,7 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { Grid } from '@material-ui/core';
+import clsx from 'clsx';
+import NavBarTransitions from '../navbar/NavBarTransitions';
 import './TodoList.css'
 import firebase from 'firebase';
 import TodoHeader from './TodoHeader'
@@ -10,9 +12,18 @@ import LoadFunction from '../loading/loadFunction';
 
 function TodoList() {
     const db = firebase.firestore();
-    const { todos, setTodos, setIsList, isList } = useContext(TodoContext);
+    const classes = NavBarTransitions()
+    const { todos, setTodos, setIsList, openDrawer, setOpenDrawer } = useContext(TodoContext);
     const { currentUser } = useContext(AuthContext);
     const [loader, showLoader, hideLoader] = LoadFunction();
+    const [t, setT] = useState(true);
+    const handleDrawerOpen = () => {
+      setOpenDrawer(true);
+    };
+  
+    const handleDrawerClose = () => {
+      setOpenDrawer(false);
+    };
 
     useEffect(() => {         
       const getTasks = async() => {
@@ -41,27 +52,28 @@ function TodoList() {
 
     useEffect(() => {
       setIsList(true);
+      setOpenDrawer(true);
     }, [])
 
     return (
       <div>
         <TodoHeader/>
-          {
-            loader ||
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              className="TodoListGrid"
-            >
-                {todos.map(todo => 
-                <Todo
-                  key={todo.id}
-                  todo={todo}
-              />)}
-            </Grid>
-          }
+        {
+          loader ||
+          <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className="TodoListGrid"
+          >
+            {todos.map(todo => 
+            <Todo
+              key={todo.id}
+              todo={todo}
+            />)}
+        </Grid>
+        }
       </div>
     )
 }

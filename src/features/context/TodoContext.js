@@ -19,6 +19,7 @@ export const TodoProvider = (props) => {
     const [name, setName] = useState('');
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight)
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     useEffect(() => {
         // Handler to call on window resize
@@ -44,7 +45,9 @@ export const TodoProvider = (props) => {
             { todos, setTodos, description, setDescription, title, setTitle, dateCreated, setDateCreated,
             modifiedDate, setModifiedDate, dateDeadline, setDateDeadline, priorityLevel, setPriorityLevel,
             isButtonDisabled, setIsButtonDisabled, isNewPriorityLevel, setIsNewPriorityLevel, isVideoPlaying, 
-            setIsVideoPlaying, name, setName, width, setWidth, height, setHeight, showList, setIsList, isList }
+            setIsVideoPlaying, name, setName, width, setWidth, height, setHeight, showList, setIsList, isList,
+            openDrawer, setOpenDrawer
+          }
         }>
             {props.children}
         </TodoContext.Provider>
