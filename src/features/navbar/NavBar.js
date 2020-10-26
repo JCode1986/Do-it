@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import clsx from 'clsx';
-import {Route} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { AuthContext } from '../authentication/Auth';
 import Drawer from '@material-ui/core/Drawer';
@@ -83,14 +83,8 @@ function PersistentDrawerLeft() {
   const { currentUser } = useContext(AuthContext);
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpenDrawer(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpenDrawer(false);
-  };
-
+  const handleDrawerOpen = () => setOpenDrawer(true);
+  const handleDrawerClose = () => setOpenDrawer(false);
   const showList = () => !currentUser ? null : <Route exact path="/tasks" component={TodoList} />;
   const showArchives = () => !currentUser ? null : <Route exact path="/completed-tasks" component={CompletedTasks} />;
 

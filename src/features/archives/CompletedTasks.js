@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { priorityToString } from '../priority/priorityFunctions';
