@@ -1,7 +1,3 @@
-tr.MuiTableRow-root.MuiTableRow-head {
-    background: gainsboro;
-}
-
 th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter {
     font: revert;
     font-size: 20px;

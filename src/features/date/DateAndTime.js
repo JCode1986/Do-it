@@ -17,7 +17,7 @@ export default function DateAndTime(props) {
     // starts date time picker with data from database
     useEffect(() => {
       setDateDeadline(currentDateDeadline);
-    }, [currentDateDeadline, setDateDeadline])
+    }, [currentDateDeadline, setDateDeadline, setUpdatedDate])
       
     //Creates a date if there is nothing to update in create form
     //updates date if current date exists
