@@ -42,8 +42,6 @@ function NavBarToolBar(props) {
     fetchFunction();
   }, [user])
 
-  //if(isPending) return <div style={{ display:"none" }}><Loading /></div>
-
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };

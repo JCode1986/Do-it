@@ -21,7 +21,7 @@
     top: 8px;
     left: 16px;
     font-size: 20px;
-    text-shadow: 3px 3px 3px black;
+    text-shadow: 0 0 3px black;
 }
 
 .bottom-left {
@@ -35,5 +35,5 @@
     top: 70px;
     left: 25%;
     transform: translate(-50%, -50%);
-    text-shadow: 4px 4px 4px black;
+    text-shadow: 6px 6px 6px 6px black;
 }

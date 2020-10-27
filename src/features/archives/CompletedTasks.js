@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { makeStyles } from '@material-ui/core/styles';
-import { priorityToString } from '../priority/priorityFunctions';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -35,6 +33,12 @@ function CompletedTasks() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const priority = (priorityLevelNumber) => {
+      if (priorityLevelNumber === 1) return 'Low';
+      if (priorityLevelNumber === 2) return 'Medium';
+      if (priorityLevelNumber === 3) return 'High';
+    }
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -100,7 +104,9 @@ function CompletedTasks() {
         <TableContainer component={Paper} style={{marginTop: '20px'}}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow
+              style={{backgroundColor:"gainsboro"}}
+            >
               <TableCell align="center">Title</TableCell>
               <TableCell align="center">Created</TableCell>
               <TableCell align="center">Deadline</TableCell>
@@ -125,7 +131,7 @@ function CompletedTasks() {
                   <TableCell align="center">{dateFormat(archive.archivedDateCreated.toDate().toString())}</TableCell>
                   <TableCell align="center">{dateFormat(archive.archivedDateDeadline.toDate().toString())}</TableCell>
                   <TableCell align="center">{dateFormat(archive.archivedCompleted.toDate().toString())}</TableCell>
-                  <TableCell align="center">{priorityToString(archive.archivedPriorityLevel)}</TableCell>
+                  <TableCell align="center">{priority(archive.archivedPriorityLevel)}</TableCell>
                 </TableRow>
                 ))}
             </TableBody>

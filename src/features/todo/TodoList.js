@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import { AuthContext } from '../authentication/Auth';
 import { Grid } from '@material-ui/core';
-import NavBarTransitions from '../navbar/NavBarTransitions';
 import './TodoList.css'
 import firebase from 'firebase';
 import TodoHeader from './TodoHeader'
@@ -38,12 +37,13 @@ function TodoList() {
       }
         getTasks();
     //dependencies
-    }, [db, currentUser]);
+    }, []);
 
     return (
       <div>
         <TodoHeader/>
         {
+          // !todos.length ? null :
           loader ||
           <Grid
             container

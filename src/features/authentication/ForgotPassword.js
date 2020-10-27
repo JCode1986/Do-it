@@ -34,7 +34,6 @@ function ForgotPassword(props) {
     return (
         <Modal
         open={props.isOpen}
-        //onClose={() => props.setIsOpen(false)}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         >
