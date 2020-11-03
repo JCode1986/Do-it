@@ -74,6 +74,7 @@ export default db;
 
 - [Youtube - lingonsaft](https://www.youtube.com/watch?v=zq0TuNqV0Ew)
 - [Github docs](https://github.com/firebase/firebaseui-web-react)
+
 ---
 
 ## Pages
@@ -84,7 +85,9 @@ export default db;
 - Create - `/form`
 - Tasks - `/tasks`
 - Archive - `/completed-tasks`
+
 ---
+
 ### Resources
 
 - [Youtube - Clever Programmer](https://www.youtube.com/watch?v=VqgTr-nd7Cg&list=PL-J2q3Ga50oMQa1JdSJxYoZELwOJAXExP&index=2&t=9057s)
