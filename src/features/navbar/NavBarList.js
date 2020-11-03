@@ -46,10 +46,6 @@ function NavBarList(props) {
         props.history.push('/completed-tasks')
       }
     
-      const about = () => {
-        setIsVideoPlaying(false);
-      }
-
     return (
         <>
             {
@@ -121,7 +117,11 @@ function NavBarList(props) {
                 <ListItemText primary="Log in"/>
             </ListItem>
             }
-            <ListItem button key="About">
+            <ListItem 
+                button 
+                key="About"
+                onClick={()=> window.open("https://portfoliojch-portfolio.netlify.app/", "_blank")}   
+            >
                 <ListItemIcon>
                 <InfoIcon/>
                 </ListItemIcon>
