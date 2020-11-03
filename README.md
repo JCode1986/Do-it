@@ -25,10 +25,6 @@
 
 ---
 
-## Useful react commands
-
-- `npm start` - starts react app
-
 ## Useful firebase commands / setting up
 
 - `firebase login` - login to firebase
