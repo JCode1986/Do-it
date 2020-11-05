@@ -10,17 +10,13 @@ import ListIcon from '@material-ui/icons/List';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import InfoIcon from '@material-ui/icons/Info';
 import StarRateIcon from '@material-ui/icons/StarRate';
+import LogoutModal from '../modals/LogoutModal';
 
 function NavBarList(props) {
     const user = firebase.auth().currentUser;
-    const { setIsVideoPlaying } = useContext(TodoContext);
-
-    const logOut = () => {
-        setIsVideoPlaying(false);
-        firebase.auth().signOut()
-        props.history.push('/login');
-      }
+    const { setIsVideoPlaying, setOpenLogOutModal, openLogOutModal } = useContext(TodoContext);
     
+    console.log(openLogOutModal, 'hello')
       const playVideo = () => {
         setIsVideoPlaying(true);
         props.history.push('/do-it');
@@ -48,6 +44,10 @@ function NavBarList(props) {
     
     return (
         <>
+            <LogoutModal 
+                openLogOutModal={openLogOutModal}
+                setOpenLogOutModal={setOpenLogOutModal}
+            />
             {
                 user? 
                 <List>
@@ -99,7 +99,7 @@ function NavBarList(props) {
                 user ? 
                 <ListItem 
                 button 
-                onClick={logOut}
+                onClick={() => setOpenLogOutModal(true)}
                 key="Log out">
                 <ListItemIcon>
                 <AccountCircleIcon/>
