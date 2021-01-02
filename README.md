@@ -1,7 +1,7 @@
 # Do it!
 
 ## Web Application
-- App where a user can register and save pending tasks or completed tasks in an archived list. Sort tasks by priority levels and a timer to show how much time is left.
+- App where a user can register and save pending tasks, or view completed tasks in an archived list. Sort tasks by priority levels and a timer to show how much time is left.
 - [Deployed Site](https://react-todo-eb067.web.app)
 
 ## Tools
